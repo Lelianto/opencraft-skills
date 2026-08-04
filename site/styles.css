@@ -137,9 +137,31 @@ h2 { margin: 0; font-size: clamp(2.8rem, 6vw, 5.6rem); font-weight: 500; }
 .skill-groups h3 { margin: 0; font-size: 0.82rem; text-transform: uppercase; letter-spacing: 0.12em; }
 .skill-groups h3 span { color: var(--red); margin-right: 0.55rem; }
 .skill-list { display: grid; grid-template-columns: repeat(2, 1fr); gap: 0 2rem; }
-.skill-list article { padding: 0 0 1.4rem; }
+.skill-list article { padding: 0 0 1rem; }
+.skill-card { width: 100%; min-height: 126px; padding: 1rem; color: inherit; border: 1px solid transparent; border-radius: 0; background: transparent; text-align: left; cursor: pointer; transition: background-color 160ms ease, border-color 160ms ease, transform 160ms ease; }
+.skill-card:hover { border-color: var(--ink); background: rgba(255,255,255,0.42); transform: translateY(-2px); }
+.skill-card > span { display: inline-flex; gap: 0.35rem; margin-top: 0.8rem; color: var(--ink); font-size: 0.66rem; font-weight: 800; text-transform: uppercase; letter-spacing: 0.08em; }
+.skill-card > span b { color: var(--red); }
 .skill-list code { color: var(--red-dark); font-size: 0.72rem; font-weight: 800; }
 .skill-list p { margin: 0.3rem 0 0; color: var(--muted); }
+
+.skill-dialog { width: min(1040px, calc(100% - 2rem)); max-height: min(820px, calc(100dvh - 2rem)); padding: 0; color: var(--ink); border: 1px solid var(--ink); background: var(--paper); box-shadow: 0 24px 80px rgba(0,0,0,0.35); }
+.skill-dialog::backdrop { background: rgba(18,20,17,0.72); backdrop-filter: blur(5px); }
+.skill-dialog-bar { min-height: 58px; padding: 0 1.25rem; display: flex; align-items: center; justify-content: space-between; border-bottom: 1px solid var(--ink); }
+.skill-dialog-bar p { margin: 0; font-size: 0.67rem; font-weight: 800; text-transform: uppercase; letter-spacing: 0.13em; }
+.skill-dialog-bar button { min-height: 40px; padding: 0 0 0 1rem; color: var(--ink); border: 0; background: transparent; cursor: pointer; font-size: 0.72rem; font-weight: 800; }
+.skill-dialog-bar button span { margin-left: 0.45rem; color: var(--red); font-size: 1.25rem; vertical-align: -0.08rem; }
+.skill-dialog-content { display: grid; grid-template-columns: 0.8fr 1.2fr; }
+.skill-dialog-intro { padding: clamp(2rem, 5vw, 4.5rem); border-right: 1px solid var(--ink); }
+.skill-dialog-intro h2 { margin: 0.35rem 0 1.2rem; font: 500 clamp(1.7rem, 4vw, 3.4rem)/1.05 ui-monospace, SFMono-Regular, Menlo, monospace; overflow-wrap: anywhere; }
+.skill-dialog-intro > p:not(.section-label) { color: var(--muted); }
+.skill-dialog-hint { margin-top: 1.5rem; padding-top: 1rem; border-top: 1px solid var(--line); font-size: 0.7rem; font-weight: 800; text-transform: uppercase; letter-spacing: 0.08em; }
+.skill-example { padding: clamp(2rem, 5vw, 4.5rem); display: grid; align-content: center; gap: 1.5rem; background: #e9e3d6; }
+.skill-example > div { padding-top: 1rem; border-top: 1px solid #b9b1a2; }
+.skill-example small { color: var(--red-dark); font-size: 0.62rem; font-weight: 850; text-transform: uppercase; letter-spacing: 0.12em; }
+.skill-example blockquote, .skill-example p { margin: 0.6rem 0 0; }
+.skill-example blockquote { font: 500 clamp(1.15rem, 2.4vw, 1.65rem)/1.28 Georgia, serif; }
+.skill-example-result p { font-weight: 720; }
 
 .modes { padding-bottom: clamp(5rem, 10vw, 9rem); }
 .section-heading.compact { margin-bottom: 2.5rem; }
@@ -246,6 +268,11 @@ pre code { font: 0.78rem/1.75 ui-monospace, SFMono-Regular, Menlo, monospace; }
   .craft-lists { grid-template-columns: 1fr; }
   .skill-groups > section { grid-template-columns: 1fr; gap: 1.5rem; }
   .skill-list { grid-template-columns: 1fr; }
+  .skill-card { min-height: 0; padding: 1rem 0.75rem; }
+  .skill-dialog { width: 100%; max-width: none; max-height: calc(100dvh - 0.75rem); margin: auto 0 0; border-width: 1px 0 0; }
+  .skill-dialog-content { grid-template-columns: 1fr; overflow-y: auto; max-height: calc(100dvh - 59px); }
+  .skill-dialog-intro { padding: 1.6rem 1.25rem; border-right: 0; border-bottom: 1px solid var(--ink); }
+  .skill-example { padding: 1.6rem 1.25rem calc(2rem + env(safe-area-inset-bottom)); }
   .mode-grid { grid-template-columns: 1fr; }
   .mode-grid article { min-height: 190px; border-right: 0; }
   .quality-card { padding: 2rem 1.2rem; }
