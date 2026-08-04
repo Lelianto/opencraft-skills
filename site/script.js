@@ -94,12 +94,22 @@ document.querySelectorAll("[data-skill]").forEach((button) => {
     skillDialog.querySelector("[data-skill-prompt]").textContent = `“${prompt}”`;
     skillDialog.querySelector("[data-skill-output]").textContent = output;
     skillDialog.querySelector("[data-skill-result]").textContent = result;
-    skillDialog.showModal();
+    if (typeof skillDialog.showModal === "function") {
+      skillDialog.showModal();
+    } else {
+      skillDialog.setAttribute("open", "");
+      skillDialog.classList.add("is-fallback-open");
+    }
   });
 });
 
 function closeSkillDialog() {
-  skillDialog?.close();
+  if (skillDialog?.open && typeof skillDialog.close === "function") {
+    skillDialog.close();
+  } else {
+    skillDialog?.removeAttribute("open");
+  }
+  skillDialog?.classList.remove("is-fallback-open");
   skillOpener?.focus();
 }
 
