@@ -4,6 +4,7 @@
 [![Agent Skills](https://img.shields.io/badge/Agent%20Skills-compatible-111827)](https://agentskills.io/specification)
 [![License: MIT](https://img.shields.io/badge/License-MIT-22c55e.svg)](LICENSE)
 [![Skills](https://img.shields.io/badge/skills-17-6366f1)](skills)
+[![npm](https://img.shields.io/npm/v/opencraft-skills?color=cb3837)](https://www.npmjs.com/package/opencraft-skills)
 
 Portable, production-minded Agent Skills for end-to-end AI-assisted product development—with a strong focus on modern web platforms.
 
@@ -367,6 +368,33 @@ opencraft-skills/
 The repository includes a dependency-free static landing page under `site/`. The root `vercel.json` sets `site` as the deployment output directory, so only the landing page and its public assets are served by Vercel; skill sources, scripts, evaluations, and repository metadata are not exposed as website routes.
 
 Import the repository into Vercel with the repository root unchanged. File-based configuration selects the “Other” framework preset, skips dependency installation and build execution, and publishes `site/` directly.
+
+## Publishing to npm
+
+The release workflow at `.github/workflows/publish-npm.yml` publishes from an immutable GitHub Release tag using npm Trusted Publishing. It validates the skills and evaluation fixtures, verifies checksums, confirms that `package.json`, `collection.json`, `skills.lock.json`, and the release tag use the same version, inspects the package tarball, and rejects versions already present on npm before publishing.
+
+Configure the existing `opencraft-skills` package on npm with these Trusted Publisher values:
+
+| Setting | Value |
+|---|---|
+| Provider | GitHub Actions |
+| Organization or user | `Lelianto` |
+| Repository | `opencraft-skills` |
+| Workflow filename | `publish-npm.yml` |
+| Environment | `npm` |
+| Allowed action | `npm publish` |
+
+Create a GitHub Environment named `npm`; adding required reviewers is recommended. Trusted Publishing uses short-lived OIDC credentials, so no long-lived `NPM_TOKEN` is required.
+
+To release a new version:
+
+1. Update the matching version in `package.json` and `collection.json`.
+2. Run `python3 scripts/generate_lock.py` so `skills.lock.json` receives the same version.
+3. Run `npm run validate` and commit the release changes.
+4. Create and publish a GitHub Release whose tag is exactly `v<version>`.
+5. The workflow validates and publishes the public package with npm provenance automatically.
+
+The workflow also supports a manually dispatched dry run against an existing tag. Manual publishing remains disabled unless `dry_run` is explicitly turned off.
 
 ## Creating or changing a skill
 

@@ -1,0 +1,71 @@
+name: Publish npm package
+
+on:
+  release:
+    types: [published]
+  workflow_dispatch:
+    inputs:
+      tag:
+        description: "Existing release tag to publish, for example v1.2.0"
+        required: true
+        type: string
+      dry_run:
+        description: "Validate the release without publishing"
+        required: true
+        default: true
+        type: boolean
+
+concurrency:
+  group: publish-npm-${{ github.event.release.tag_name || inputs.tag }}
+  cancel-in-progress: false
+
+permissions:
+  contents: read
+  id-token: write
+
+jobs:
+  publish:
+    name: Validate and publish
+    runs-on: ubuntu-latest
+    environment: npm
+    env:
+      RELEASE_TAG: ${{ github.event.release.tag_name || inputs.tag }}
+    steps:
+      - name: Check out the release tag
+        uses: actions/checkout@v6
+        with:
+          ref: ${{ env.RELEASE_TAG }}
+
+      - name: Set up Node.js for npm Trusted Publishing
+        uses: actions/setup-node@v6
+        with:
+          node-version: "24"
+          registry-url: "https://registry.npmjs.org"
+          package-manager-cache: false
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+
+      - name: Verify release identity
+        run: node scripts/check-release.mjs --tag "$RELEASE_TAG"
+
+      - name: Validate skills, evaluations, and integrity
+        run: npm run validate
+
+      - name: Inspect the publishable package
+        run: npm pack --dry-run
+
+      - name: Reject an existing npm version
+        run: |
+          package_name="$(node -p "require('./package.json').name")"
+          package_version="$(node -p "require('./package.json').version")"
+          if npm view "$package_name@$package_version" version >/dev/null 2>&1; then
+            echo "ERROR $package_name@$package_version already exists on npm"
+            exit 1
+          fi
+
+      - name: Publish to npm
+        if: ${{ github.event_name == 'release' || inputs.dry_run == false }}
+        run: npm publish --access public

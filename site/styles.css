@@ -181,6 +181,7 @@ pre code { font: 0.78rem/1.75 ui-monospace, SFMono-Regular, Menlo, monospace; }
 .copy-button { margin-top: 1rem; min-height: 38px; padding: 0.4rem 0.75rem; color: var(--lime); border: 1px solid #55574f; border-radius: 999px; background: transparent; cursor: pointer; font-size: 0.68rem; }
 .copy-button:hover { border-color: var(--lime); }
 .terminal-note { margin: 0; padding: 0 1.25rem 1.25rem; color: #77796f; font-size: 0.64rem; }
+.terminal-note a { color: var(--lime); text-underline-offset: 0.2rem; }
 
 .prompt-section { padding: clamp(4rem, 9vw, 8rem) 0; border-top: 1px solid var(--line); text-align: center; }
 .prompt-section blockquote { max-width: 1000px; margin: 0 auto 2.5rem; font-size: clamp(2rem, 4.8vw, 4.4rem); }

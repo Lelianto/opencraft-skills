@@ -11,7 +11,7 @@
     "templates/",
     "evals/",
     "scripts/*.py",
-    "scripts/install.mjs",
+    "scripts/*.mjs",
     "collection.json",
     "skills.lock.json",
     "STANDARD.md",
@@ -20,12 +20,15 @@
     "LICENSE"
   ],
   "scripts": {
-    "validate": "python3 scripts/validate.py && python3 scripts/evaluate.py && python3 scripts/generate_lock.py --check",
+    "validate": "python3 scripts/validate.py && python3 scripts/evaluate.py && python3 scripts/generate_lock.py --check && node scripts/check-release.mjs",
     "test:node-installer": "node scripts/install.mjs --help",
     "prepack": "npm run validate && npm run test:node-installer"
   },
   "engines": {
     "node": ">=18"
+  },
+  "publishConfig": {
+    "access": "public"
   },
   "keywords": [
     "agent-skills",
