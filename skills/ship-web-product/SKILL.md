@@ -14,7 +14,7 @@ Run an evidence-driven idea-to-release loop. Keep artifacts proportional: a smal
 3. Apply `analyze-product` to establish evidence, users, opportunity, hypotheses, success measures, and a proceed/research/no-go recommendation.
 4. Apply `shape-product` to select the smallest valuable end-to-end scope and expose consequential decisions.
 5. Apply `write-product-prd` to create the approved source of truth, traceable requirements, acceptance criteria, quality constraints, metrics, and rollout expectations.
-6. Apply `design-product-experience` for information architecture, flows, component states, responsive behavior, and accessibility when user experience is in scope.
+6. Apply `design-product-experience` and `craft-distinctive-product` for information architecture, meaningful visual direction, flows, component states, originality, mobile app-quality behavior, responsiveness, and accessibility when user experience is in scope.
 7. Apply `design-web-system` for boundaries, contracts, data lifecycle, identity and access, operations, migrations, and implementation sequence.
 8. Apply `threat-model-platform` for trust boundaries, abuse cases, versioned security controls, verification, and residual risk.
 9. Apply `plan-product-delivery` to produce traceable vertical slices and bounded tasks. Do not implement while its readiness result is `not ready`.

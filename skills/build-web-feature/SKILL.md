@@ -21,6 +21,8 @@ Deliver a working platform as a sequence of verified vertical slices that follow
 10. Run focused checks, then repository-wide required checks. Inspect the final diff and exercise the critical user flow in a browser when available.
 11. Report the outcome, important decisions, evidence, and any residual risk. Do not claim checks that were not run.
 
+Apply `craft-distinctive-product` for user-facing work. Preserve the product-specific design thesis, reject generic AI-slop patterns, and implement mobile as a deliberate touch-first composition rather than a collapsed desktop layout.
+
 For a new platform, establish the minimum production-shaped foundation first: configuration and environment validation, application shell and routing, identity and authorization boundaries, data access and migrations, error handling, observability, test harness, and production build. Then deliver prioritized journeys one vertical slice at a time. Do not leave core flows as mock handlers or disconnected screens unless the user explicitly asked for a prototype.
 
 Load [references/frontend-quality.md](references/frontend-quality.md) for UI-heavy work. Load [references/full-stack-checklist.md](references/full-stack-checklist.md) when the change crosses client, server, or data boundaries.

@@ -139,6 +139,20 @@
     "scenario": "Build a responsive tenant-aware approval journey without placeholder server behavior.",
     "assertions": ["responsive|accessib", "test|verification"]
   },
+  "craft-distinctive-product": {
+    "should_trigger": [
+      "Remove the generic AI look from this product and create a meaningful design direction grounded in its domain.",
+      "Make this responsive website feel like a purpose-built mobile app instead of stacked desktop cards.",
+      "Review this interface for AI slop, fake marketing content, weak hierarchy, and derivative visual patterns."
+    ],
+    "should_not_trigger": [
+      "Design the database schema and migration for this approved architecture.",
+      "Run the API authorization test suite and report failures."
+    ],
+    "ambiguous": ["Make this product feel original, intentional, and genuinely useful on mobile."],
+    "scenario": "Turn a generic SaaS dashboard into a domain-specific, meaningful experience with a distinct design thesis and app-quality mobile composition.",
+    "assertions": ["meaning|design thesis|domain", "mobile|touch|thumb"]
+  },
   "debug-platform": {
     "should_trigger": [
       "Find the root cause of this intermittent integration test failure before fixing it.",

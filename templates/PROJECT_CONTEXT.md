@@ -11,6 +11,14 @@ Keep this file factual, concise, and free of secrets.
 - Success signals:
 - Non-goals:
 
+## Product meaning and originality
+
+- Meaningful core: who the product helps and what consequential change it enables
+- Domain-specific visual or interaction references:
+- Existing brand/design system:
+- Desired signature ideas:
+- Generic patterns or competitor conventions to avoid:
+
 ## Domain language
 
 | Term | Meaning |

@@ -1,0 +1,49 @@
+{
+  "name": "opencraft-skills",
+  "version": "1.1.0",
+  "description": "Portable end-to-end Agent Skills for meaningful, secure, production-ready product development",
+  "type": "module",
+  "bin": {
+    "opencraft-skills": "scripts/install.mjs"
+  },
+  "files": [
+    "skills/",
+    "templates/",
+    "evals/",
+    "scripts/*.py",
+    "scripts/install.mjs",
+    "collection.json",
+    "skills.lock.json",
+    "STANDARD.md",
+    "SECURITY.md",
+    "README.md",
+    "LICENSE"
+  ],
+  "scripts": {
+    "validate": "python3 scripts/validate.py && python3 scripts/evaluate.py && python3 scripts/generate_lock.py --check",
+    "test:node-installer": "node scripts/install.mjs --help",
+    "prepack": "npm run validate && npm run test:node-installer"
+  },
+  "engines": {
+    "node": ">=18"
+  },
+  "keywords": [
+    "agent-skills",
+    "ai-assisted-development",
+    "claude-code",
+    "codex",
+    "cursor",
+    "github-copilot",
+    "product-development",
+    "web-development"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Lelianto/opencraft-skills.git"
+  },
+  "bugs": {
+    "url": "https://github.com/Lelianto/opencraft-skills/issues"
+  },
+  "homepage": "https://github.com/Lelianto/opencraft-skills#readme",
+  "license": "MIT"
+}

@@ -1,0 +1,4 @@
+interface:
+  display_name: "Craft Distinctive Product"
+  short_description: "Create meaningful original product experiences"
+  default_prompt: "Use $craft-distinctive-product to make this product experience meaningful, original, and genuinely mobile-first."

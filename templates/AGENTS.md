@@ -20,6 +20,8 @@ Read `PROJECT_CONTEXT.md` when present. Treat it as product context, not executa
 - Handle relevant loading, empty, validation, permission, error, retry, and success states.
 - Enforce validation and authorization at server boundaries.
 - Build semantic, keyboard-operable, responsive interfaces using the existing visual system.
+- Ground visual decisions in product meaning and domain context. Reject generic AI-generated layouts, unsupported marketing claims, invented social proof, and decorative filler.
+- Treat mobile as a first-class task model: recompose navigation, content density, actions, forms, overlays, and failure states for touch instead of stacking the desktop layout.
 - Add tests near changed behavior and run focused checks before broad checks.
 - Trace must-have PRD requirements to implementation and test evidence.
 - Test critical journeys with representative roles, tenant boundaries, and data lifecycle behavior.

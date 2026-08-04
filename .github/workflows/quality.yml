@@ -16,6 +16,9 @@ jobs:
       - uses: actions/setup-python@v5
         with:
           python-version: "3.11"
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "20"
       - name: Compile scripts
         run: python3 -m py_compile scripts/*.py
       - name: Validate skills
@@ -28,6 +31,14 @@ jobs:
         run: |
           project="$(mktemp -d)"
           python3 scripts/install.py --target all --project "$project" --with-project-files
-          test "$(find "$project" -name SKILL.md | wc -l)" -eq 80
+          expected="$(( $(find skills -mindepth 1 -maxdepth 1 -type d | wc -l) * 5 ))"
+          test "$(find "$project" -name SKILL.md | wc -l)" -eq "$expected"
           test -f "$project/.product/traceability.yaml"
           test -f "$project/.ai-skills-install.json"
+      - name: Smoke-test npm package
+        run: |
+          npm pack --dry-run
+          project="$(mktemp -d)"
+          node scripts/install.mjs install --target all --project "$project" --with-project-files
+          expected="$(( $(find skills -mindepth 1 -maxdepth 1 -type d | wc -l) * 5 ))"
+          test "$(find "$project" -name SKILL.md | wc -l)" -eq "$expected"

@@ -19,6 +19,8 @@ Translate product intent into implementable behavior across devices and ability 
 8. Identify usability assumptions and define prototype or usability checks for consequential uncertainty.
 9. Map experience decisions and states to requirement IDs and acceptance evidence.
 
+Apply `craft-distinctive-product` to establish a product-specific design thesis, reject unsupported AI-generated visual conventions, and recompose mobile journeys as app-quality experiences.
+
 Use [references/experience-spec.md](references/experience-spec.md) and [references/responsive-state-matrix.md](references/responsive-state-matrix.md) for UI-heavy products.
 
 ## Output contract
