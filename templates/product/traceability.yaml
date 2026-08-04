@@ -1,0 +1,14 @@
+schema_version: "1.0"
+product_version: "unreleased"
+delivery_mode: "greenfield-product"
+items:
+  - requirement_id: "REQ-EXAMPLE-001"
+    artifact: ".product/prd.md"
+    architecture_ids: []
+    experience_ids: []
+    task_ids: []
+    threat_ids: []
+    control_ids: []
+    test_ids: []
+    release_evidence: []
+    status: "planned"

@@ -1,0 +1,4 @@
+interface:
+  display_name: "Debug Platform"
+  short_description: "Find root causes before applying fixes"
+  default_prompt: "Use $debug-platform to reproduce and fix this issue from its root cause."

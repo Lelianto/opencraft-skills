@@ -1,0 +1,4 @@
+interface:
+  display_name: "Design Product Experience"
+  short_description: "Design responsive accessible experiences"
+  default_prompt: "Use $design-product-experience to define the user flows and responsive interaction states."

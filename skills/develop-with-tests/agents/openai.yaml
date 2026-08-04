@@ -1,0 +1,4 @@
+interface:
+  display_name: "Develop With Tests"
+  short_description: "Develop behavior through test evidence"
+  default_prompt: "Use $develop-with-tests to implement this behavior with a red-green-refactor loop."

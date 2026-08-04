@@ -1,0 +1,4 @@
+interface:
+  display_name: "Prepare Deployment"
+  short_description: "Prepare safe deployment and rollback"
+  default_prompt: "Use $prepare-deployment to assess and prepare this platform for deployment."

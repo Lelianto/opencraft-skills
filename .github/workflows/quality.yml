@@ -1,0 +1,33 @@
+name: quality
+
+on:
+  pull_request:
+  push:
+    branches: [main]
+
+permissions:
+  contents: read
+
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+      - name: Compile scripts
+        run: python3 -m py_compile scripts/*.py
+      - name: Validate skills
+        run: python3 scripts/validate.py
+      - name: Validate eval fixtures
+        run: python3 scripts/evaluate.py
+      - name: Verify integrity lock
+        run: python3 scripts/generate_lock.py --check
+      - name: Smoke-test installer
+        run: |
+          project="$(mktemp -d)"
+          python3 scripts/install.py --target all --project "$project" --with-project-files
+          test "$(find "$project" -name SKILL.md | wc -l)" -eq 80
+          test -f "$project/.product/traceability.yaml"
+          test -f "$project/.ai-skills-install.json"

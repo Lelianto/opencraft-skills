@@ -1,0 +1,4 @@
+interface:
+  display_name: "Threat Model Platform"
+  short_description: "Model platform threats and controls"
+  default_prompt: "Use $threat-model-platform to threat-model this platform and define verifiable controls."

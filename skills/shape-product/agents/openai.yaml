@@ -1,0 +1,4 @@
+interface:
+  display_name: "Shape Product"
+  short_description: "Turn product ideas into build-ready scope"
+  default_prompt: "Use $shape-product to turn this product idea into a build-ready brief."

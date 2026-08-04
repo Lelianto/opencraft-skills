@@ -1,0 +1,4 @@
+interface:
+  display_name: "Ship Web Product"
+  short_description: "Orchestrate idea-to-release web delivery"
+  default_prompt: "Use $ship-web-product to take this web product from idea to a verified release."

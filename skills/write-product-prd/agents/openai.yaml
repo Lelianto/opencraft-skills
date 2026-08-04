@@ -1,0 +1,4 @@
+interface:
+  display_name: "Write Product PRD"
+  short_description: "Create an evidence-based build-ready PRD"
+  default_prompt: "Use $write-product-prd to create a build-ready PRD for this product."

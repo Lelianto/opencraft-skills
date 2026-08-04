@@ -1,0 +1,4 @@
+interface:
+  display_name: "Plan Product Delivery"
+  short_description: "Turn specifications into executable slices"
+  default_prompt: "Use $plan-product-delivery to turn this PRD and architecture into an executable delivery plan."

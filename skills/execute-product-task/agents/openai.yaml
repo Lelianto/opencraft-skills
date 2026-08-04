@@ -1,0 +1,4 @@
+interface:
+  display_name: "Execute Product Task"
+  short_description: "Execute one bounded product task safely"
+  default_prompt: "Use $execute-product-task to implement and verify the next bounded product task."

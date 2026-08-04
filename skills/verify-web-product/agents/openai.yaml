@@ -1,0 +1,4 @@
+interface:
+  display_name: "Verify Web Product"
+  short_description: "Verify web quality, safety, and UX"
+  default_prompt: "Use $verify-web-product to verify this web product before release."

@@ -1,0 +1,4 @@
+interface:
+  display_name: "Test Platform"
+  short_description: "Test platform flows, security, and data"
+  default_prompt: "Use $test-platform to run end-to-end, security, and data validation for this platform."

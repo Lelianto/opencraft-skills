@@ -1,0 +1,4 @@
+interface:
+  display_name: "Build Web Feature"
+  short_description: "Implement production-ready web features"
+  default_prompt: "Use $build-web-feature to implement this web feature end to end."

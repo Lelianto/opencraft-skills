@@ -1,0 +1,4 @@
+interface:
+  display_name: "Design Web System"
+  short_description: "Design pragmatic web product architecture"
+  default_prompt: "Use $design-web-system to design the architecture for this web product."

@@ -1,0 +1,4 @@
+interface:
+  display_name: "Analyze Product"
+  short_description: "Analyze product opportunities and risks"
+  default_prompt: "Use $analyze-product to analyze this product opportunity before we define the solution."

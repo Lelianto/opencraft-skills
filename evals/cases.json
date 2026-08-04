@@ -1,0 +1,226 @@
+{
+  "analyze-product": {
+    "should_trigger": [
+      "Analyze whether a subscription expense approval product solves a credible problem for small agencies.",
+      "Evaluate this customer request, its alternatives, risks, and measurable opportunity before we build.",
+      "We have interview notes and analytics; determine whether to proceed with this product idea."
+    ],
+    "should_not_trigger": [
+      "Implement the approved password reset requirement in the existing application.",
+      "Run the release candidate end-to-end tests and report failures."
+    ],
+    "ambiguous": ["Help me decide what to do next with this early product concept and existing prototype."],
+    "scenario": "Analyze a B2B approval platform from supplied interviews and metrics without inventing market facts.",
+    "assertions": ["fact|inference|assumption|unknown", "proceed|research first|do not proceed"]
+  },
+  "shape-product": {
+    "should_trigger": [
+      "Reduce this broad roadmap request to one coherent MVP vertical slice.",
+      "Turn these competing feature requests into must, later, and out scope.",
+      "Define the smallest user journey and acceptance criteria we can build this sprint."
+    ],
+    "should_not_trigger": [
+      "Assess the market evidence for this new company idea.",
+      "Deploy the already approved build to production."
+    ],
+    "ambiguous": ["This feature is too broad; help me make it actionable."],
+    "scenario": "Shape a multi-role expense workflow into a demonstrable one-week slice with explicit non-goals.",
+    "assertions": ["must", "later|non-goal|out"]
+  },
+  "write-product-prd": {
+    "should_trigger": [
+      "Create a build-ready PRD from this approved product analysis.",
+      "Write numbered requirements, user journeys, metrics, and acceptance criteria for the MVP.",
+      "Review this PRD for missing security, data lifecycle, responsive, and rollout requirements."
+    ],
+    "should_not_trigger": [
+      "Choose the database architecture for these approved requirements.",
+      "Fix the failing authorization integration test."
+    ],
+    "ambiguous": ["Document exactly what engineering should build for this product."],
+    "scenario": "Create a traceable PRD for a tenant-aware approval system with measurable outcomes and failure states.",
+    "assertions": ["REQ-[A-Z]+-[0-9]+", "acceptance criteria"]
+  },
+  "design-product-experience": {
+    "should_trigger": [
+      "Design the mobile and desktop user flows for this approved PRD.",
+      "Specify the information architecture, screen hierarchy, and interaction states.",
+      "Define responsive and accessible behavior for this multi-step onboarding journey."
+    ],
+    "should_not_trigger": [
+      "Implement the approved responsive design in React.",
+      "Review the API authorization boundaries."
+    ],
+    "ambiguous": ["Help make this user journey clear and usable on every screen size."],
+    "scenario": "Design an accessible approval experience across mobile, tablet, desktop, errors, and empty states.",
+    "assertions": ["information architecture|journey", "responsive|accessib"]
+  },
+  "design-web-system": {
+    "should_trigger": [
+      "Design the architecture, contracts, data model, and migration plan for this web platform.",
+      "Review whether this feature needs a background job and how failures should recover.",
+      "Turn the PRD into server boundaries, authorization rules, persistence, and observability decisions."
+    ],
+    "should_not_trigger": [
+      "Create the PRD for this product idea.",
+      "Run browser tests against the implemented platform."
+    ],
+    "ambiguous": ["Work out the technical approach for this approved feature."],
+    "scenario": "Architect a tenant-aware SaaS slice with contracts, migrations, rollback, and operational evidence.",
+    "assertions": ["boundary|contract", "migration|rollback"]
+  },
+  "threat-model-platform": {
+    "should_trigger": [
+      "Threat-model this SaaS architecture and map controls to verification evidence.",
+      "Identify assets, trust boundaries, abuse cases, and residual risks before implementation.",
+      "Update the threat model after adding an AI agent and MCP integration."
+    ],
+    "should_not_trigger": [
+      "Run the existing security test suite.",
+      "Fix the known XSS finding in this component."
+    ],
+    "ambiguous": ["Assess how this architecture could be attacked or abused."],
+    "scenario": "Model cross-tenant, privilege, data, integration, and AI-specific threats for a platform.",
+    "assertions": ["THREAT|threat", "ASVS|AISVS|control"]
+  },
+  "plan-product-delivery": {
+    "should_trigger": [
+      "Break this approved PRD and architecture into traceable vertical slices and bounded tasks.",
+      "Create an implementation plan with dependencies, verification commands, and readiness status.",
+      "Check whether these requirements are ready for an agent to implement safely."
+    ],
+    "should_not_trigger": [
+      "Implement TASK-AUTH-003 now.",
+      "Analyze whether customers need this product."
+    ],
+    "ambiguous": ["Turn these product documents into actionable engineering work."],
+    "scenario": "Plan an approval MVP into ordered tasks that each produce demonstrable user value.",
+    "assertions": ["TASK-[A-Z]+-[0-9]+|task id", "ready|concern|not ready"]
+  },
+  "execute-product-task": {
+    "should_trigger": [
+      "Execute TASK-AUTH-003 from the approved delivery plan and record evidence.",
+      "Implement only the next unblocked product task without expanding scope.",
+      "Resume this bounded vertical-slice task and update its traceability status."
+    ],
+    "should_not_trigger": [
+      "Create a roadmap for the whole product.",
+      "Review this pull request without changing it."
+    ],
+    "ambiguous": ["Continue the implementation plan from where the last agent stopped."],
+    "scenario": "Execute one authorization task while preserving unrelated changes and producing fresh test evidence.",
+    "assertions": ["task", "verification|evidence"]
+  },
+  "develop-with-tests": {
+    "should_trigger": [
+      "Implement this domain rule with a red-green-refactor loop.",
+      "Add the API behavior and first prove it with a failing test.",
+      "Create a regression test before fixing this reproducible bug."
+    ],
+    "should_not_trigger": [
+      "Write a product requirements document.",
+      "Perform a read-only release readiness review."
+    ],
+    "ambiguous": ["Implement this behavior and make sure tests genuinely prove it."],
+    "scenario": "Add an authorization invariant with a meaningful failing test and focused verification.",
+    "assertions": ["fail|red", "pass|green"]
+  },
+  "build-web-feature": {
+    "should_trigger": [
+      "Build this approved full-stack feature including responsive UI, API, persistence, and tests.",
+      "Create the production-shaped foundation and first vertical slice for this web platform.",
+      "Implement the dashboard flow end to end using the repository's existing patterns."
+    ],
+    "should_not_trigger": [
+      "Determine whether this product opportunity is worth pursuing.",
+      "Prepare a deployment plan without changing the application."
+    ],
+    "ambiguous": ["Turn the approved plan into a working web experience."],
+    "scenario": "Build a responsive tenant-aware approval journey without placeholder server behavior.",
+    "assertions": ["responsive|accessib", "test|verification"]
+  },
+  "debug-platform": {
+    "should_trigger": [
+      "Find the root cause of this intermittent integration test failure before fixing it.",
+      "Reproduce and diagnose why the production build fails only in CI.",
+      "Trace this incorrect database state across the API and background worker."
+    ],
+    "should_not_trigger": [
+      "Implement a new feature from an approved task.",
+      "Write the initial product analysis."
+    ],
+    "ambiguous": ["This keeps failing after two attempted fixes; investigate it properly."],
+    "scenario": "Diagnose a cross-component race condition with falsifiable hypotheses and regression evidence.",
+    "assertions": ["reproduc", "root cause|hypothesis"]
+  },
+  "review-product-change": {
+    "should_trigger": [
+      "Review this diff against the PRD and report actionable findings only.",
+      "Perform a read-only pre-merge review for specification compliance and code quality.",
+      "Check this pull request for regressions, security, data, accessibility, and missing tests."
+    ],
+    "should_not_trigger": [
+      "Fix every review finding in this branch.",
+      "Create the architecture for a new platform."
+    ],
+    "ambiguous": ["Tell me whether this change is safe and complete."],
+    "scenario": "Review a multi-file authorization change in two passes without editing the code.",
+    "assertions": ["specification|requirement", "severity|finding|no actionable"]
+  },
+  "test-platform": {
+    "should_trigger": [
+      "Run risk-based E2E, security, and data-integrity testing for this platform.",
+      "Test critical journeys across roles, tenants, devices, and failure recovery.",
+      "Create and execute a requirement traceability test strategy for this release."
+    ],
+    "should_not_trigger": [
+      "Design the user experience before implementation.",
+      "Deploy the release candidate to production."
+    ],
+    "ambiguous": ["Prove this completed platform is actually ready for users."],
+    "scenario": "Test a SaaS release across browser flows, authorization, migrations, and sensitive-data lifecycle.",
+    "assertions": ["traceability|requirement", "residual risk|untested"]
+  },
+  "verify-web-product": {
+    "should_trigger": [
+      "Independently verify this web release candidate and do not fix it.",
+      "Run the release gates and report pass, fail, not run, or not applicable.",
+      "Check functional, responsive, accessibility, security, performance, and operational readiness."
+    ],
+    "should_not_trigger": [
+      "Implement the approved feature.",
+      "Analyze the market opportunity for this idea."
+    ],
+    "ambiguous": ["Is this web product really done? Show me evidence."],
+    "scenario": "Perform an independent release-quality pass and distinguish facts from untested areas.",
+    "assertions": ["pass|fail|not run|not applicable", "evidence|residual"]
+  },
+  "prepare-deployment": {
+    "should_trigger": [
+      "Prepare a go/no-go deployment record, smoke tests, abort thresholds, and rollback plan.",
+      "Assess whether this release artifact and migration are ready for production.",
+      "Create exact rollout and post-deployment observation steps without deploying yet."
+    ],
+    "should_not_trigger": [
+      "Build the missing product feature.",
+      "Write the initial PRD."
+    ],
+    "ambiguous": ["Get this release ready to go live safely."],
+    "scenario": "Prepare a canary release with migration compatibility, observability, backup, abort, and recovery evidence.",
+    "assertions": ["go|no-go|conditional", "rollback|abort"]
+  },
+  "ship-web-product": {
+    "should_trigger": [
+      "Own this SaaS product end to end from analysis and PRD through build, tests, and deployment readiness.",
+      "Build and ship a complete responsive web platform with security and data validation.",
+      "Take this product idea through every phase and keep requirements traceable to release evidence."
+    ],
+    "should_not_trigger": [
+      "Change the button label on this existing page.",
+      "Explain what this single function does without editing it."
+    ],
+    "ambiguous": ["Help me turn this idea into a production-ready product."],
+    "scenario": "Orchestrate a greenfield multi-role SaaS product through all gates without unauthorized production deployment.",
+    "assertions": ["product analysis|PRD", "deployment|release"]
+  }
+}

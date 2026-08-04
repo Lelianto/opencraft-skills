@@ -1,0 +1,10 @@
+{
+  "schema_version": "1.0",
+  "name": "opencraft-skills",
+  "version": "1.0.0",
+  "description": "Portable end-to-end AI-assisted product development skills",
+  "source": "https://github.com/Lelianto/opencraft-skills",
+  "license": "MIT",
+  "artifact_contract": ".product/",
+  "supported_targets": ["agents", "claude", "codex", "cursor", "github"]
+}

@@ -1,0 +1,4 @@
+interface:
+  display_name: "Review Product Change"
+  short_description: "Review spec compliance and code quality"
+  default_prompt: "Use $review-product-change to review this change against its requirements and quality gates."
