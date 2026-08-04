@@ -1,0 +1,17 @@
+{
+  "name": "OpenCraft Skills",
+  "short_name": "OpenCraft",
+  "description": "A complete product-development system for AI agents.",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#f3efe5",
+  "theme_color": "#f3efe5",
+  "icons": [
+    {
+      "src": "/assets/icon-512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any"
+    }
+  ]
+}
