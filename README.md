@@ -1,12 +1,19 @@
-# OpenCraft Skills
+<h1 align="center">
+  <img src="https://raw.githubusercontent.com/Lelianto/opencraft-skills/main/site/assets/icon-512.png" width="52" height="52" alt="OpenCraft carpenter mark" />
+  OpenCraft Skills
+</h1>
 
-[![Quality](https://github.com/Lelianto/opencraft-skills/actions/workflows/quality.yml/badge.svg)](https://github.com/Lelianto/opencraft-skills/actions/workflows/quality.yml)
-[![Agent Skills](https://img.shields.io/badge/Agent%20Skills-compatible-111827)](https://agentskills.io/specification)
-[![License: MIT](https://img.shields.io/badge/License-MIT-22c55e.svg)](LICENSE)
-[![Skills](https://img.shields.io/badge/skills-17-6366f1)](skills)
-[![npm](https://img.shields.io/npm/v/opencraft-skills?color=cb3837)](https://www.npmjs.com/package/opencraft-skills)
+<p align="center">
+  Portable, production-minded Agent Skills for end-to-end AI-assisted product development—with a strong focus on modern web platforms.
+</p>
 
-Portable, production-minded Agent Skills for end-to-end AI-assisted product development—with a strong focus on modern web platforms.
+<p align="center">
+  <a href="https://github.com/Lelianto/opencraft-skills/actions/workflows/quality.yml"><img src="https://github.com/Lelianto/opencraft-skills/actions/workflows/quality.yml/badge.svg" alt="Quality" /></a>
+  <a href="https://agentskills.io/specification"><img src="https://img.shields.io/badge/Agent%20Skills-compatible-111827" alt="Agent Skills" /></a>
+  <a href="LICENSE"><img src="https://img.shields.io/badge/License-MIT-22c55e.svg" alt="License: MIT" /></a>
+  <a href="skills"><img src="https://img.shields.io/badge/skills-17-6366f1" alt="Skills" /></a>
+  <a href="https://www.npmjs.com/package/opencraft-skills"><img src="https://img.shields.io/npm/v/opencraft-skills?color=cb3837" alt="npm" /></a>
+</p>
 
 OpenCraft Skills gives Claude Code, OpenAI Codex, Cursor, GitHub Copilot, and other Agent Skills-compatible tools a shared delivery system. It guides an agent from product evidence and PRD creation through experience design, architecture, implementation, testing, security, data validation, and deployment readiness.
 
