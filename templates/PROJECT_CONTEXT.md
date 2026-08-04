@@ -59,6 +59,16 @@ Keep this file factual, concise, and free of secrets.
 - Rollback strategy:
 - Release owner:
 
+## Human decision model
+
+- Mode: `off` / `autonomous` / `guided` / `approval-gated`
+- Product decision owner:
+- Design decision owner:
+- Architecture decision owner:
+- Security and privacy risk owner:
+- Production approval owner:
+- Decisions that always require a human:
+
 ## Durable decisions
 
 | Decision | Rationale | Date or evidence |

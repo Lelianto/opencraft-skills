@@ -23,3 +23,5 @@ Use [references/product-analysis.md](references/product-analysis.md) for a forma
 ## Output contract
 
 Include problem framing, users, evidence, alternatives, opportunity, assumptions, risks, hypotheses, success metrics, recommendation, and next validation step. Keep solution details provisional until the problem and outcome are credible.
+
+Apply `facilitate-product-decision` when evidence leads to a material proceed, research-first, target-user, outcome, or investment choice. Analysis may recommend; the human owns `D2` product judgment and every `D3` authority decision when HITL is enabled.

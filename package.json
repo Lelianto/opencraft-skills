@@ -1,6 +1,6 @@
 {
   "name": "opencraft-skills",
-  "version": "1.1.0",
+  "version": "1.2.0",
   "description": "Portable end-to-end Agent Skills for meaningful, secure, production-ready product development",
   "type": "module",
   "bin": {
@@ -20,9 +20,10 @@
     "LICENSE"
   ],
   "scripts": {
-    "validate": "python3 scripts/validate.py && python3 scripts/evaluate.py && python3 scripts/generate_lock.py --check && node scripts/check-release.mjs",
+    "validate": "python3 scripts/validate.py && python3 scripts/evaluate.py && node scripts/validate-hitl.mjs && python3 scripts/generate_lock.py --check && node scripts/check-release.mjs",
     "test:node-installer": "node scripts/install.mjs --help",
-    "prepack": "npm run validate && npm run test:node-installer"
+    "test:hitl": "node scripts/test-decision-cli.mjs",
+    "prepack": "npm run validate && npm run test:node-installer && npm run test:hitl"
   },
   "engines": {
     "node": ">=18"
@@ -37,6 +38,7 @@
     "codex",
     "cursor",
     "github-copilot",
+    "human-in-the-loop",
     "product-development",
     "web-development"
   ],

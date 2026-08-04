@@ -26,3 +26,4 @@ Use [references/threat-model.md](references/threat-model.md) for the artifact an
 - Do not claim a control exists without implementation or configuration evidence.
 - Never run intrusive tests against systems outside explicit authorization.
 - Do not include secret values, exploitable production details, or unnecessary personal data in the artifact.
+- Apply `facilitate-product-decision` before accepting residual security, privacy, tenant-isolation, compliance, or sensitive-data risk. Risk acceptance is `D3`; an AI recommendation or implementation constraint is never approval.

@@ -29,3 +29,4 @@ Use [references/architecture-brief.md](references/architecture-brief.md) for sub
 - Keep secrets server-side and configuration outside source control.
 - Design migrations for mixed-version operation when deployment is not atomic.
 - Treat accessibility, security, performance, and operability as architecture inputs.
+- Apply `facilitate-product-decision` to `D2` architecture choices involving vendor dependency, recurring cost, data model, migration path, lock-in, operability, or meaningful reversal cost. Production, destructive, sensitive-data, and accepted-risk choices are `D3` and always require explicit authority.

@@ -35,3 +35,5 @@ Return or create a concise artifact containing:
 - thin-slice delivery plan.
 
 Do not begin implementation unless the user asked for it. Preserve explicit product decisions in the repository's established documentation location.
+
+When MVP boundaries, target users, success measures, or consequential non-goals remain unresolved, apply `facilitate-product-decision`. In guided mode, pause dependent PRD or implementation work until each `D2` choice is recorded.

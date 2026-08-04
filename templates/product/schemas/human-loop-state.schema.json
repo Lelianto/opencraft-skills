@@ -1,0 +1,24 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://opencraft-skills.vercel.app/schemas/human-loop-state.schema.json",
+  "title": "OpenCraft Human Loop State",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["schema_version", "status", "active_decision_ids", "resume", "updated_at"],
+  "properties": {
+    "schema_version": { "const": "1.0" },
+    "status": { "enum": ["IN_PROGRESS", "DECISION_REQUIRED", "APPROVAL_REQUIRED", "BLOCKED", "READY_TO_RESUME", "VERIFICATION_REQUIRED", "COMPLETE"] },
+    "active_decision_ids": { "type": "array", "uniqueItems": true, "items": { "type": "string", "pattern": "^DEC-[A-Z0-9]+-[0-9]{3,}$" } },
+    "resume": {
+      "type": ["object", "null"],
+      "required": ["stage", "next_action"],
+      "properties": {
+        "stage": { "type": "string", "minLength": 1 },
+        "next_action": { "type": "string", "minLength": 1 },
+        "skill": { "type": "string" },
+        "task_id": { "type": "string" }
+      }
+    },
+    "updated_at": { "type": ["string", "null"], "format": "date-time" }
+  }
+}

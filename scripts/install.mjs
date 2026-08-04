@@ -16,6 +16,7 @@ import {
 } from "node:fs";
 import { dirname, join, relative, resolve } from "node:path";
 import { fileURLToPath } from "node:url";
+import { decisionUsage, runDecisionCommand } from "./decision-cli.mjs";
 
 const repository = resolve(dirname(fileURLToPath(import.meta.url)), "..");
 const targets = {
@@ -31,16 +32,22 @@ function usage() {
 
 Usage:
   opencraft-skills install [options]
+  opencraft-skills hitl init [options]
+  opencraft-skills decisions [options]
+  opencraft-skills decision <add|show|resolve|defer|revise> <DEC-ID|record.json> [options]
+  opencraft-skills resume [options]
 
 Options:
   --project <path>       Target project root (default: current directory)
   --target <client>      agents, claude, codex, cursor, github, or all
   --mode <mode>          copy or link (default: copy)
   --with-project-files   Initialize AGENTS.md, PROJECT_CONTEXT.md, and .product/
+  --human-loop <mode>    off, autonomous, guided, or approval-gated (default: guided)
   --force                Replace same-named installed skills
   --version              Print the package version
   --help                 Show this help
 `);
+  decisionUsage();
 }
 
 function readCollection() {
@@ -48,7 +55,7 @@ function readCollection() {
 }
 
 function parseArgs(argv) {
-  const args = { project: process.cwd(), target: "agents", mode: "copy", force: false, withProjectFiles: false };
+  const args = { project: process.cwd(), target: "agents", mode: "copy", force: false, withProjectFiles: false, humanLoop: "guided" };
   const tokens = [...argv];
   if (tokens[0] === "install") tokens.shift();
   while (tokens.length) {
@@ -57,6 +64,10 @@ function parseArgs(argv) {
     if (token === "--version" || token === "-v") return { version: true };
     if (token === "--force") args.force = true;
     else if (token === "--with-project-files") args.withProjectFiles = true;
+    else if (token === "--human-loop") {
+      if (!tokens.length) throw new Error(`${token} requires a value`);
+      args.humanLoop = tokens.shift();
+    }
     else if (["--project", "--target", "--mode"].includes(token)) {
       if (!tokens.length) throw new Error(`${token} requires a value`);
       const key = token.slice(2);
@@ -65,6 +76,7 @@ function parseArgs(argv) {
   }
   if (![...Object.keys(targets), "all"].includes(args.target)) throw new Error(`invalid target: ${args.target}`);
   if (!["copy", "link"].includes(args.mode)) throw new Error(`invalid mode: ${args.mode}`);
+  if (!["off", "autonomous", "guided", "approval-gated"].includes(args.humanLoop)) throw new Error(`invalid human-loop mode: ${args.humanLoop}`);
   return args;
 }
 
@@ -101,7 +113,7 @@ function installSkill(source, destination, mode, force) {
   return `OK   ${target}`;
 }
 
-function initializeProjectFiles(project) {
+function initializeProjectFiles(project, humanLoop) {
   const mappings = [
     [join(repository, "templates/AGENTS.md"), join(project, "AGENTS.md")],
     [join(repository, "templates/PROJECT_CONTEXT.md"), join(project, "PROJECT_CONTEXT.md")],
@@ -117,6 +129,11 @@ function initializeProjectFiles(project) {
   if (existsSync(productTarget)) console.log(`SKIP ${productTarget} (exists)`);
   else {
     cpSync(join(repository, "templates/product"), productTarget, { recursive: true });
+    const configPath = join(productTarget, "human-loop.json");
+    const config = JSON.parse(readFileSync(configPath, "utf8"));
+    config.enabled = humanLoop !== "off";
+    config.mode = humanLoop;
+    writeFileSync(configPath, `${JSON.stringify(config, null, 2)}\n`, "utf8");
     console.log(`OK   ${productTarget}`);
   }
 }
@@ -124,7 +141,9 @@ function initializeProjectFiles(project) {
 function main() {
   let args;
   try {
-    args = parseArgs(process.argv.slice(2));
+    const argv = process.argv.slice(2);
+    if (["hitl", "decisions", "decision", "resume"].includes(argv[0])) return runDecisionCommand(repository, argv);
+    args = parseArgs(argv);
     if (args.help) return usage();
     if (args.version) return console.log(readCollection().version);
     const project = resolve(args.project);
@@ -142,7 +161,7 @@ function main() {
     }
     if (args.withProjectFiles) {
       console.log("[project]");
-      initializeProjectFiles(project);
+      initializeProjectFiles(project, args.humanLoop);
     }
     const receipt = {
       collection: lock.collection,
@@ -151,6 +170,7 @@ function main() {
       source: lock.source,
       targets: selected.map(([name]) => name),
       version: lock.version,
+      human_loop: args.withProjectFiles ? args.humanLoop : null,
     };
     writeFileSync(join(project, ".ai-skills-install.json"), `${JSON.stringify(receipt, null, 2)}\n`, "utf8");
   } catch (error) {

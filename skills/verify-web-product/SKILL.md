@@ -27,3 +27,4 @@ Use [references/release-gates.md](references/release-gates.md) for release candi
 - Do not report theoretical style preferences as defects.
 - Prioritize exploitable security issues, data loss, broken primary journeys, and regressions over polish.
 - If no actionable findings exist, say so and list residual test gaps.
+- Treat unresolved `D2` or `D3` decisions, inconsistent human-loop state, implementation that contradicts accepted decisions, or missing production/risk authority as release blockers. Report them by `DEC-*` ID.

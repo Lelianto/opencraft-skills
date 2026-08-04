@@ -24,3 +24,5 @@ Use [references/prd-template.md](references/prd-template.md) for the deliverable
 ## Output contract
 
 Produce a concise PRD with version/status, evidence links, numbered requirements, measurable acceptance criteria, explicit non-goals, decisions, assumptions, and unresolved questions. Do not present assumptions as approved requirements.
+
+Before marking the PRD approved, apply `facilitate-product-decision` to unresolved `D2` scope, role, permission, success-measure, data-lifecycle, or rollout choices. List pending decision IDs rather than silently selecting a product direction.

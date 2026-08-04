@@ -1,0 +1,19 @@
+{
+  "schema_version": "1.0",
+  "id": "DEC-EXAMPLE-001",
+  "level": "D2",
+  "stage": "product-shaping",
+  "status": "example",
+  "question": "Replace this example with a material product decision.",
+  "why_now": "A dependent task cannot proceed safely without this choice.",
+  "options": [
+    {
+      "id": "option-a",
+      "label": "Option A",
+      "tradeoffs": "Describe user, delivery, risk, cost, and reversibility consequences."
+    }
+  ],
+  "recommendation": "option-a",
+  "affected_artifacts": [],
+  "created_at": "1970-01-01T00:00:00Z"
+}

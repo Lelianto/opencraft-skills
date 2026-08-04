@@ -37,3 +37,4 @@ Return or implement:
 - Do not fabricate customer evidence, usage statistics, logos, awards, or social proof.
 - Do not hide weak product value behind polish.
 - Preserve an established design system unless a deliberate redesign is in scope.
+- Use `facilitate-product-decision` when choosing among material design theses or signature interactions. Explain the product meaning, mobile behavior, originality risks, accessibility, and implementation consequences of each direction.

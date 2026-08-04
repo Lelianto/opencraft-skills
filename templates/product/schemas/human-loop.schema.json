@@ -1,0 +1,24 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://opencraft-skills.vercel.app/schemas/human-loop.schema.json",
+  "title": "OpenCraft Human Loop Configuration",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["schema_version", "enabled", "mode", "decision_levels"],
+  "properties": {
+    "schema_version": { "const": "1.0" },
+    "enabled": { "type": "boolean" },
+    "mode": { "enum": ["off", "autonomous", "guided", "approval-gated"] },
+    "decision_levels": {
+      "type": "object",
+      "required": ["D0", "D1", "D2", "D3"],
+      "additionalProperties": false,
+      "properties": {
+        "D0": { "type": "string" },
+        "D1": { "type": "string" },
+        "D2": { "type": "string" },
+        "D3": { "type": "string" }
+      }
+    }
+  }
+}

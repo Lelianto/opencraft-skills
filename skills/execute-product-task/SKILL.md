@@ -27,3 +27,4 @@ Use [references/task-record.md](references/task-record.md) to persist execution 
 - Never weaken a test or security control merely to make a check pass.
 - Never claim completion from stale output.
 - Do not deploy or mutate production unless the task and user explicitly authorize it.
+- Before execution or resume, inspect `.product/human-loop-state.json` and linked `DEC-*` records when present. Stop dependent work in `DECISION_REQUIRED`, `APPROVAL_REQUIRED`, or `BLOCKED`; use `facilitate-product-decision` instead of guessing.

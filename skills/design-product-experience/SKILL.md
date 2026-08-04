@@ -26,3 +26,5 @@ Use [references/experience-spec.md](references/experience-spec.md) and [referenc
 ## Output contract
 
 Produce behavior and layout guidance precise enough to implement without guessing, while leaving visual exploration flexible where the product has not made a decision.
+
+For material navigation, information-architecture, interaction, or design-direction choices, apply `facilitate-product-decision`. Present genuinely distinct directions with mobile, accessibility, delivery, and reversibility trade-offs; do not implement a preferred direction until the configured human gate is resolved.

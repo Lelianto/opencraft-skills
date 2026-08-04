@@ -223,6 +223,20 @@
     "scenario": "Prepare a canary release with migration compatibility, observability, backup, abort, and recovery evidence.",
     "assertions": ["go|no-go|conditional", "rollback|abort"]
   },
+  "facilitate-product-decision": {
+    "should_trigger": [
+      "Present the design directions and let me choose after you explain the meaningful trade-offs.",
+      "We have a material architecture decision; prepare options, recommend one, and record my choice.",
+      "Pause this workflow for human approval before accepting the residual security risk."
+    ],
+    "should_not_trigger": [
+      "Rename this local variable to match the existing convention.",
+      "Run the already approved focused test command and report the result."
+    ],
+    "ambiguous": ["I want to stay in control of important choices while the agent builds the product."],
+    "scenario": "Facilitate a D2 mobile navigation decision in guided mode with evidence, distinct options, a recommendation, and a durable pending record without continuing implementation.",
+    "assertions": ["D2|decision required", "trade-off|tradeoff|reversib", "recommend", "DEC-[A-Z]+-[0-9]+|stop|pause"]
+  },
   "ship-web-product": {
     "should_trigger": [
       "Own this SaaS product end to end from analysis and PRD through build, tests, and deployment readiness.",

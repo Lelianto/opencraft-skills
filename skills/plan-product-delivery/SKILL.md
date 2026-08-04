@@ -26,3 +26,4 @@ Use [references/delivery-plan.md](references/delivery-plan.md) for the artifact 
 - Reference requirement IDs rather than paraphrasing them.
 - Do not mark tasks complete in this skill; execution owns status and evidence.
 - Prefer explicit dependencies over implied ordering.
+- Mark readiness `not ready` when a blocking `D2` or `D3` decision is pending. Apply `facilitate-product-decision`, link its `DEC-*` ID from dependent tasks, and do not plan around an invented answer.

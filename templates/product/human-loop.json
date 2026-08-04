@@ -1,0 +1,11 @@
+{
+  "schema_version": "1.0",
+  "enabled": true,
+  "mode": "guided",
+  "decision_levels": {
+    "D0": "continue",
+    "D1": "continue-and-record",
+    "D2": "human-decision",
+    "D3": "explicit-human-approval"
+  }
+}

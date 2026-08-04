@@ -1,0 +1,4 @@
+interface:
+  display_name: "Facilitate Product Decision"
+  short_description: "Guide material human product decisions"
+  default_prompt: "Use $facilitate-product-decision to present this material choice with evidence, trade-offs, and a recorded human decision."

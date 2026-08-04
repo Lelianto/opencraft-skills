@@ -35,3 +35,4 @@ Load [references/frontend-quality.md](references/frontend-quality.md) for UI-hea
 - Relevant tests and static checks pass.
 - Production build succeeds when the project defines one.
 - No secrets, debug artifacts, placeholder claims, or unrelated edits are introduced.
+- When HITL artifacts exist, dependent work follows accepted `DEC-*` records and stops for pending material choices instead of implementing an AI recommendation as if it were approved.

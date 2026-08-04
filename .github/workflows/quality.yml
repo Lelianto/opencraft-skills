@@ -25,6 +25,8 @@ jobs:
         run: python3 scripts/validate.py
       - name: Validate eval fixtures
         run: python3 scripts/evaluate.py
+      - name: Validate HITL contracts
+        run: node scripts/validate-hitl.mjs
       - name: Verify integrity lock
         run: python3 scripts/generate_lock.py --check
       - name: Smoke-test installer
@@ -34,6 +36,8 @@ jobs:
           expected="$(( $(find skills -mindepth 1 -maxdepth 1 -type d | wc -l) * 5 ))"
           test "$(find "$project" -name SKILL.md | wc -l)" -eq "$expected"
           test -f "$project/.product/traceability.yaml"
+          test -f "$project/.product/human-loop.json"
+          test -f "$project/.product/schemas/decision-record.schema.json"
           test -f "$project/.ai-skills-install.json"
       - name: Smoke-test npm package
         run: |
@@ -42,3 +46,4 @@ jobs:
           node scripts/install.mjs install --target all --project "$project" --with-project-files
           expected="$(( $(find skills -mindepth 1 -maxdepth 1 -type d | wc -l) * 5 ))"
           test "$(find "$project" -name SKILL.md | wc -l)" -eq "$expected"
+          node scripts/test-decision-cli.mjs

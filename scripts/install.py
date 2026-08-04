@@ -28,6 +28,7 @@ def parse_args() -> argparse.Namespace:
     parser.add_argument("--mode", choices=["copy", "link"], default="copy")
     parser.add_argument("--force", action="store_true", help="Replace same-named installed skills")
     parser.add_argument("--with-project-files", action="store_true", help="Initialize AGENTS.md, PROJECT_CONTEXT.md, and .product templates")
+    parser.add_argument("--human-loop", choices=["off", "autonomous", "guided", "approval-gated"], default="guided", help="Human decision mode for new project artifacts")
     return parser.parse_args()
 
 
@@ -44,7 +45,7 @@ def verify_lock(repository: Path) -> dict[str, object]:
     return lock
 
 
-def initialize_project_files(repository: Path, project: Path) -> list[str]:
+def initialize_project_files(repository: Path, project: Path, human_loop: str) -> list[str]:
     results: list[str] = []
     mappings = {
         repository / "templates/AGENTS.md": project / "AGENTS.md",
@@ -61,6 +62,11 @@ def initialize_project_files(repository: Path, project: Path) -> list[str]:
         results.append(f"SKIP {product_target} (exists)")
     else:
         shutil.copytree(repository / "templates/product", product_target)
+        config_path = product_target / "human-loop.json"
+        config = json.loads(config_path.read_text(encoding="utf-8"))
+        config["enabled"] = human_loop != "off"
+        config["mode"] = human_loop
+        config_path.write_text(json.dumps(config, indent=2) + "\n", encoding="utf-8")
         results.append(f"OK   {product_target}")
     return results
 
@@ -112,7 +118,7 @@ def main() -> int:
             print(install_one(source, destination, args.mode, args.force))
     if args.with_project_files:
         print("[project]")
-        for result in initialize_project_files(repository, project):
+        for result in initialize_project_files(repository, project, args.human_loop):
             print(result)
     receipt = {
         "collection": lock["collection"],
@@ -121,6 +127,7 @@ def main() -> int:
         "targets": list(selected),
         "mode": args.mode,
         "skills": [source.name for source in skills],
+        "human_loop": args.human_loop if args.with_project_files else None,
     }
     (project / ".ai-skills-install.json").write_text(json.dumps(receipt, indent=2, sort_keys=True) + "\n", encoding="utf-8")
     return 0

@@ -25,3 +25,5 @@ Use [references/test-strategy.md](references/test-strategy.md) to plan coverage.
 ## Exit contract
 
 Return a requirement traceability matrix, test results, defects ordered by severity, security/data observations, untested areas, residual risk, and a release recommendation. Never equate a passing happy path with platform readiness.
+
+Include HITL state integrity when configured: pending records must match active decision IDs, gated work must not proceed, accepted choices must trace to implementation, and production or residual-risk authority must be explicit.

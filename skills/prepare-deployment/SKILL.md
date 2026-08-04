@@ -28,3 +28,4 @@ Use [references/deployment-readiness.md](references/deployment-readiness.md) for
 - Never assume rollback works because a command exists; verify the recovery path safely.
 - Never run production deployment, migration, DNS change, or destructive test without explicit authorization.
 - Keep release and rollback commands exact enough for another operator to execute.
+- Apply `facilitate-product-decision` to conditional-go exceptions and every `D3` production, migration, destructive, external-state, or residual-risk decision. A `go` classification prepares a decision; it does not grant deployment authority.

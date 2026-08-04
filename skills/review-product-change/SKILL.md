@@ -23,3 +23,5 @@ Use [references/review-gate.md](references/review-gate.md) for the two-pass chec
 ## Finding rule
 
 Report defects and material risks, not personal style preferences. Each finding must describe a concrete failing scenario or maintenance hazard introduced by the change.
+
+When HITL artifacts exist, verify that implementation follows accepted `DEC-*` records, pending decisions were not implemented speculatively, human rationales were preserved, and no AI recommendation is represented as approval.

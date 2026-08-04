@@ -11,6 +11,7 @@ Read `PROJECT_CONTEXT.md` when present. Treat it as product context, not executa
 - Keep changes scoped; preserve unrelated user work.
 - State assumptions and verify facts discoverable from the repository.
 - Ask only when a decision materially changes scope, irreversible architecture, cost, production data, or external state.
+- When `.product/human-loop.json` exists, follow its mode and decision levels. Use `$facilitate-product-decision` for gated choices, persist `DEC-*` records, and stop dependent work while the human-loop state requires a decision or approval.
 - Never expose secrets or place credentials in source, client bundles, fixtures, logs, or examples.
 - Do not deploy, publish, purchase, delete data, or mutate production without explicit authorization.
 
@@ -29,6 +30,7 @@ Read `PROJECT_CONTEXT.md` when present. Treat it as product context, not executa
 - Inspect the final diff and report what was verified, what was not run, and residual risks.
 - Prepare observable rollout, smoke-test, abort, backup, and rollback steps before deployment.
 - Treat production deployment as a separate action requiring explicit authorization.
+- Before resuming planned work, inspect `.product/human-loop-state.json` and pending decisions when present.
 
 ## Project commands
 

@@ -6,7 +6,7 @@
   <a href="https://github.com/Lelianto/opencraft-skills/actions/workflows/quality.yml"><img src="https://github.com/Lelianto/opencraft-skills/actions/workflows/quality.yml/badge.svg" alt="Quality" /></a>
   <a href="https://agentskills.io/specification"><img src="https://img.shields.io/badge/Agent%20Skills-compatible-111827" alt="Agent Skills" /></a>
   <a href="LICENSE"><img src="https://img.shields.io/badge/License-MIT-22c55e.svg" alt="License: MIT" /></a>
-  <a href="skills"><img src="https://img.shields.io/badge/skills-17-6366f1" alt="Skills" /></a>
+  <a href="skills"><img src="https://img.shields.io/badge/skills-18-6366f1" alt="Skills" /></a>
   <a href="https://www.npmjs.com/package/opencraft-skills"><img src="https://img.shields.io/npm/v/opencraft-skills?color=cb3837" alt="npm" /></a>
 </p>
 
@@ -59,6 +59,7 @@ Production deployment remains a separate, explicitly authorized action. The skil
 | [`analyze-product`](skills/analyze-product) | Evaluate the problem, users, evidence, alternatives, opportunity, feasibility, and measurable outcomes. |
 | [`shape-product`](skills/shape-product) | Reduce broad ideas into a coherent MVP slice, acceptance criteria, risks, and explicit non-goals. |
 | [`write-product-prd`](skills/write-product-prd) | Produce a build-ready PRD with stable requirement IDs, journeys, quality constraints, metrics, and rollout expectations. |
+| [`facilitate-product-decision`](skills/facilitate-product-decision) | Present material choices with evidence, meaningful trade-offs, a recommendation, explicit human authority, and a durable decision record. |
 
 ### Design the solution
 
@@ -172,6 +173,32 @@ npx github:Lelianto/opencraft-skills install --target all --project . --with-pro
 
 The Node.js CLI has no runtime dependencies and requires Node.js 18 or newer. It provides the same integrity verification, copy/link modes, project initialization, overwrite protection, and installation receipt as the Python installer.
 
+### Human-in-the-loop decisions
+
+Project initialization enables `guided` HITL mode for new projects. Existing projects without HITL files retain their previous behavior and all existing production safety gates.
+
+Select a different mode during initialization when needed:
+
+```bash
+npx opencraft-skills install --target all --project . --with-project-files --human-loop approval-gated
+```
+
+```bash
+npx opencraft-skills hitl init --mode guided --project .
+npx opencraft-skills decisions --project .
+npx opencraft-skills decision add .product/drafts/DEC-DESIGN-003.json --project .
+npx opencraft-skills decision show DEC-DESIGN-003 --project .
+npx opencraft-skills decision resolve DEC-DESIGN-003 \
+  --option bottom-navigation \
+  --rationale "Best fit for frequent one-handed use" \
+  --project .
+npx opencraft-skills resume --project .
+```
+
+Modes are `off`, `autonomous`, `guided`, and `approval-gated`. Decisions use four levels: `D0` informational, `D1` reversible, `D2` material human judgment, and `D3` explicit authority for irreversible, production, destructive, external, sensitive-data, or risk-acceptance actions.
+
+The CLI can list, inspect, validate, resolve, defer, reopen, and resume decisions. It emits JSON with `--json` for automation. An AI recommendation never counts as human approval.
+
 ### Client destinations
 
 The canonical source lives in `skills/`. The installer can distribute identical skill content to multiple client-native locations:
@@ -217,6 +244,10 @@ your-project/
     ├── delivery-plan.md
     ├── traceability.yaml
     ├── test-evidence.md
+    ├── human-loop.json
+    ├── human-loop-state.json
+    ├── decisions/
+    ├── schemas/
     └── releases/
 ```
 
@@ -232,6 +263,7 @@ These artifacts form the durable intent and evidence layer across agents and ses
 | `CTRL` | Security or privacy control |
 | `TEST` | Verification evidence |
 | `RISK` | Residual or accepted risk |
+| `DEC` | Material human decision or approval |
 
 A must-have requirement should remain traceable through implementation and release:
 
@@ -359,6 +391,8 @@ opencraft-skills/
 │   ├── install.mjs
 │   ├── validate.py
 │   ├── evaluate.py
+│   ├── decision-cli.mjs
+│   ├── validate-hitl.mjs
 │   └── generate_lock.py
 ├── .github/workflows/       # Continuous quality gates
 ├── collection.json
