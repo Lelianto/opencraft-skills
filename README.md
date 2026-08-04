@@ -1,11 +1,6 @@
 <h1 align="center">
-  <img src="https://raw.githubusercontent.com/Lelianto/opencraft-skills/main/site/assets/icon-512.png" width="52" height="52" alt="OpenCraft carpenter mark" />
-  OpenCraft Skills
+  <img src="https://raw.githubusercontent.com/Lelianto/opencraft-skills/main/site/assets/icon-512.png" width="36" height="36" alt="OpenCraft carpenter mark" align="absmiddle" />&nbsp;OpenCraft Skills
 </h1>
-
-<p align="center">
-  Portable, production-minded Agent Skills for end-to-end AI-assisted product development—with a strong focus on modern web platforms.
-</p>
 
 <p align="center">
   <a href="https://github.com/Lelianto/opencraft-skills/actions/workflows/quality.yml"><img src="https://github.com/Lelianto/opencraft-skills/actions/workflows/quality.yml/badge.svg" alt="Quality" /></a>
@@ -13,6 +8,10 @@
   <a href="LICENSE"><img src="https://img.shields.io/badge/License-MIT-22c55e.svg" alt="License: MIT" /></a>
   <a href="skills"><img src="https://img.shields.io/badge/skills-17-6366f1" alt="Skills" /></a>
   <a href="https://www.npmjs.com/package/opencraft-skills"><img src="https://img.shields.io/npm/v/opencraft-skills?color=cb3837" alt="npm" /></a>
+</p>
+
+<p align="center">
+  Portable, production-minded Agent Skills for end-to-end AI-assisted product development—with a strong focus on modern web platforms.
 </p>
 
 OpenCraft Skills gives Claude Code, OpenAI Codex, Cursor, GitHub Copilot, and other Agent Skills-compatible tools a shared delivery system. It guides an agent from product evidence and PRD creation through experience design, architecture, implementation, testing, security, data validation, and deployment readiness.
