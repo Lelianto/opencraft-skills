@@ -46,7 +46,7 @@ def resolve(project, registry):
         name, spec = parse_ref(ref)
         roots.append((name, spec))
     if not roots:
-        raise ResolutionError("project extends is empty")
+        return []
 
     graph = {}
     # Pass 1: collect the graph and detect cycles.

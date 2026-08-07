@@ -197,11 +197,13 @@ A conflict is two definitions of the same context `id` at the same precedence le
 
 No API keys. No cloud account. No `@lcdd/cli` required. Python 3.10+ or Node.js 18+.
 
-```bash
-# Init a project pack declaration
-python3 scripts/packtool.py packs init --project .
+**LCDD applies automatically.** Installing the package with `--with-project-files`, or running `packs bootstrap`, applies the baseline `core-pack` and materializes `.lcdd/` with zero configuration:
 
-# Declare packs
+```bash
+# Apply LCDD to a project (baseline core-pack + .lcdd/) — automatic on install
+python3 scripts/packtool.py packs bootstrap --project .
+
+# Declare more packs
 python3 scripts/packtool.py packs add nextjs-pack --project .
 python3 scripts/packtool.py packs add security-pack --project .
 python3 scripts/packtool.py packs add fintech-pack --project .
@@ -228,13 +230,14 @@ Result:
 └── report.json         # merge/conflict/override report
 ```
 
-The whole engine runs locally: the 13 reference packs ship with the repository, so the demo above works **with no network**.
+The whole engine runs locally: the 14 reference packs ship with the repository, so the demo above works **with no network**.
 
 ## CLI Reference
 
 | Command | Description |
 |---|---|
-| `packs init` | Create `packs.yaml` + `.lcdd/` skeleton. |
+| `packs bootstrap` | Apply LCDD: baseline `core-pack` + materialize `.lcdd/` (automatic on install). |
+| `packs init` | Create an empty `packs.yaml` + `.lcdd/` skeleton. |
 | `packs add <name[@range]>` | Declare a pack. |
 | `packs remove <name>` | Remove a declared pack. |
 | `packs install` | Resolve, merge, validate, materialize into `.lcdd/`. |
@@ -255,6 +258,7 @@ Options: `--project <dir>` (default `.`), `--json`, `--force`, `--dry-run`.
 
 | Pack | Type | Extends | Focus |
 |---|---|---|---|
+| `core-pack` | baseline | — | Evidence standard, secrets, production authority, honest claims. Applied automatically. |
 | `typescript-pack` | technology | — | Strict typing, tsconfig, lint, path aliases. |
 | `node-pack` | technology | — | Runtime versioning, ESM, process hygiene. |
 | `react-pack` | framework | typescript-pack | Components, hooks, state, keys. |
@@ -340,7 +344,7 @@ Context Packs are the **composability layer** of Living Context Driven Developme
 |---|---|---|
 | Specification + schemas | ✅ | 14 RFCs, JSON Schemas, pack contract. |
 | Reference engine | ✅ | Zero-dependency Python + Node CLIs, 23 unit tests. |
-| Reference packs | ✅ | 13 installable packs exercising inheritance/overrides. |
+| Reference packs | ✅ | 14 installable packs exercising inheritance/overrides. |
 | Registry + publishing | 🟡 | Catalog + npm transport; automated publish via CI Trusted Publishing. |
 | MCP server | 🔴 | Structured querying for MCP-capable agents. |
 | Community ecosystem | 🔴 | Contribution SDK, maturity levels, compatibility matrix. |

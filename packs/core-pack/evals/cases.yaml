@@ -1,0 +1,13 @@
+positive:
+  - "What rules apply to every project in this workspace?"
+  - "Set up the baseline governance and evidence standard for this project."
+  - "Why can't the agent deploy without my approval?"
+negative:
+  - "Add a dark mode toggle to the settings page."
+  - "Write a release blog post."
+ambiguous:
+  - "Bootstrap this project's living context."
+assertions:
+  - "response references fresh evidence for completion claims"
+  - "response requires human authority for production actions"
+  - "response forbids committing secrets"

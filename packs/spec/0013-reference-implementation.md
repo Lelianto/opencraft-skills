@@ -55,7 +55,7 @@ All canonical packs are validated to stay within the subset (unknown constructs 
 
 ## Registry and caching
 
-`registry.py` resolves in order: cache → built-in `packs/` tree → remote npm transport. The built-in tree makes all 13 reference packs installable offline and key-free. Remote fetch verifies `sha256` before unpacking; network failures degrade gracefully to a clear error, never partial state.
+`registry.py` resolves in order: cache → built-in `packs/` tree → remote npm transport. The built-in tree makes all 14 reference packs installable offline and key-free. Remote fetch verifies `sha256` before unpacking; network failures degrade gracefully to a clear error, never partial state.
 
 ## Determinism
 
@@ -99,7 +99,7 @@ The Node CLI (`packtool.mjs`) implements the same pipeline: YAML subset parser, 
 
 | Scenario | Measured (reference) | Bound |
 |---|---|---|
-| `validate --all` (13 packs) | ~0.1s | 15s |
+| `validate --all` (14 packs) | ~0.1s | 15s |
 | `install` into a project (Python) | ~0.14s | 10s |
 | `install` into a project (Node) | ~0.09s | 10s |
 | Resolve 100-pack diamond | ~0.09s | 5s |

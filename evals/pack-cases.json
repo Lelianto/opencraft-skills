@@ -16,6 +16,24 @@
       "Add automated axe-core checks to CI."
     ]
   },
+  "core-pack": {
+    "ambiguous": "Bootstrap this project's living context.",
+    "assertions": [
+      "response references fresh evidence for completion claims",
+      "response requires human authority for production actions",
+      "response forbids committing secrets"
+    ],
+    "scenario": "What rules apply to every project in this workspace?",
+    "should_not_trigger": [
+      "Add a dark mode toggle to the settings page.",
+      "Write a release blog post."
+    ],
+    "should_trigger": [
+      "What rules apply to every project in this workspace?",
+      "Set up the baseline governance and evidence standard for this project.",
+      "Why can't the agent deploy without my approval?"
+    ]
+  },
   "ecommerce-pack": {
     "ambiguous": "Review the new purchase flow.",
     "assertions": [

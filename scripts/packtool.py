@@ -32,6 +32,21 @@ from packlib.registry import Registry, pack_integrity  # noqa: E402
 REPO_ROOT = Path(__file__).resolve().parent.parent
 PACKS_ROOT = REPO_ROOT / "packs"
 SCHEMA_URL = "https://opencraft.dev/schema/project-packs/v1"
+CORE_PACK = "core-pack@^1"
+
+
+def ensure_packs_yaml(project: Path):
+    """Create packs.yaml with the baseline core-pack if missing. Returns True if created."""
+    packs_yaml = project / "packs.yaml"
+    if packs_yaml.is_file():
+        return False
+    (project / "packs.yaml").write_text(
+        "schema: https://opencraft.dev/schema/project-packs/v1\n"
+        f"extends:\n  - {CORE_PACK}\n"
+        "conflict_policy: fail\n",
+        encoding="utf-8",
+    )
+    return True
 
 
 def out_json(payload):
@@ -175,6 +190,9 @@ def cmd_install(project, argv, json_out):
         if token == "--resolve":
             if index + 2 < len(argv):
                 resolve_arg = (argv[index + 1], argv[index + 2])
+    bootstrapped = ensure_packs_yaml(project)
+    if bootstrapped and not json_out:
+        print(f"OK   bootstrapped packs.yaml with {CORE_PACK}")
     result = run_pipeline(project, force=force)
     if not result["ok"]:
         payload = {"ok": False, "errors": result["errors"], "conflicts": result["merged"]["report"]["conflicts"]}
@@ -185,6 +203,8 @@ def cmd_install(project, argv, json_out):
                 print(f"ERROR {error}")
         return 1
 
+    if not result["ordered"] and not json_out:
+        print("INFO no packs declared; add packs with 'packs add <name>' and reinstall.")
     lcdd = materialize.materialize(
         project, result["merged"], result["ordered"], result["project"], lock_integrity=result["lock_integrity"]
     )
@@ -204,6 +224,23 @@ def cmd_install(project, argv, json_out):
         for conflict in result["merged"]["report"]["conflicts"]:
             print(f"WARN conflict {conflict['id']}: {', '.join(conflict['packs'])}")
     return 0
+
+
+def cmd_bootstrap(project, argv, json_out):
+    """Apply LCDD to a project: create packs.yaml (baseline core-pack) and install."""
+    packs_yaml = project / "packs.yaml"
+    if packs_yaml.is_file():
+        declaration = manifest.load_project_declaration(project)
+        if not declaration.get("extends"):
+            declaration["extends"] = [CORE_PACK]
+            write_declaration(project, declaration)
+            if not json_out:
+                print(f"OK   added baseline {CORE_PACK} to packs.yaml")
+    else:
+        ensure_packs_yaml(project)
+        if not json_out:
+            print(f"OK   bootstrapped packs.yaml with {CORE_PACK}")
+    return cmd_install(project, argv, json_out)
 
 
 def cmd_update(project, argv, json_out):
@@ -561,6 +598,7 @@ def usage():
     print("")
     print("Commands:")
     print("  init                  Create packs.yaml + .lcdd/ skeleton")
+    print("  bootstrap             Apply LCDD: baseline core-pack + install (auto on install)")
     print("  add <name[@range]>    Declare a pack")
     print("  remove <name>         Remove a declared pack")
     print("  install               Resolve, merge, validate, materialize")
@@ -607,6 +645,7 @@ def main(argv):
     try:
         handlers = {
             "init": lambda: cmd_init(project, command_argv),
+            "bootstrap": lambda: cmd_bootstrap(project, command_argv, json_out),
             "add": lambda: cmd_add(project, command_argv, json_out),
             "remove": lambda: cmd_remove(project, command_argv, json_out),
             "install": lambda: cmd_install(project, command_argv, json_out),

@@ -1,0 +1,20 @@
+kind: ownership
+pack: core-pack
+version: 1
+description: Ownership metadata for core-pack.
+updated_at: 2026-01-01
+pack_owner: opencraft
+areas:
+  - name: baseline-governance
+    owner: opencraft
+    review_cadence: quarterly
+contexts:
+  - id: ctx-core-evidence-standard
+    owner: opencraft
+  - id: ctx-core-secrets-protection
+    owner: opencraft-security
+  - id: ctx-core-production-authority
+    owner: opencraft
+  - id: ctx-core-honest-claims
+    owner: opencraft
+escalation: "Security escalations go to opencraft-security; authority questions to opencraft."

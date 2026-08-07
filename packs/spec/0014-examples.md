@@ -8,6 +8,12 @@ The repository ships thirteen reference packs that exercise the full specificati
 
 ## The packs
 
+### Baseline (applied automatically)
+
+| Pack | Extends | Focus |
+|---|---|---|
+| `core-pack` | — | Evidence standard, secrets protection, production authority, honest claims. Installed by `packs bootstrap` and `--with-project-files`. |
+
 ### Technology baselines
 
 | Pack | Extends | Focus |
@@ -83,11 +89,20 @@ The quickest end-to-end proof:
 
 ```bash
 project="$(mktemp -d)"
+python3 scripts/packtool.py packs bootstrap --project "$project"   # applies LCDD automatically
+node scripts/packtool.mjs packs bootstrap --project "$project"     # parity: identical output
+ls -R "$project/.lcdd"
+```
+
+Or bootstrap a richer project directly:
+
+```bash
+project="$(mktemp -d)"
 cat > "$project/packs.yaml" <<'YAML'
 schema: https://opencraft.dev/schema/project-packs/v1
 extends:
   - nextjs-pack@^1
-  - security-pack@^2
+  - security-pack@^1
   - fintech-pack@^1
 conflict_policy: fail
 YAML

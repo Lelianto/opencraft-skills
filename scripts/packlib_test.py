@@ -82,9 +82,12 @@ def make_pack(root: Path, name: str, version: str, extra_manifest="", contexts=N
 
 def make_project(dirpath: Path, extends, overrides="", policy="fail"):
     text = "schema: https://opencraft.dev/schema/project-packs/v1\n"
-    text += "extends:\n"
-    for ref in extends:
-        text += f"  - {ref}\n"
+    if extends:
+        text += "extends:\n"
+        for ref in extends:
+            text += f"  - {ref}\n"
+    else:
+        text += "extends: []\n"
     text += f"conflict_policy: {policy}\n"
     text += overrides
     write(dirpath / "packs.yaml", text)
@@ -211,6 +214,12 @@ class ResolverTests(unittest.TestCase):
         project = make_project(self.tmp / "cyc", ["a-pack@^1"])
         with self.assertRaises(resolver.ResolutionError):
             resolver.resolve(manifest.load_project_declaration(self.tmp / "cyc"), self.registry)
+
+    def test_empty_extends_resolves_empty(self):
+        make_pack(self.packs_root, "typescript-pack", "1.0.0")
+        project = make_project(self.tmp / "empty", [])
+        ordered = resolver.resolve(manifest.load_project_declaration(self.tmp / "empty"), self.registry)
+        self.assertEqual(ordered, [])
 
     def test_unsatisfiable_range(self):
         project = make_project(self.tmp / "bad", ["react-pack@^2"])

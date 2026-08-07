@@ -1,0 +1,32 @@
+schema: https://opencraft.dev/schema/context-pack/v1
+name: core-pack
+version: 1.0.0
+type: cross-cutting
+description: Baseline living context for any project — evidence standard, secrets, production authority, honest claims.
+license: MIT
+author:
+  type: organization
+  id: opencraft
+  name: OpenCraft
+tags: [baseline, evidence, security, human-in-the-loop]
+extends: []
+dependencies: []
+provides:
+  contexts:
+    - ctx-core-evidence-standard
+    - ctx-core-secrets-protection
+    - ctx-core-production-authority
+    - ctx-core-honest-claims
+  knowledge:
+    - ai-rules
+    - review-checklist
+    - ownership
+lifecycle: active
+governance:
+  classification: local-standard
+  approval_required: false
+owner:
+  type: organization
+  id: opencraft
+  name: OpenCraft
+repository: https://github.com/Lelianto/opencraft-skills

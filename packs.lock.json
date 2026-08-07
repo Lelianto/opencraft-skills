@@ -6,6 +6,10 @@
       "integrity": "sha256-bb85a478e05e5f8f8039d2b0fa8d6a7bb2a837718ca350d67c928de71bf01e4a",
       "version": "1.0.0"
     },
+    "core-pack": {
+      "integrity": "sha256-3759424c187114f163bdc3f016e53b7e4ab7a528e9fe84439b2d0c0190bc7b61",
+      "version": "1.0.0"
+    },
     "ecommerce-pack": {
       "integrity": "sha256-9354fb8ad869ec51f6c13d8ec7398dacf765f6daac07390784b478ffc8409faa",
       "version": "1.0.0"

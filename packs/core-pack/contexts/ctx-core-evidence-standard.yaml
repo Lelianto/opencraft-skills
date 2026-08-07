@@ -1,0 +1,38 @@
+id: ctx-core-evidence-standard
+version: 1
+title: Completion claims must be backed by fresh, reproducible evidence
+description: >
+  A claim that work is complete or ready MUST be backed by fresh command
+  output or direct observation. Checks that were not run MUST be recorded as
+  "not run", never as pass. Verified facts, inferences, assumptions, and
+  unresolved risks MUST stay distinguishable. This is the OpenCraft evidence
+  standard, applied to every project via LCDD.
+applies_to:
+  - "**/*"
+category: process
+severity: medium
+source:
+  type: organization
+  uri: https://github.com/Lelianto/opencraft-skills
+authority:
+  source:
+    type: organization
+    id: opencraft
+    name: OpenCraft
+  level: 2
+lifecycle: active
+governance:
+  classification: local-standard
+  approval_required: false
+effective_date: "2026-01-01T00:00:00Z"
+owner: opencraft
+enforcement:
+  mode: warn
+  specification:
+    type: review-gate
+    config:
+      require_evidence: true
+    violation_message_template: >
+      Completion claims require fresh evidence; record unexecuted checks as not run.
+metadata:
+  pack: core-pack

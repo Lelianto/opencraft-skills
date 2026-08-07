@@ -24,6 +24,29 @@
       }
     },
     {
+      "author": "OpenCraft",
+      "description": "Baseline living context for any project \u2014 evidence standard, secrets, production authority, honest claims.",
+      "latest": "1.0.0",
+      "license": "MIT",
+      "lifecycle": "active",
+      "name": "core-pack",
+      "tags": [
+        "baseline",
+        "evidence",
+        "security",
+        "human-in-the-loop"
+      ],
+      "type": "cross-cutting",
+      "versions": {
+        "1.0.0": {
+          "dependencies": [],
+          "extends": [],
+          "integrity": "sha256-3759424c187114f163bdc3f016e53b7e4ab7a528e9fe84439b2d0c0190bc7b61",
+          "npm": "@opencraft/core-pack"
+        }
+      }
+    },
+    {
       "author": "OpenCraft E-commerce",
       "description": "Living context for e-commerce applications \u2014 cart, payments, inventory, tax, abuse.",
       "latest": "1.0.0",

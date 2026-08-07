@@ -9,6 +9,7 @@ import json
 import os
 from pathlib import Path
 import shutil
+import subprocess
 import sys
 
 
@@ -90,6 +91,26 @@ def install_one(source: Path, destination: Path, mode: str, force: bool) -> str:
     return f"OK   {target}"
 
 
+def bootstrap_lcdd(repository: Path, project: Path) -> list[str]:
+    """Apply LCDD to the project: baseline core-pack + .lcdd/ materialization.
+
+    Best-effort: a failure to bootstrap prints a warning and does not fail the
+    skills install, so the package remains usable even if packs are unavailable.
+    """
+    script = repository / "scripts" / "packtool.py"
+    try:
+        result = subprocess.run(
+            [sys.executable, str(script), "packs", "bootstrap", "--project", str(project)],
+            capture_output=True, text=True, timeout=120,
+        )
+    except (OSError, subprocess.SubprocessError) as error:
+        return [f"WARN LCDD bootstrap skipped: {error}"]
+    lines = [line for line in result.stdout.splitlines() if line.strip()]
+    if result.returncode != 0:
+        lines.append("WARN LCDD bootstrap failed; run 'opencraft-packs packs bootstrap' later.")
+    return lines
+
+
 def main() -> int:
     args = parse_args()
     repository = Path(__file__).resolve().parent.parent
@@ -119,6 +140,9 @@ def main() -> int:
     if args.with_project_files:
         print("[project]")
         for result in initialize_project_files(repository, project, args.human_loop):
+            print(result)
+        print("[lcdd]")
+        for result in bootstrap_lcdd(repository, project):
             print(result)
     receipt = {
         "collection": lock["collection"],

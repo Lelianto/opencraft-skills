@@ -7,7 +7,7 @@ This document specifies how OpenCraft Context Pack resolution consults the regis
 The resolver (`scripts/packlib/registry.py` and `scripts/packtool.mjs`) consults sources in this order:
 
 1. **Local cache** `~/.opencraft/packs/<name>/<version>/` — offline, immutable, integrity-verified.
-2. **Built-in tree** `packs/` — the 13 reference packs ship with the repository.
+2. **Built-in tree** `packs/` — the 14 reference packs ship with the repository.
 3. **Remote transport** — scoped npm packages `@opencraft/<name>` via the catalog + npm tarball, with sha256 verification. (Reference implementation currently resolves sources 1–2; the transport interface is defined below so a remote implementation can be layered in.)
 
 ## Version selection

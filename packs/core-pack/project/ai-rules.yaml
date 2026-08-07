@@ -1,0 +1,26 @@
+kind: ai-rules
+pack: core-pack
+version: 1
+description: Baseline AI coding rules applied to every OpenCraft project.
+updated_at: 2026-01-01
+rules:
+  - id: ai-core-evidence
+    level: must
+    instruction: Back every completion claim with fresh command output; record unexecuted checks as "not run".
+    rationale: Completion, release readiness, and production health are separate, verifiable claims.
+  - id: ai-core-secrets
+    level: must-not
+    instruction: Never write secrets, credentials, or private operational details into code, config, logs, fixtures, or examples.
+    rationale: Exposed secrets are a supply-chain and incident risk.
+  - id: ai-core-authority
+    level: must
+    instruction: Never execute production, destructive, purchasing, or external actions without explicit human authority.
+    rationale: Preparation is allowed; execution against production is not.
+  - id: ai-core-honest
+    level: must-not
+    instruction: Do not invent metrics, testimonials, social proof, or unsupported success claims; reject generic AI-generated design without product evidence.
+    rationale: Originality and truthfulness come from domain meaning and user behavior.
+  - id: ai-core-lcdd
+    level: must
+    instruction: Read .lcdd/CONTEXT.md and obey the active contexts and conventions materialized there.
+    rationale: Living context is the enforced, current source of project knowledge.

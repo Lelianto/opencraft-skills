@@ -1,6 +1,7 @@
 #!/usr/bin/env node
 
 import { createHash } from "node:crypto";
+import { spawnSync } from "node:child_process";
 import {
   copyFileSync,
   cpSync,
@@ -138,6 +139,23 @@ function initializeProjectFiles(project, humanLoop) {
   }
 }
 
+function bootstrapLcdd(repository, project) {
+  const packtool = join(repository, "scripts", "packtool.mjs");
+  try {
+    const result = spawnSync(process.execPath, [packtool, "packs", "bootstrap", "--project", project], {
+      encoding: "utf8",
+      timeout: 120000,
+    });
+    const lines = (result.stdout || "").split("\n").filter((line) => line.trim());
+    if (result.status !== 0) {
+      lines.push("WARN LCDD bootstrap failed; run 'opencraft-packs packs bootstrap' later.");
+    }
+    return lines;
+  } catch (error) {
+    return [`WARN LCDD bootstrap skipped: ${error.message}`];
+  }
+}
+
 function main() {
   let args;
   try {
@@ -162,6 +180,8 @@ function main() {
     if (args.withProjectFiles) {
       console.log("[project]");
       initializeProjectFiles(project, args.humanLoop);
+      console.log("[lcdd]");
+      for (const line of bootstrapLcdd(repository, project)) console.log(line);
     }
     const receipt = {
       collection: lock.collection,

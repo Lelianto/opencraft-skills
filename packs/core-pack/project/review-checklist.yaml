@@ -1,0 +1,24 @@
+kind: review-checklist
+pack: core-pack
+version: 1
+description: Baseline review checklist applied to every project.
+updated_at: 2026-01-01
+categories:
+  - name: Evidence
+    items:
+      - id: chk-evidence
+        check: "Completion claims backed by fresh output; not-run recorded honestly."
+      - id: chk-claims
+        check: "No invented metrics, testimonials, or unsupported success claims."
+  - name: Security
+    items:
+      - id: chk-secrets
+        check: "No secrets in code, config, logs, fixtures, or examples."
+  - name: Authority
+    items:
+      - id: chk-authority
+        check: "Production/destructive/external actions authorized by a human."
+  - name: Living context
+    items:
+      - id: chk-lcdd
+        check: ".lcdd/ is current; changes obey active contexts."

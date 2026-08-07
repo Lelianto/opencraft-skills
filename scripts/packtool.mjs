@@ -17,6 +17,19 @@ import { fileURLToPath } from "node:url";
 const REPO_ROOT = resolve(dirname(fileURLToPath(import.meta.url)), "..");
 const PACKS_ROOT = join(REPO_ROOT, "packs");
 const SCHEMA_URL = "https://opencraft.dev/schema/project-packs/v1";
+const CORE_PACK = "core-pack@^1";
+
+function ensurePacksYaml(projectDir) {
+  const path = join(projectDir, "packs.yaml");
+  if (existsSync(path)) return false;
+  writeFileSync(
+    path,
+    "schema: https://opencraft.dev/schema/project-packs/v1\n" +
+      `extends:\n  - ${CORE_PACK}\nconflict_policy: fail\n`,
+    "utf8"
+  );
+  return true;
+}
 
 // ---------------------------------------------------------------------------
 // Minimal YAML subset (mirrors packlib/yamlmini.py)
@@ -704,7 +717,7 @@ function loadProjectDeclaration(dir) {
   const data = loadYamlFile(path);
   if (!data || typeof data !== "object" || Array.isArray(data)) throw new Error("packs.yaml must be a mapping");
   if (data.schema !== SCHEMA_URL) throw new Error("packs.yaml is missing or has an invalid schema URL");
-  if (!Array.isArray(data.extends) || data.extends.length === 0) throw new Error("packs.yaml 'extends' must be a non-empty list");
+  if (!Array.isArray(data.extends)) throw new Error("packs.yaml 'extends' must be a list");
   return data;
 }
 
@@ -826,6 +839,7 @@ class Registry {
 
 function resolvePack(project, registry) {
   const roots = project.extends.map((ref) => parseRef(ref));
+  if (roots.length === 0) return [];
   const graph = {};
   const color = {};
   for (const [name] of roots) graph[name] = newNode();
@@ -1416,6 +1430,7 @@ Usage: packtool.mjs packs <command> [options]
 
 Commands:
   init                  Create packs.yaml + .lcdd/ skeleton
+  bootstrap             Apply LCDD: baseline core-pack + install (auto on install)
   add <name[@range]>    Declare a pack
   remove <name>         Remove a declared pack
   install               Resolve, merge, validate, materialize
@@ -1510,7 +1525,22 @@ function main() {
       process.exitCode = cmdValidate(rest);
       return;
     }
-    if (command === "install" || command === "update") {
+    if (command === "install" || command === "update" || command === "bootstrap") {
+      if (command === "bootstrap") {
+        const packsPath = join(projectDir, "packs.yaml");
+        if (existsSync(packsPath)) {
+          const declaration = loadProjectDeclaration(projectDir);
+          if ((declaration.extends || []).length === 0) {
+            declaration.extends = [CORE_PACK];
+            writeFileSync(packsPath, dumpYaml(declaration), "utf8");
+            if (!jsonOut) console.log(`OK   added baseline ${CORE_PACK} to packs.yaml`);
+          }
+        } else if (ensurePacksYaml(projectDir) && !jsonOut) {
+          console.log(`OK   bootstrapped packs.yaml with ${CORE_PACK}`);
+        }
+      } else if (ensurePacksYaml(projectDir) && !jsonOut) {
+        console.log(`OK   bootstrapped packs.yaml with ${CORE_PACK}`);
+      }
       const result = runPipeline(projectDir);
       if (!result.ok) {
         for (const e of result.errors) console.error(`ERROR ${e}`);

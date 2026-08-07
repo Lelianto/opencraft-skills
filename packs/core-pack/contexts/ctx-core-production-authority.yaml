@@ -1,0 +1,38 @@
+id: ctx-core-production-authority
+version: 1
+title: Production, destructive, and external actions require explicit human authority
+description: >
+  Deploying to production, destructive operations, purchasing, external
+  communication, sensitive-data transmission, and permission changes MUST be
+  explicitly authorized by a human. AI recommendations never count as
+  approval. Preparation (plans, migrations, smoke tests, rollback) is always
+  allowed; executing against production is not, without authority.
+applies_to:
+  - "**/*"
+category: process
+severity: high
+source:
+  type: organization
+  uri: https://github.com/Lelianto/opencraft-skills
+authority:
+  source:
+    type: organization
+    id: opencraft
+    name: OpenCraft
+  level: 3
+lifecycle: active
+governance:
+  classification: hardened-standard
+  approval_required: true
+effective_date: "2026-01-01T00:00:00Z"
+owner: opencraft
+enforcement:
+  mode: block
+  specification:
+    type: authority-gate
+    config:
+      actions: ["production-deploy", "destructive", "purchase", "external-communication", "sensitive-data"]
+    violation_message_template: >
+      Production, destructive, and external actions require explicit human authority.
+metadata:
+  pack: core-pack

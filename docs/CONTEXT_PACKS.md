@@ -26,26 +26,28 @@ One command materializes the resolved, merged, validated context into `.lcdd/`:
 
 - Python 3.10+ **or** Node.js 18+ (both CLIs are behaviorally equivalent).
 - No API keys. No cloud account. No `@lcdd/cli` required (optional, interoperable).
-- Offline-friendly: the built-in `packs/` tree makes the 13 reference packs installable with no network.
+- Offline-friendly: the built-in `packs/` tree makes the 14 reference packs installable with no network.
 
 ## Quick start
 
+**LCDD applies automatically.** `--with-project-files` (skills installer) or `packs bootstrap` applies the baseline `core-pack` and materializes `.lcdd/` with zero configuration:
+
 ```bash
-# Python
-python3 scripts/packtool.py packs init --project .
+# Apply LCDD to a project (baseline core-pack + .lcdd/)
+python3 scripts/packtool.py packs bootstrap --project .
+# or, equivalently: node scripts/packtool.mjs packs bootstrap --project .
+
+# Add more context
 python3 scripts/packtool.py packs add nextjs-pack --project .
 python3 scripts/packtool.py packs add security-pack --project .
 python3 scripts/packtool.py packs add fintech-pack --project .
 python3 scripts/packtool.py packs install --project .
-
-# Node (equivalent)
-node scripts/packtool.mjs packs install --project .
 ```
 
 Or after `npm install --global opencraft-skills`:
 
 ```bash
-opencraft-packs packs init --project .
+opencraft-packs packs bootstrap --project .
 opencraft-packs packs add nextjs-pack --project .
 opencraft-packs packs install --project .
 ```
@@ -54,7 +56,8 @@ opencraft-packs packs install --project .
 
 | Command | Description |
 |---|---|
-| `packs init` | Create `packs.yaml` + `.lcdd/` skeleton. |
+| `packs bootstrap` | Apply LCDD: baseline `core-pack` + materialize `.lcdd/` (automatic on install). |
+| `packs init` | Create an empty `packs.yaml` + `.lcdd/` skeleton. |
 | `packs add <name[@range]>` | Declare a pack. |
 | `packs remove <name>` | Remove a declared pack. |
 | `packs install` | Resolve, merge, validate, materialize into `.lcdd/`. |

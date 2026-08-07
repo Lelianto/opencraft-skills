@@ -173,7 +173,6 @@ def load_project_declaration(project_dir):
         raise PackError("packs.yaml must be a mapping")
     if data.get("schema") != "https://opencraft.dev/schema/project-packs/v1":
         raise PackError("packs.yaml is missing or has an invalid schema URL")
-    extends = data.get("extends")
-    if not isinstance(extends, list) or not extends:
-        raise PackError("packs.yaml 'extends' must be a non-empty list")
+    if not isinstance(data.get("extends"), list):
+        raise PackError("packs.yaml 'extends' must be a list")
     return data

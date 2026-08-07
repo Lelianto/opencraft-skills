@@ -11,7 +11,7 @@
   <a href="https://github.com/Lelianto/opencraft-skills/actions/workflows/quality.yml"><img src="https://github.com/Lelianto/opencraft-skills/actions/workflows/quality.yml/badge.svg" alt="Quality" /></a>
   <a href="LICENSE"><img src="https://img.shields.io/badge/License-MIT-22c55e.svg" alt="License: MIT" /></a>
   <a href="skills"><img src="https://img.shields.io/badge/skills-18-6366f1" alt="Skills" /></a>
-  <a href="packs"><img src="https://img.shields.io/badge/context%20packs-13-10b981" alt="Context Packs" /></a>
+  <a href="packs"><img src="https://img.shields.io/badge/context%20packs-14-10b981" alt="Context Packs" /></a>
 </p>
 
 **Code evolves. Knowledge decays. AI never notices. Until now.**
@@ -146,10 +146,11 @@ extends:
 
 Each pack automatically provides the fourteen Living-Context concerns: project vision, architecture decisions, coding conventions, folder structure, technology stack, security rules, testing strategy, business constraints, AI coding rules, code review checklist, deployment guidelines, observability practices, lifecycle metadata, and ownership metadata.
 
-The 13 reference packs ship with the repository:
+The 14 reference packs ship with the repository:
 
 | Type | Packs |
 |---|---|
+| baseline | `core-pack` (applied automatically on install) |
 | technology | `typescript-pack`, `node-pack` |
 | framework | `react-pack`, `nextjs-pack` |
 | baas | `supabase-pack`, `firebase-pack` |
@@ -157,6 +158,10 @@ The 13 reference packs ship with the repository:
 | domain | `fintech-pack`, `healthcare-pack`, `ecommerce-pack`, `education-pack` |
 
 **Zero dependencies to run:** no API keys, no cloud account, and no `@lcdd/cli` prerequisite — though the materialized `.lcdd/` is fully interoperable with `@lcdd/cli` and `@lcdd/mcp` for teams that adopt them.
+
+### LCDD applies automatically
+
+Installing with `--with-project-files` (or running `opencraft-packs packs bootstrap`) **applies LCDD to the project automatically**: it creates `packs.yaml` with the baseline `core-pack` and materializes `.lcdd/` — a real Context Registry with enforced baseline contexts (evidence standard, secrets protection, production authority, honest claims). From the first install, AI agents read `.lcdd/CONTEXT.md` and obey versioned, enforceable governance. No manual `packs init` required; add domain packs whenever you want richer context.
 
 Read the [Context Packs README](packs/README.md), the [specification](packs/SPEC.md), the [14 RFCs](packs/spec/), and the [end-user guide](docs/CONTEXT_PACKS.md).
 
@@ -175,10 +180,10 @@ npm install --global opencraft-skills
 opencraft-skills install --target all --project . --with-project-files
 ```
 
-Then install Living Context with Context Packs:
+Then install Living Context with Context Packs — **applied automatically** by the command above, or explicitly:
 
 ```bash
-opencraft-packs packs init --project .
+opencraft-packs packs bootstrap --project .   # applies LCDD: core-pack baseline + .lcdd/
 opencraft-packs packs add nextjs-pack --project .
 opencraft-packs packs add security-pack --project .
 opencraft-packs packs add fintech-pack --project .
@@ -216,7 +221,8 @@ opencraft-packs packs <command>
 
 | Command | Description |
 |---|---|
-| `packs init` | Create `packs.yaml` + `.lcdd/` skeleton. |
+| `packs bootstrap` | Apply LCDD to a project: baseline `core-pack` + materialize `.lcdd/`. |
+| `packs init` | Create an empty `packs.yaml` + `.lcdd/` skeleton. |
 | `packs add <name[@range]>` | Declare a pack. |
 | `packs remove <name>` | Remove a declared pack. |
 | `packs install` | Resolve, merge, validate, materialize into `.lcdd/`. |
@@ -337,7 +343,7 @@ opencraft-skills/
 │   ├── spec/                #   14 numbered RFCs
 │   ├── schemas/             #   18 JSON Schemas
 │   ├── registry/            #   catalog + resolver protocol
-│   └── <pack>/              #   13 reference packs
+│   └── <pack>/              #   14 reference packs
 ├── evals/                   # discovery fixtures + benchmark guidance
 ├── templates/               # agent instructions and .product artifacts
 ├── scripts/
@@ -388,7 +394,7 @@ See [DEVELOPMENT_ROADMAP.md](DEVELOPMENT_ROADMAP.md) for the full plan. Current 
 |---|---|---|
 | Portable skills collection | ✅ | 18 skills, installers, evals, lockfile. |
 | Human-in-the-loop decisions | ✅ | `D0`–`D3` decision records with explicit authority. |
-| Context Packs specification + engine | ✅ | 14 RFCs, schemas, zero-dependency Python + Node CLIs, 13 reference packs. |
+| Context Packs specification + engine | ✅ | 14 RFCs, schemas, zero-dependency Python + Node CLIs, 14 reference packs. |
 | Pack evaluation + benchmark | ✅ | Unit/security tests, CI parity smoke-test, performance bounds. |
 | Registry + publishing | 🟡 | Catalog + npm transport; automated publish via Trusted Publishing. |
 | MCP server for packs | 🔴 | Structured querying for MCP-capable agents. |

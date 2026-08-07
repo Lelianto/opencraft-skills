@@ -1,0 +1,38 @@
+id: ctx-core-honest-claims
+version: 1
+title: No unsupported completion, quality, or success claims
+description: >
+  Do not claim work is complete, release-ready, or production-healthy without
+  evidence, and do not invent metrics, testimonials, logos, or social proof.
+  Reject generic AI-generated design and copy unless product evidence gives it
+  a specific purpose. Originality is grounded in domain meaning and truthful
+  content, not novelty alone.
+applies_to:
+  - "**/*"
+category: quality
+severity: medium
+source:
+  type: organization
+  uri: https://github.com/Lelianto/opencraft-skills
+authority:
+  source:
+    type: organization
+    id: opencraft
+    name: OpenCraft
+  level: 2
+lifecycle: active
+governance:
+  classification: local-standard
+  approval_required: false
+effective_date: "2026-01-01T00:00:00Z"
+owner: opencraft
+enforcement:
+  mode: warn
+  specification:
+    type: review-gate
+    config:
+      reject_unsupported_claims: true
+    violation_message_template: >
+      Completion and success claims must be evidence-backed; no invented social proof.
+metadata:
+  pack: core-pack
