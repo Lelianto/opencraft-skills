@@ -1,0 +1,37 @@
+id: ctx-a11y-labels
+version: 1
+title: Every control must have an accessible name and announced state
+description: >
+  Every form control, link, and button MUST have an accessible name (visible
+  label or `aria-label`) and announce meaningful state changes (loading,
+  expanded, selected, error). Icon-only buttons MUST include an accessible
+  name; decorative icons MUST be hidden from assistive technology.
+applies_to:
+  - "**/*.tsx"
+category: accessibility
+severity: medium
+source:
+  type: standard-body
+  uri: https://www.w3.org/WAI/WCAG22/
+authority:
+  source:
+    type: standard-body
+    id: w3c
+    name: W3C Web Accessibility Initiative
+  level: 2
+lifecycle: active
+governance:
+  classification: local-standard
+  approval_required: false
+effective_date: "2026-01-01T00:00:00Z"
+owner: opencraft-accessibility
+enforcement:
+  mode: warn
+  specification:
+    type: lint-rule
+    config:
+      rule: "jsx-a11y/control-has-associated-label"
+    violation_message_template: >
+      Every control needs an accessible name and announced state.
+metadata:
+  pack: accessibility-pack

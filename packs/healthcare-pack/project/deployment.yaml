@@ -1,0 +1,21 @@
+kind: deployment
+pack: healthcare-pack
+version: 1
+description: Deployment guidelines for healthcare services.
+updated_at: 2026-01-01
+environments:
+  - name: development
+    purpose: Local, synthetic data only.
+  - name: staging
+    purpose: Compliance and integration validation with de-identified data.
+  - name: production
+    purpose: Patient-facing.
+rollout:
+  - "Deploy in-region per data-residency constraints."
+  - "Run smoke tests against non-PHI endpoints first."
+  - "Use feature flags for patient-facing changes."
+smoke_tests:
+  - "Health endpoint responds."
+  - "A consented, sandboxed PHI access round-trip audits correctly."
+rollback:
+  - "Revert without orphaning consent or audit records; reconcile after rollback."

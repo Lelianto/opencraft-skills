@@ -1,0 +1,37 @@
+id: ctx-healthcare-consent
+version: 1
+title: PHI access and sharing must follow recorded consent
+description: >
+  Accessing or sharing PHI MUST follow the patient's recorded consent. Consent
+  records are versioned, capture scope and expiration, and are re-checked at
+  the point of access — not only at enrollment. Revocation takes effect
+  immediately and is audited.
+applies_to:
+  - "**/*.ts"
+category: compliance
+severity: critical
+source:
+  type: organization
+  uri: https://github.com/Lelianto/opencraft-skills
+authority:
+  source:
+    type: organization
+    id: opencraft-healthcare
+    name: OpenCraft Healthcare
+  level: 4
+lifecycle: active
+governance:
+  classification: hardened-mandate
+  approval_required: true
+effective_date: "2026-01-01T00:00:00Z"
+owner: opencraft-healthcare
+enforcement:
+  mode: block
+  specification:
+    type: custom-script
+    config:
+      command: "node scripts/verify-consent.mjs"
+    violation_message_template: >
+      PHI access must be checked against recorded, current consent at point of use.
+metadata:
+  pack: healthcare-pack

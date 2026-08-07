@@ -1,0 +1,25 @@
+kind: observability
+pack: healthcare-pack
+version: 1
+description: Observability practices for healthcare.
+updated_at: 2026-01-01
+metrics:
+  - name: phi_access_rate
+    description: Rate of PHI access by category.
+    type: counter
+  - name: consent_revocation_latency
+    description: Time from revocation to enforcement.
+    type: histogram
+logs:
+  - "Structured operational logs without PHI."
+  - "PHI access events to the compliance audit store, not application logs."
+traces:
+  - "Trace consented access flows without logging PHI values."
+alerts:
+  - name: unusual_phi_access
+    condition: "spike in PHI access without corresponding consent events"
+    severity: critical
+slos:
+  - name: availability
+    target: "99.9%"
+    description: Patient-facing availability.

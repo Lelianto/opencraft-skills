@@ -1,0 +1,22 @@
+kind: ai-rules
+pack: typescript-pack
+version: 1
+description: AI coding rules for TypeScript work.
+updated_at: 2026-01-01
+rules:
+  - id: ai-ts-strict
+    level: must
+    instruction: Keep tsconfig strict mode enabled; never relax it to silence a type error.
+    rationale: Relaxing strictness reintroduces the failures strict mode prevents.
+  - id: ai-ts-unknown
+    level: must-not
+    instruction: Do not write explicit `any` types, even to make a compile pass.
+    rationale: `any` disables the type system for the entire reachable surface.
+  - id: ai-ts-import-type
+    level: should
+    instruction: Prefer `import type` for type-only imports.
+    rationale: Produces smaller bundles and clearer intent.
+  - id: ai-ts-run-checks
+    level: must
+    instruction: Run the type-check and lint commands and fix all reported errors before finishing.
+    rationale: Completion claims require fresh command output per the evidence standard.

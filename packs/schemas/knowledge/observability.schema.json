@@ -1,0 +1,54 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://opencraft.dev/schema/knowledge/observability/v1",
+  "title": "PKD: observability",
+  "type": "object",
+  "allOf": [
+    { "$ref": "#/$defs/envelope" },
+    {
+      "type": "object",
+      "properties": {
+        "metrics": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "required": ["name", "description"],
+            "properties": {
+              "name": { "type": "string" },
+              "description": { "type": "string" },
+              "type": { "type": "string", "enum": ["counter", "gauge", "histogram", "summary"] }
+            }
+          }
+        },
+        "logs": { "type": "array", "items": { "type": "string" } },
+        "traces": { "type": "array", "items": { "type": "string" } },
+        "alerts": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "required": ["name", "condition"],
+            "properties": {
+              "name": { "type": "string" },
+              "condition": { "type": "string" },
+              "severity": { "type": "string", "enum": ["critical", "high", "medium", "low"] }
+            }
+          }
+        },
+        "slos": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "required": ["name", "target"],
+            "properties": {
+              "name": { "type": "string" },
+              "target": { "type": "string" },
+              "description": { "type": "string" }
+            }
+          }
+        },
+        "dashboards": { "type": "array", "items": { "type": "string" } }
+      }
+    }
+  ],
+  "$defs": { "envelope": { "$ref": "https://opencraft.dev/schema/knowledge/envelope/v1" } }
+}

@@ -1,0 +1,12 @@
+positive:
+  - "Set up TypeScript with strict mode for this new module."
+  - "Why does this code use `any`? Fix it properly."
+  - "Add path aliases to the tsconfig and update imports."
+negative:
+  - "Deploy the database migration to staging."
+  - "Write a marketing email draft."
+ambiguous:
+  - "Review this TypeScript change."
+assertions:
+  - "response mentions tsconfig strict mode when discussing configuration"
+  - "response does not introduce `any` where a concrete type is possible"

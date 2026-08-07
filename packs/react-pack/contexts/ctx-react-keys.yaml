@@ -1,0 +1,37 @@
+id: ctx-react-keys
+version: 1
+title: List items must use stable, unique keys
+description: >
+  Rendering a list MUST provide a stable, unique `key` for each item. Keys MUST
+  derive from stable item identity (an id), not from the array index when items
+  can be reordered, inserted, or removed. Index keys cause incorrect state
+  reuse and broken focus/scroll behavior.
+applies_to:
+  - "**/*.tsx"
+category: code-style
+severity: medium
+source:
+  type: organization
+  uri: https://github.com/Lelianto/opencraft-skills
+authority:
+  source:
+    type: organization
+    id: opencraft
+    name: OpenCraft
+  level: 2
+lifecycle: active
+governance:
+  classification: local-standard
+  approval_required: false
+effective_date: "2026-01-01T00:00:00Z"
+owner: opencraft-web
+enforcement:
+  mode: warn
+  specification:
+    type: lint-rule
+    config:
+      rule: "react/no-array-index-key"
+    violation_message_template: >
+      Use a stable identity key for list items, not the array index.
+metadata:
+  pack: react-pack

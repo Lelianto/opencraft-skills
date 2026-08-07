@@ -1,0 +1,31 @@
+kind: security
+pack: fintech-pack
+version: 1
+description: Fintech-specific security rules.
+updated_at: 2026-01-01
+standards:
+  - name: OWASP ASVS
+    version: 5.0.0
+    level: "L2"
+rules:
+  - id: CTRL-FINTECH-001
+    description: "All financial data encrypted at rest and in transit; least-privilege access."
+    severity: critical
+  - id: CTRL-FINTECH-002
+    description: "Access to financial data is logged and auditable."
+    severity: critical
+  - id: CTRL-FINTECH-003
+    description: "Money movement uses idempotency keys and is reconciled end-to-end."
+    severity: critical
+  - id: CTRL-FINTECH-004
+    description: "PII and financial data never logged in plaintext."
+    severity: critical
+sensitive_data:
+  - "Bank and card details"
+  - "Identity documents"
+  - "Transaction histories"
+trust_boundaries:
+  - "Client <-> service (validated, authorized)"
+  - "Service <-> payment providers (scoped credentials)"
+references:
+  - "https://owasp.org/www-project-application-security-verification-standard/"

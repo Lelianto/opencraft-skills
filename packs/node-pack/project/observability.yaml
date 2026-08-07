@@ -1,0 +1,25 @@
+kind: observability
+pack: node-pack
+version: 1
+description: Observability practices for Node.js services.
+updated_at: 2026-01-01
+metrics:
+  - name: http_request_duration_seconds
+    description: Request latency by route and status.
+    type: histogram
+  - name: process_memory_bytes
+    description: Heap and RSS memory.
+    type: gauge
+logs:
+  - "Structured JSON logs with request id, service, and level."
+  - "Log the request outcome and duration; never log secrets or PII."
+traces:
+  - "Propagate trace context across service boundaries."
+alerts:
+  - name: error_rate
+    condition: "http 5xx rate > 1% over 5 minutes"
+    severity: high
+slos:
+  - name: availability
+    target: "99.9%"
+    description: Uptime excluding planned maintenance.

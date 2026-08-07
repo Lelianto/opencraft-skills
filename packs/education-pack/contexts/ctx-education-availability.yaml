@@ -1,0 +1,37 @@
+id: ctx-education-availability
+version: 1
+title: Core learning paths must stay available under load
+description: >
+  Core paths (lesson delivery, assessment, progress save) MUST remain
+  available during demand spikes, including class-start times. The system MUST
+  degrade gracefully: offline-first reading for lessons, queue-aware progress
+  writes, and clear failure states rather than silent data loss.
+applies_to:
+  - "**/*.ts"
+category: reliability
+severity: high
+source:
+  type: organization
+  uri: https://github.com/Lelianto/opencraft-skills
+authority:
+  source:
+    type: organization
+    id: opencraft-education
+    name: OpenCraft Education
+  level: 3
+lifecycle: active
+governance:
+  classification: local-standard
+  approval_required: false
+effective_date: "2026-01-01T00:00:00Z"
+owner: opencraft-education
+enforcement:
+  mode: warn
+  specification:
+    type: load-test-gate
+    config:
+      peak_multiplier: "2x class-start load"
+    violation_message_template: >
+      Core learning paths must stay available under load with graceful degradation.
+metadata:
+  pack: education-pack

@@ -1,0 +1,34 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://opencraft.dev/schema/knowledge/conventions/v1",
+  "title": "PKD: conventions",
+  "type": "object",
+  "allOf": [
+    { "$ref": "#/$defs/envelope" },
+    {
+      "type": "object",
+      "properties": {
+        "naming": { "$ref": "#/$defs/ruleList" },
+        "formatting": { "$ref": "#/$defs/ruleList" },
+        "imports": { "$ref": "#/$defs/ruleList" },
+        "state": { "$ref": "#/$defs/ruleList" },
+        "structure": { "$ref": "#/$defs/ruleList" }
+      }
+    }
+  ],
+  "$defs": {
+    "envelope": { "$ref": "https://opencraft.dev/schema/knowledge/envelope/v1" },
+    "ruleList": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["id", "rule"],
+        "properties": {
+          "id": { "type": "string" },
+          "rule": { "type": "string" },
+          "applies_to": { "type": "array", "items": { "type": "string" } }
+        }
+      }
+    }
+  }
+}

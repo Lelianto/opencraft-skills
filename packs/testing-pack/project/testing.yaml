@@ -1,0 +1,22 @@
+kind: testing
+pack: testing-pack
+version: 1
+description: Canonical testing strategy.
+updated_at: 2026-01-01
+strategy: "Risk-based testing: effort proportional to the probability and impact of failure."
+pyramid: "Many unit tests, fewer integration tests, fewest end-to-end tests."
+tools:
+  - vitest
+  - @testing-library/react
+  - Playwright
+gates:
+  - name: unit-gate
+    requirement: "Changed logic ships with passing unit tests."
+  - name: integration-gate
+    requirement: "Data flows and boundaries have integration coverage."
+  - name: e2e-gate
+    requirement: "Critical journeys have E2E coverage with representative roles."
+fixtures:
+  - "MSW handlers"
+  - "In-memory repositories"
+  - "Seeded database snapshots for integration tests"

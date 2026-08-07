@@ -1,0 +1,34 @@
+schema: https://opencraft.dev/schema/context-pack/v1
+name: security-pack
+version: 1.0.0
+type: cross-cutting
+description: Living context for application security — input validation, authorization, secrets, dependency hygiene.
+license: MIT
+author:
+  type: organization
+  id: opencraft
+  name: OpenCraft
+tags: [security, owasp, authz, secrets, supply-chain]
+extends: []
+dependencies: []
+provides:
+  contexts:
+    - ctx-security-input-validation
+    - ctx-security-authz-server
+    - ctx-security-secrets
+    - ctx-security-dependency-hygiene
+  knowledge:
+    - security
+    - ai-rules
+    - review-checklist
+    - business-constraints
+    - ownership
+lifecycle: active
+governance:
+  classification: hardened-standard
+  approval_required: true
+owner:
+  type: organization
+  id: opencraft-security
+  name: OpenCraft Security
+repository: https://github.com/Lelianto/opencraft-skills

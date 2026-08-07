@@ -1,0 +1,26 @@
+kind: ai-rules
+pack: security-pack
+version: 1
+description: AI coding rules for security-sensitive work.
+updated_at: 2026-01-01
+rules:
+  - id: ai-sec-validate
+    level: must
+    instruction: Validate and normalize all untrusted input at the server boundary before use.
+    rationale: Injection and logic flaws begin with unvalidated input.
+  - id: ai-sec-authz
+    level: must
+    instruction: Re-check authorization server-side on every protected operation; never trust client claims.
+    rationale: Client-side gates are not authorization.
+  - id: ai-sec-secrets
+    level: must-not
+    instruction: Never write, copy, or generate secrets into code, config, logs, fixtures, or examples.
+    rationale: Exposed secrets are a supply-chain and incident risk.
+  - id: ai-sec-encoding
+    level: must
+    instruction: Encode output for its context; never concatenate unsanitized user input into HTML, SQL, or URLs.
+    rationale: Output encoding is the injection defense that cannot be omitted.
+  - id: ai-sec-threat
+    level: should
+    instruction: When adding a feature that touches data or boundaries, note the threat model implications and new trust boundaries.
+    rationale: Security is a delivery input, not final polish.

@@ -1,0 +1,42 @@
+id: ctx-security-authz-server
+version: 1
+title: Authorization must be enforced server-side, never trusted from the client
+description: >
+  Every protected operation MUST re-check authorization on the server. Client
+  claims, role flags, and hidden UI states are NEVER authorization. Enforce
+  deny-by-default: an unauthenticated or unauthorized request is rejected with
+  401/403, and the decision is made from the server's own session and
+  permission data.
+applies_to:
+  - "api/**/*.ts"
+  - "app/**/route.ts"
+  - "app/**/actions.ts"
+category: security
+severity: critical
+source:
+  type: standard-body
+  uri: https://owasp.org/www-project-application-security-verification-standard/
+  document_id: ASVS-V4
+authority:
+  source:
+    type: standard-body
+    id: owasp
+    name: OWASP Application Security Verification Standard
+  level: 4
+lifecycle: active
+governance:
+  classification: hardened-mandate
+  approval_required: true
+  approvers: ["opencraft-security", "cto"]
+effective_date: "2026-01-01T00:00:00Z"
+owner: opencraft-security
+enforcement:
+  mode: block
+  specification:
+    type: custom-script
+    config:
+      command: "node scripts/verify-authz-boundaries.mjs"
+    violation_message_template: >
+      Authorization must be enforced on the server with deny-by-default semantics.
+metadata:
+  pack: security-pack

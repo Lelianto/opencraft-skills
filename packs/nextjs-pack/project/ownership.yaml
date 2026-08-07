@@ -1,0 +1,21 @@
+kind: ownership
+pack: nextjs-pack
+version: 1
+description: Ownership metadata for nextjs-pack.
+updated_at: 2026-01-01
+pack_owner: opencraft-web
+areas:
+  - name: framework-conventions
+    owner: opencraft-web
+    review_cadence: quarterly
+  - name: security-controls
+    owner: opencraft-security
+    review_cadence: monthly
+contexts:
+  - id: ctx-nextjs-app-router
+    owner: opencraft-web
+  - id: ctx-nextjs-data-fetching
+    owner: opencraft-web
+  - id: ctx-nextjs-server-actions
+    owner: opencraft-security
+escalation: "Contact opencraft-web; security escalations go to opencraft-security."

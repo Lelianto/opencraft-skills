@@ -1,0 +1,31 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://opencraft.dev/schema/knowledge/deployment/v1",
+  "title": "PKD: deployment",
+  "type": "object",
+  "allOf": [
+    { "$ref": "#/$defs/envelope" },
+    {
+      "type": "object",
+      "properties": {
+        "environments": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "required": ["name", "purpose"],
+            "properties": {
+              "name": { "type": "string" },
+              "url": { "type": "string" },
+              "purpose": { "type": "string" }
+            }
+          }
+        },
+        "rollout": { "type": "array", "items": { "type": "string" } },
+        "smoke_tests": { "type": "array", "items": { "type": "string" } },
+        "rollback": { "type": "array", "items": { "type": "string" } },
+        "release_notes": { "type": "string" }
+      }
+    }
+  ],
+  "$defs": { "envelope": { "$ref": "https://opencraft.dev/schema/knowledge/envelope/v1" } }
+}

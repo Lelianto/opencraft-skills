@@ -1,0 +1,28 @@
+kind: observability
+pack: nextjs-pack
+version: 1
+description: Observability practices for Next.js applications.
+updated_at: 2026-01-01
+metrics:
+  - name: nextjs_page_ttfb
+    description: Time to first byte per route and cache state.
+    type: histogram
+  - name: nextjs_isr_regeneration
+    description: ISR regeneration count and duration.
+    type: histogram
+logs:
+  - "Server components log errors with request path and trace id; never log secrets."
+  - "Client errors are captured with component stack when available."
+traces:
+  - "Propagate trace context through fetch and server actions."
+alerts:
+  - name: page_errors
+    condition: "server-side 5xx rate above 1% for 5 minutes"
+    severity: high
+slos:
+  - name: availability
+    target: "99.9%"
+    description: Route availability excluding maintenance.
+  - name: ttfb_p95
+    target: "< 400ms"
+    description: P95 time-to-first-byte for cacheable pages.

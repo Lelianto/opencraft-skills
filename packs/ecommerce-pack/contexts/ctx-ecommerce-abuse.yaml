@@ -1,0 +1,37 @@
+id: ctx-ecommerce-abuse
+version: 1
+title: Public-facing flows must defend against abuse
+description: >
+  Checkout, reviews, and promotions MUST defend against abuse: rate limiting,
+  bot detection for high-value actions, coupon/limit validation server-side,
+  and inventory-hold abuse protection. Abuse signals are observed and acted on
+  without blocking legitimate customers.
+applies_to:
+  - "**/*.ts"
+category: security
+severity: high
+source:
+  type: organization
+  uri: https://github.com/Lelianto/opencraft-skills
+authority:
+  source:
+    type: organization
+    id: opencraft-ecommerce
+    name: OpenCraft E-commerce
+  level: 3
+lifecycle: active
+governance:
+  classification: hardened-standard
+  approval_required: true
+effective_date: "2026-01-01T00:00:00Z"
+owner: opencraft-ecommerce
+enforcement:
+  mode: warn
+  specification:
+    type: review-gate
+    config:
+      abuse_controls: true
+    violation_message_template: >
+      High-value flows must enforce rate limits and abuse controls server-side.
+metadata:
+  pack: ecommerce-pack

@@ -1,0 +1,36 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://opencraft.dev/schema/knowledge/review-checklist/v1",
+  "title": "PKD: review-checklist",
+  "type": "object",
+  "allOf": [
+    { "$ref": "#/$defs/envelope" },
+    {
+      "type": "object",
+      "properties": {
+        "categories": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "required": ["name", "items"],
+            "properties": {
+              "name": { "type": "string" },
+              "items": {
+                "type": "array",
+                "items": {
+                  "type": "object",
+                  "required": ["id", "check"],
+                  "properties": {
+                    "id": { "type": "string" },
+                    "check": { "type": "string" }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  ],
+  "$defs": { "envelope": { "$ref": "https://opencraft.dev/schema/knowledge/envelope/v1" } }
+}

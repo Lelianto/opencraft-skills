@@ -1,0 +1,38 @@
+id: ctx-typescript-strict
+version: 1
+title: TypeScript must run in strict mode
+description: >
+  Every TypeScript project MUST enable `strict: true` in tsconfig.json.
+  Strict mode is the baseline for type safety; it turns implicit any,
+  nullability holes, and unchecked call sites into compile errors.
+applies_to:
+  - "tsconfig*.json"
+category: code-style
+severity: high
+source:
+  type: organization
+  uri: https://github.com/Lelianto/opencraft-skills
+authority:
+  source:
+    type: organization
+    id: opencraft
+    name: OpenCraft
+  level: 3
+  trust_model: community-consensus
+lifecycle: active
+governance:
+  classification: hardened-standard
+  approval_required: true
+effective_date: "2026-01-01T00:00:00Z"
+owner: opencraft-web
+enforcement:
+  mode: block
+  specification:
+    type: config-constraint
+    config:
+      json_path: "compilerOptions.strict"
+      expected: true
+    violation_message_template: >
+      tsconfig.json must set "compilerOptions.strict": true.
+metadata:
+  pack: typescript-pack

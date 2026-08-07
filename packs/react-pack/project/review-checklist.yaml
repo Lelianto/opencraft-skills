@@ -1,0 +1,24 @@
+kind: review-checklist
+pack: react-pack
+version: 1
+description: React review checklist.
+updated_at: 2026-01-01
+categories:
+  - name: Components
+    items:
+      - id: chk-function
+        check: "New components are function components; no new class components."
+      - id: chk-composition
+        check: "Components are small and compose; no single screen-wide monoliths."
+  - name: Hooks and state
+    items:
+      - id: chk-hooks
+        check: "Hooks called at top level; dependency arrays complete."
+      - id: chk-derived
+        check: "Derived values computed during render, not mirrored in state."
+  - name: Behavior
+    items:
+      - id: chk-keys
+        check: "List keys are stable and unique."
+      - id: chk-a11y
+        check: "Interactive elements have labels, focus order, and keyboard operability."

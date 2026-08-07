@@ -1,0 +1,38 @@
+id: ctx-fintech-disclosure
+version: 1
+title: Fees, rates, and terms must be disclosed before acceptance
+description: >
+  Any product that charges money MUST disclose all fees, the effective rate,
+  the total cost, and the repayment or billing schedule BEFORE the customer
+  accepts. Disclosure text MUST be derived from configured, versioned terms —
+  not generated ad hoc — and MUST be recorded in the audit trail.
+applies_to:
+  - "**/*.tsx"
+  - "**/*.ts"
+category: compliance
+severity: high
+source:
+  type: organization
+  uri: https://github.com/Lelianto/opencraft-skills
+authority:
+  source:
+    type: organization
+    id: opencraft-fintech
+    name: OpenCraft Fintech
+  level: 4
+lifecycle: active
+governance:
+  classification: hardened-mandate
+  approval_required: true
+effective_date: "2026-01-01T00:00:00Z"
+owner: opencraft-fintech
+enforcement:
+  mode: block
+  specification:
+    type: llm-evaluation
+    config:
+      expected: "all fees, rate, total cost, and schedule visible before accept"
+    violation_message_template: >
+      Full disclosure of fees, rate, total cost, and schedule must appear before acceptance.
+metadata:
+  pack: fintech-pack

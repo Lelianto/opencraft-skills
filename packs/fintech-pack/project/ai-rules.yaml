@@ -1,0 +1,26 @@
+kind: ai-rules
+pack: fintech-pack
+version: 1
+description: AI coding rules for fintech work.
+updated_at: 2026-01-01
+rules:
+  - id: ai-fintech-kyc
+    level: must
+    instruction: Gate financial transactions on completed KYC/AML verification; record failures.
+    rationale: Compliance is a product requirement, not overhead.
+  - id: ai-fintech-audit
+    level: must
+    instruction: Write immutable audit records for every money movement; never allow application edits.
+    rationale: Audit trails are write-once by design.
+  - id: ai-fintech-idempotency
+    level: must
+    instruction: Use idempotency keys for all payment intents and reconciliations.
+    rationale: Retries must not double-charge.
+  - id: ai-fintech-disclosure
+    level: must
+    instruction: Show true fees, rate, total cost, and schedule before acceptance, from versioned terms.
+    rationale: Transparency is regulatory and product-critical.
+  - id: ai-fintech-sensitive
+    level: must-not
+    instruction: Never log PII, card data, or transaction details in plaintext.
+    rationale: Sensitive data in logs is an exposure and audit failure.

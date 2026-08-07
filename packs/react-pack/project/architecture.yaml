@@ -1,0 +1,24 @@
+kind: architecture
+pack: react-pack
+version: 1
+description: React architecture conventions.
+updated_at: 2026-01-01
+patterns:
+  - id: arch-component-tree
+    name: Component hierarchy
+    statement: "Pages compose feature components; feature components compose shared UI primitives; state lives as low as it can while remaining correct."
+    applies_to: ["**/*.tsx"]
+  - id: arch-data-fetching
+    name: Data fetching in one place
+    statement: "Fetch orchestration lives in dedicated hooks or data modules, not inline in arbitrary components."
+decisions:
+  - id: ARCH-REACT-001
+    title: Function components and hooks only
+    status: accepted
+    context: "Class components were the historical default; hooks are the current supported model."
+    decision: "New code uses function components and hooks."
+    consequences: "Legacy class components must be migrated incrementally."
+boundaries:
+  - "Presentational components never call data-fetching services directly."
+constraints:
+  - "No new class components."

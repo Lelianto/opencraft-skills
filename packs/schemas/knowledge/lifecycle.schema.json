@@ -1,0 +1,45 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://opencraft.dev/schema/knowledge/lifecycle/v1",
+  "title": "PKD: lifecycle",
+  "description": "Context lifecycle metadata for the pack and its contexts.",
+  "type": "object",
+  "allOf": [
+    { "$ref": "#/$defs/envelope" },
+    {
+      "type": "object",
+      "properties": {
+        "pack_info": {
+          "type": "object",
+          "properties": {
+            "version": { "type": "string", "pattern": "^[0-9]+\\.[0-9]+\\.[0-9]+$" },
+            "lifecycle": {
+              "type": "string",
+              "enum": ["draft", "candidate", "approved", "active", "deprecated", "archived"]
+            }
+          }
+        },
+        "review_cadence": { "type": "string" },
+        "context_defaults": {
+          "type": "object",
+          "properties": {
+            "governance_classification": { "type": "string" },
+            "min_review_period_hours": { "type": "integer", "minimum": 0 }
+          }
+        },
+        "transitions": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "to": { "type": "string" },
+              "date": { "type": "string", "format": "date" },
+              "reason": { "type": "string" }
+            }
+          }
+        }
+      }
+    }
+  ],
+  "$defs": { "envelope": { "$ref": "https://opencraft.dev/schema/knowledge/envelope/v1" } }
+}

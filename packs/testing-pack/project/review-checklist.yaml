@@ -1,0 +1,18 @@
+kind: review-checklist
+pack: testing-pack
+version: 1
+description: Testing review checklist.
+updated_at: 2026-01-01
+categories:
+  - name: Coverage
+    items:
+      - id: chk-risk
+        check: "Test effort proportional to risk; high-risk paths have integration/E2E evidence."
+      - id: chk-regression
+        check: "Bug fixes ship with a regression test that failed on the old behavior."
+  - name: Integrity
+    items:
+      - id: chk-real
+        check: "Tests assert real behavior; no empty tests or skipped assertions."
+      - id: chk-ci
+        check: "CI gates on unit, integration, and E2E suites."

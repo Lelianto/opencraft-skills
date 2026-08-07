@@ -1,0 +1,47 @@
+id: ctx-security-input-validation
+version: 1
+title: All untrusted input must be validated and normalized at the server boundary
+description: >
+  Every input crossing a trust boundary (HTTP, webhooks, file uploads, query
+  parameters) MUST be validated against an explicit schema and normalized
+  before use. Fail closed: invalid input is rejected, not coerced silently.
+  Output encoding must match the context (HTML, URL, JSON) to prevent
+  injection.
+applies_to:
+  - "api/**/*.ts"
+  - "app/**/route.ts"
+  - "app/**/actions.ts"
+category: security
+severity: critical
+source:
+  type: standard-body
+  uri: https://owasp.org/www-project-application-security-verification-standard/
+  document_id: ASVS-V5
+authority:
+  source:
+    type: standard-body
+    id: owasp
+    name: OWASP Application Security Verification Standard
+  level: 4
+  delegation:
+    - from: "opencraft-security"
+      to: "owasp"
+      scope: "input-validation"
+      effective_date: "2026-01-01"
+lifecycle: active
+governance:
+  classification: hardened-mandate
+  approval_required: true
+  approvers: ["opencraft-security", "cto"]
+effective_date: "2026-01-01T00:00:00Z"
+owner: opencraft-security
+enforcement:
+  mode: block
+  specification:
+    type: schema-validation
+    config:
+      fail_on_unvalidated: true
+    violation_message_template: >
+      Untrusted input must be validated against an explicit schema at the server boundary.
+metadata:
+  pack: security-pack

@@ -1,0 +1,43 @@
+id: ctx-education-learner-privacy
+version: 1
+title: Learner data must be protected and minimized
+description: >
+  Learner data (progress, assessment results, and identifiers) MUST be treated
+  as sensitive: encrypted in transit and at rest, accessed under least
+  privilege, and never sold or exposed to third parties without explicit
+  consent. Analytics MUST be aggregate or de-identified where possible, and
+  retention MUST follow a documented policy.
+applies_to:
+  - "**/*.ts"
+category: privacy
+severity: high
+source:
+  type: organization
+  uri: https://github.com/Lelianto/opencraft-skills
+authority:
+  source:
+    type: organization
+    id: opencraft-education
+    name: OpenCraft Education
+  level: 4
+lifecycle: active
+governance:
+  classification: hardened-mandate
+  approval_required: true
+effective_date: "2026-01-01T00:00:00Z"
+owner: opencraft-education
+enforcement:
+  mode: block
+  specification:
+    type: composite
+    config:
+      operator: "and"
+      verifiers:
+        - type: "encryption-check"
+          config: { at_rest: true, in_transit: "TLS1.2+" }
+        - type: "retention-policy"
+          config: { documented: true }
+    violation_message_template: >
+      Learner data must be encrypted, minimized, and retained per policy.
+metadata:
+  pack: education-pack

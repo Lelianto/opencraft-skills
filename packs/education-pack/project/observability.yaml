@@ -1,0 +1,27 @@
+kind: observability
+pack: education-pack
+version: 1
+description: Observability practices for education.
+updated_at: 2026-01-01
+metrics:
+  - name: lesson_delivery_latency
+    description: Time to render a lesson.
+    type: histogram
+  - name: progress_save_rate
+    description: Share of progress writes succeeding.
+    type: gauge
+  - name: class_start_peak
+    description: Concurrent learners at peak times.
+    type: gauge
+logs:
+  - "Structured logs without learner PII."
+traces:
+  - "Trace learner journeys without logging identifying data."
+alerts:
+  - name: progress_loss
+    condition: "progress save failures above 1%"
+    severity: critical
+slos:
+  - name: availability
+    target: "99.9%"
+    description: Core learning-path availability.

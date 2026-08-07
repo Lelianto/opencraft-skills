@@ -1,0 +1,38 @@
+id: ctx-supabase-realtime
+version: 1
+title: Realtime subscriptions must be scoped to RLS and bounded channels
+description: >
+  Realtime subscriptions MUST be authorized by the same RLS policies as reads,
+  MUST use narrow channel filters, and MUST be unsubscribed on component
+  unmount. Broadcast and presence are for ephemeral collaborative state only —
+  never for durable or sensitive data.
+applies_to:
+  - "**/*.ts"
+  - "**/*.tsx"
+category: architecture
+severity: medium
+source:
+  type: organization
+  uri: https://supabase.com/docs/guides/realtime
+authority:
+  source:
+    type: organization
+    id: opencraft-backend
+    name: OpenCraft Backend
+  level: 2
+lifecycle: active
+governance:
+  classification: local-standard
+  approval_required: false
+effective_date: "2026-01-01T00:00:00Z"
+owner: opencraft-backend
+enforcement:
+  mode: warn
+  specification:
+    type: lint-rule
+    config:
+      rule: "no-unsubscribe-missing"
+    violation_message_template: >
+      Realtime subscriptions must be RLS-scoped, filtered, and cleaned up on unmount.
+metadata:
+  pack: supabase-pack

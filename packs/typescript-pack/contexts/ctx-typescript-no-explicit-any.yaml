@@ -1,0 +1,38 @@
+id: ctx-typescript-no-explicit-any
+version: 1
+title: Code must not introduce explicit `any`
+description: >
+  New code MUST NOT use explicit `any` types. When a type cannot be expressed,
+  prefer `unknown`, generics, or a narrow union, and document the boundary.
+  Existing `any` must be eliminated during related work. This protects the
+  invariants strict mode is designed to guarantee.
+applies_to:
+  - "**/*.ts"
+  - "**/*.tsx"
+category: code-style
+severity: medium
+source:
+  type: organization
+  uri: https://github.com/Lelianto/opencraft-skills
+authority:
+  source:
+    type: organization
+    id: opencraft
+    name: OpenCraft
+  level: 2
+lifecycle: active
+governance:
+  classification: local-standard
+  approval_required: false
+effective_date: "2026-01-01T00:00:00Z"
+owner: opencraft-web
+enforcement:
+  mode: warn
+  specification:
+    type: lint-rule
+    config:
+      rule: "@typescript-eslint/no-explicit-any"
+    violation_message_template: >
+      Avoid explicit `any`. Use `unknown` or a narrow type.
+metadata:
+  pack: typescript-pack

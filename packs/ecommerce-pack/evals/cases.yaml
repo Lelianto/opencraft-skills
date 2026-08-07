@@ -1,0 +1,13 @@
+positive:
+  - "Implement the checkout with server-side pricing and idempotency."
+  - "Why can we oversell this product? Fix inventory atomicity."
+  - "Add abuse controls to the coupon redemption flow."
+negative:
+  - "Write the blog announcement."
+  - "Style the footer."
+ambiguous:
+  - "Review the new purchase flow."
+assertions:
+  - "response prices and settles checkout on the server"
+  - "response keeps inventory atomic with orders"
+  - "response avoids fake scarcity or invented social proof"

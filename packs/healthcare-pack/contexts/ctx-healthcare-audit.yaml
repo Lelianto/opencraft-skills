@@ -1,0 +1,38 @@
+id: ctx-healthcare-audit
+version: 1
+title: Every PHI access must be logged for compliance review
+description: >
+  Every access to PHI MUST produce a non-repudiable audit record: who, what,
+  when, why, and the authorization basis (including consent reference). Records
+  MUST be retained per the retention policy and available for compliance
+  review without application-level editing.
+applies_to:
+  - "**/*.ts"
+category: compliance
+severity: high
+source:
+  type: organization
+  uri: https://github.com/Lelianto/opencraft-skills
+authority:
+  source:
+    type: organization
+    id: opencraft-healthcare
+    name: OpenCraft Healthcare
+  level: 4
+lifecycle: active
+governance:
+  classification: hardened-mandate
+  approval_required: true
+effective_date: "2026-01-01T00:00:00Z"
+owner: opencraft-healthcare
+enforcement:
+  mode: block
+  specification:
+    type: file-exists
+    config:
+      files: ["**/access-audit*.ts"]
+      at_least_one: true
+    violation_message_template: >
+      PHI access must be logged for compliance review.
+metadata:
+  pack: healthcare-pack

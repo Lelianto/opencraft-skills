@@ -1,0 +1,48 @@
+schema: https://opencraft.dev/schema/context-pack/v1
+name: fintech-pack
+version: 1.0.0
+type: domain
+description: Living context for fintech applications — regulatory framing, audit, transparency, data residency.
+license: MIT
+author:
+  type: organization
+  id: opencraft-fintech
+  name: OpenCraft Fintech
+tags: [fintech, compliance, audit, kyc, payments]
+extends:
+  - node-pack@^1
+  - security-pack@^1
+  - testing-pack@^1
+dependencies: []
+override:
+  - id: ctx-security-dependency-hygiene
+    action: patch
+    patch:
+      severity: critical
+    reason: "Financial services treat vulnerable dependencies as release-blocking."
+provides:
+  contexts:
+    - ctx-fintech-kyc
+    - ctx-fintech-audit
+    - ctx-fintech-data-residency
+    - ctx-fintech-disclosure
+  knowledge:
+    - vision
+    - business-constraints
+    - security
+    - testing
+    - ai-rules
+    - review-checklist
+    - deployment
+    - observability
+    - lifecycle
+    - ownership
+lifecycle: active
+governance:
+  classification: local-standard
+  approval_required: false
+owner:
+  type: organization
+  id: opencraft-fintech
+  name: OpenCraft Fintech
+repository: https://github.com/Lelianto/opencraft-skills

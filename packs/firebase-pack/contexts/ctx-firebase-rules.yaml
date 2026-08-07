@@ -1,0 +1,39 @@
+id: ctx-firebase-rules
+version: 1
+title: Firestore and Storage must be protected by security rules, not client code
+description: >
+  Every Firestore path and Storage bucket MUST be covered by security rules
+  that authorize reads and writes from the request context (`auth`, `request`),
+  with deny-by-default. Client-side conditional rendering and queries are NEVER
+  authorization. Rules must be tested with the rules emulator.
+applies_to:
+  - "firestore.rules"
+  - "storage.rules"
+category: security
+severity: critical
+source:
+  type: organization
+  uri: https://firebase.google.com/docs/rules
+authority:
+  source:
+    type: organization
+    id: opencraft-security
+    name: OpenCraft Security
+  level: 4
+lifecycle: active
+governance:
+  classification: hardened-mandate
+  approval_required: true
+  approvers: ["opencraft-security", "cto"]
+effective_date: "2026-01-01T00:00:00Z"
+owner: opencraft-backend
+enforcement:
+  mode: block
+  specification:
+    type: custom-script
+    config:
+      command: "node scripts/verify-firebase-rules.mjs"
+    violation_message_template: >
+      Firestore/Storage path is unprotected or uses client-side authorization.
+metadata:
+  pack: firebase-pack

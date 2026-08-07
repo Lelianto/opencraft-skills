@@ -1,0 +1,13 @@
+kind: business-constraints
+pack: security-pack
+version: 1
+description: Business constraints driven by security posture.
+updated_at: 2026-01-01
+constraints:
+  - id: biz-sec-ownership
+    description: "Every security control and accepted risk has an explicit owner."
+    type: accountability
+compliance:
+  - name: OWASP ASVS
+    requirement: "Target L1 as the minimum; L2 where sensitive data is processed."
+risk_tolerance: "No unresolved critical/high advisories in production dependencies without a documented risk-acceptance owner."

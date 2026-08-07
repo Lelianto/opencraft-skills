@@ -1,0 +1,25 @@
+kind: architecture
+pack: firebase-pack
+version: 1
+description: Firebase architecture conventions.
+updated_at: 2026-01-01
+patterns:
+  - id: arch-firebase-rules-authz
+    name: Security rules are the authorization boundary
+    statement: "Firestore/Storage rules authorize every read and write; the client never performs authorization."
+    applies_to: ["firestore.rules", "storage.rules"]
+  - id: arch-firebase-functions
+    name: Functions for privileged work
+    statement: "Admin-SDK and trusted computation runs in Cloud Functions, not the client."
+decisions:
+  - id: ARCH-FIREBASE-001
+    title: Rules enforced over client filtering
+    status: accepted
+    context: "Client filters are bypassable by direct API calls."
+    decision: "All authorization lives in security rules."
+    consequences: "Rules are tested with the emulator in CI."
+boundaries:
+  - "Client <-> Firestore/Storage (rules)"
+  - "Client <-> callable functions (auth context)"
+constraints:
+  - "No unprotected paths in firestore.rules."

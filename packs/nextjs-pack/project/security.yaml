@@ -1,0 +1,30 @@
+kind: security
+pack: nextjs-pack
+version: 1
+description: Security rules for Next.js applications.
+updated_at: 2026-01-01
+standards:
+  - name: OWASP ASVS
+    version: 5.0.0
+    level: "L1"
+rules:
+  - id: CTRL-NEXT-001
+    description: "Validate and authorize every Server Action and route handler on the server."
+    severity: critical
+    applies_to: ["app/**/actions.ts", "app/**/route.ts"]
+  - id: CTRL-NEXT-002
+    description: "Never pass secrets to Client Components; use server-only modules and environment access."
+    severity: critical
+    applies_to: ["app/**/*.tsx"]
+  - id: CTRL-NEXT-003
+    description: "Escape and encode user content at render boundaries; avoid dangerouslySetInnerHTML."
+    severity: high
+  - id: CTRL-NEXT-004
+    description: "Set security headers (CSP, HSTS, X-Frame-Options) in next.config or middleware."
+    severity: high
+sensitive_data:
+  - "User credentials and session tokens"
+  - "Personally identifiable information"
+trust_boundaries:
+  - "Client browser <-> server (validated at the server boundary)"
+  - "Server <-> external services (secrets never leave the server environment)"

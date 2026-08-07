@@ -1,0 +1,36 @@
+id: ctx-react-functional-components
+version: 1
+title: Components must be written as functions
+description: >
+  All new components MUST be function components with hooks. Class components
+  are permitted only for legacy code that cannot be migrated. Function
+  components keep state logic declarative and testable.
+applies_to:
+  - "**/*.tsx"
+category: code-style
+severity: medium
+source:
+  type: organization
+  uri: https://github.com/Lelianto/opencraft-skills
+authority:
+  source:
+    type: organization
+    id: opencraft
+    name: OpenCraft
+  level: 2
+lifecycle: active
+governance:
+  classification: local-standard
+  approval_required: false
+effective_date: "2026-01-01T00:00:00Z"
+owner: opencraft-web
+enforcement:
+  mode: warn
+  specification:
+    type: lint-rule
+    config:
+      rule: "react/prefer-function-component"
+    violation_message_template: >
+      New components should be function components.
+metadata:
+  pack: react-pack

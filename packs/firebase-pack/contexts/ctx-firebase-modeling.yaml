@@ -1,0 +1,38 @@
+id: ctx-firebase-modeling
+version: 1
+title: Firestore documents must model access boundaries, not application logic
+description: >
+  Document structure MUST align with access patterns and security rules:
+  denormalize for reads, prefer subcollections over deep nesting, and avoid
+  unbounded document growth. Documents MUST NOT contain secrets; per-user data
+  MUST be scoped by user id in the path so rules can enforce isolation.
+applies_to:
+  - "src/**/*.ts"
+  - "functions/**/*.ts"
+category: data-integrity
+severity: medium
+source:
+  type: organization
+  uri: https://firebase.google.com/docs/firestore/data-model
+authority:
+  source:
+    type: organization
+    id: opencraft-backend
+    name: OpenCraft Backend
+  level: 2
+lifecycle: active
+governance:
+  classification: local-standard
+  approval_required: false
+effective_date: "2026-01-01T00:00:00Z"
+owner: opencraft-backend
+enforcement:
+  mode: warn
+  specification:
+    type: review-gate
+    config:
+      review: "data-model-review"
+    violation_message_template: >
+      Model documents around access patterns; scope per-user data by id in the path.
+metadata:
+  pack: firebase-pack

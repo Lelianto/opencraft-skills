@@ -1,0 +1,24 @@
+kind: tech-stack
+pack: nextjs-pack
+version: 1
+description: Next.js technology stack.
+updated_at: 2026-01-01
+language: TypeScript
+runtime: Node.js LTS
+framework: Next.js App Router
+entries:
+  - name: Next.js
+    role: framework
+    version: "15.x"
+    alternatives: [Remix, Vite + React, Astro]
+    rationale: Integrated SSR, ISR, server actions, and deployment targets.
+  - name: React
+    role: ui-library
+    version: "19.x"
+    rationale: Server and client components in a single model.
+  - name: Tailwind CSS
+    role: styling
+    rationale: Utility-first styling with design-token discipline.
+pinned_versions:
+  next: "^15"
+  react: "^19"

@@ -1,0 +1,30 @@
+kind: observability
+pack: ecommerce-pack
+version: 1
+description: Observability practices for e-commerce.
+updated_at: 2026-01-01
+metrics:
+  - name: checkout_success_rate
+    description: Share of checkouts reaching settlement.
+    type: gauge
+  - name: oversell_count
+    description: Overselling incidents.
+    type: gauge
+  - name: reconciliation_gap
+    description: Unaccounted gap between orders, payments, and inventory.
+    type: gauge
+logs:
+  - "Structured logs with order id, payment intent id, and outcome; no card data."
+traces:
+  - "End-to-end purchase journey tracing."
+alerts:
+  - name: oversell
+    condition: "oversell_count > 0 in any hour"
+    severity: critical
+  - name: checkout_errors
+    condition: "checkout 5xx rate above 2% for 5 minutes"
+    severity: high
+slos:
+  - name: checkout_availability
+    target: "99.9%"
+    description: Checkout-path availability.

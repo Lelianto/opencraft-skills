@@ -1,0 +1,22 @@
+kind: ai-rules
+pack: firebase-pack
+version: 1
+description: AI coding rules for Firebase work.
+updated_at: 2026-01-01
+rules:
+  - id: ai-firebase-rules
+    level: must
+    instruction: Authorize every Firestore/Storage read and write in security rules with deny-by-default; never in client code.
+    rationale: Client-side authorization is bypassable.
+  - id: ai-firebase-admin
+    level: must-not
+    instruction: Never use the admin SDK in the client; keep privileged work in Cloud Functions.
+    rationale: Admin SDK bypasses security rules.
+  - id: ai-firebase-model
+    level: should
+    instruction: Model documents around access patterns and rules; scope per-user data by uid in the path.
+    rationale: Correct modeling makes rules enforceable and queries cheap.
+  - id: ai-firebase-functions-auth
+    level: must
+    instruction: Validate auth context in every callable function and never trust user-provided objects.
+    rationale: Callable functions are a boundary like any other.

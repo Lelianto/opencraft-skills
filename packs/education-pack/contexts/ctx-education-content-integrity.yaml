@@ -1,0 +1,38 @@
+id: ctx-education-content-integrity
+version: 1
+title: Learning content must be versioned, reviewable, and correct
+description: >
+  Learning content MUST be versioned and go through review before publishing.
+  Content must not invent facts, fabricate references, or present unsupported
+  claims. Changes are attributed and revertible. Assessment answers MUST be
+  correctable without data loss.
+applies_to:
+  - "**/*.md"
+  - "**/*.ts"
+category: content
+severity: high
+source:
+  type: organization
+  uri: https://github.com/Lelianto/opencraft-skills
+authority:
+  source:
+    type: organization
+    id: opencraft-education
+    name: OpenCraft Education
+  level: 3
+lifecycle: active
+governance:
+  classification: hardened-standard
+  approval_required: true
+effective_date: "2026-01-01T00:00:00Z"
+owner: opencraft-education
+enforcement:
+  mode: warn
+  specification:
+    type: review-gate
+    config:
+      content_review: true
+    violation_message_template: >
+      Content must be versioned and reviewed; no invented facts or fabricated references.
+metadata:
+  pack: education-pack

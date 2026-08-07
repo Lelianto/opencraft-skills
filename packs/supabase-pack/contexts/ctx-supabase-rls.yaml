@@ -1,0 +1,38 @@
+id: ctx-supabase-rls
+version: 1
+title: Every table must have Row Level Security enabled and policies reviewed
+description: >
+  Every Postgres table MUST have RLS enabled and at least one explicit policy.
+  Policies MUST express the authorization decision in SQL using auth.uid() and
+  claims — never rely on client filters. The service role key is used only
+  server-side and never in the client bundle.
+applies_to:
+  - "supabase/migrations/**/*.sql"
+category: security
+severity: critical
+source:
+  type: organization
+  uri: https://supabase.com/docs/guides/database/postgres/row-level-security
+authority:
+  source:
+    type: organization
+    id: opencraft-security
+    name: OpenCraft Security
+  level: 4
+lifecycle: active
+governance:
+  classification: hardened-mandate
+  approval_required: true
+  approvers: ["opencraft-security", "cto"]
+effective_date: "2026-01-01T00:00:00Z"
+owner: opencraft-backend
+enforcement:
+  mode: block
+  specification:
+    type: custom-script
+    config:
+      command: "node scripts/verify-rls.mjs"
+    violation_message_template: >
+      Table lacks RLS or an explicit policy; client-side filtering is not authorization.
+metadata:
+  pack: supabase-pack

@@ -1,0 +1,22 @@
+kind: deployment
+pack: node-pack
+version: 1
+description: Deployment guidelines for Node.js services.
+updated_at: 2026-01-01
+environments:
+  - name: development
+    purpose: Local iteration; no production data.
+  - name: staging
+    purpose: Pre-production validation with realistic data.
+  - name: production
+    purpose: Customer-facing traffic.
+rollout:
+  - "Build the container from the locked dependency graph (npm ci)."
+  - "Run migrations as a separate step before deploying new code."
+  - "Deploy behind a health-checked target; drain connections on shutdown."
+smoke_tests:
+  - "GET /health returns 200 after startup."
+  - "A representative read path returns expected data."
+rollback:
+  - "Keep the previous image and database schema compatible for one release."
+  - "Revert by redeploying the prior image; do not roll back schema without a plan."

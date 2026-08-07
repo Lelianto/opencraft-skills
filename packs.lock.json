@@ -1,0 +1,60 @@
+{
+  "algorithm": "sha256",
+  "collection": "opencraft-context-packs",
+  "packs": {
+    "accessibility-pack": {
+      "integrity": "sha256-bb85a478e05e5f8f8039d2b0fa8d6a7bb2a837718ca350d67c928de71bf01e4a",
+      "version": "1.0.0"
+    },
+    "ecommerce-pack": {
+      "integrity": "sha256-9354fb8ad869ec51f6c13d8ec7398dacf765f6daac07390784b478ffc8409faa",
+      "version": "1.0.0"
+    },
+    "education-pack": {
+      "integrity": "sha256-b945aa22c8cc44f991614739c50acb0821bc52594259e4d294e44f7694fbc56f",
+      "version": "1.0.0"
+    },
+    "fintech-pack": {
+      "integrity": "sha256-e86735dc362773e0548df6940b30e73db062d980667bef4aac86ceeba7235ac7",
+      "version": "1.0.0"
+    },
+    "firebase-pack": {
+      "integrity": "sha256-de0aaebc79d101e5ad28288d29bbd429fd9b0b14be327eb5dab89bbe83ba0b3e",
+      "version": "1.0.0"
+    },
+    "healthcare-pack": {
+      "integrity": "sha256-fe3e02e7cd812a1549b36ac1df643520491897b880f3df78031c5141b659a06b",
+      "version": "1.0.0"
+    },
+    "nextjs-pack": {
+      "integrity": "sha256-ca85f5ff95e5d1336ef5a10e37d85efbcaddaf8d0b9e35d0f727f313eb0e2368",
+      "version": "1.0.0"
+    },
+    "node-pack": {
+      "integrity": "sha256-5eeb87798f9bdea39f434a15d1128002661cb16ca21e822008bf838e4e199bb2",
+      "version": "1.0.0"
+    },
+    "react-pack": {
+      "integrity": "sha256-3449c839fb61b7fa9dccdb8e427c93bec32ae931c52f8ba7e85d0127562825cc",
+      "version": "1.0.0"
+    },
+    "security-pack": {
+      "integrity": "sha256-0d7c4bbcc4ba034d1bc751d8fbe98bdcdf1824f908fbc093cf4c34b234fb8565",
+      "version": "1.0.0"
+    },
+    "supabase-pack": {
+      "integrity": "sha256-4460d9e95b65b4c964998f9cecf61fe3a07059fadcadbb8fd223b342adec9026",
+      "version": "1.0.0"
+    },
+    "testing-pack": {
+      "integrity": "sha256-ef4571599d1bc42180f5f1c96a46177d1b556139b46a8a66d6aac8476277b5c3",
+      "version": "1.0.0"
+    },
+    "typescript-pack": {
+      "integrity": "sha256-505674846c3c7dbaf8f0cf283cafb9efe1ac136f7752bacff67960c30cae4e87",
+      "version": "1.0.0"
+    }
+  },
+  "schema": "https://opencraft.dev/schema/packs.lock/v1",
+  "source": "https://github.com/Lelianto/opencraft-skills"
+}

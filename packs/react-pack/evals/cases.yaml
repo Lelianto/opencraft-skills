@@ -1,0 +1,12 @@
+positive:
+  - "Build a settings component with form state."
+  - "Why is this component re-rendering with stale props?"
+  - "Add a sortable list with stable keys to this view."
+negative:
+  - "Write a Node.js database migration."
+  - "Compose a marketing email."
+ambiguous:
+  - "Refactor this React screen."
+assertions:
+  - "response uses function components and hooks"
+  - "response includes accessible labels and keyboard handling"

@@ -1,0 +1,38 @@
+id: ctx-testing-risk-proportional
+version: 1
+title: Test effort must be proportional to risk
+description: >
+  New behavior MUST be covered by tests proportional to its risk. High-risk
+  paths (auth, payments, data integrity, external boundaries) require
+  integration or end-to-end coverage with representative roles; low-risk
+  cosmetic changes require only lightweight checks. "All tests pass" on weak
+  coverage is not verification.
+applies_to:
+  - "**/*"
+category: testing
+severity: high
+source:
+  type: organization
+  uri: https://github.com/Lelianto/opencraft-skills
+authority:
+  source:
+    type: organization
+    id: opencraft-quality
+    name: OpenCraft Quality
+  level: 3
+lifecycle: active
+governance:
+  classification: local-standard
+  approval_required: false
+effective_date: "2026-01-01T00:00:00Z"
+owner: opencraft-quality
+enforcement:
+  mode: warn
+  specification:
+    type: review-gate
+    config:
+      require_test_evidence: true
+    violation_message_template: >
+      High-risk change lacks proportional test evidence.
+metadata:
+  pack: testing-pack

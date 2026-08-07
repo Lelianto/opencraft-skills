@@ -1,0 +1,19 @@
+kind: testing
+pack: nextjs-pack
+version: 1
+description: Testing strategy for Next.js applications.
+updated_at: 2026-01-01
+strategy: "Risk-based: unit-test logic and components, integration-test data flows, and E2E-test critical journeys."
+pyramid: "Many component tests, fewer integration tests, fewest E2E tests."
+tools:
+  - vitest
+  - @testing-library/react
+  - Playwright
+gates:
+  - name: unit-gate
+    requirement: "Changed logic ships with passing unit/component tests."
+  - name: critical-journey
+    requirement: "Critical journeys have E2E coverage with representative roles."
+fixtures:
+  - "MSW handlers for external HTTP"
+  - "In-memory repositories for data-layer tests"

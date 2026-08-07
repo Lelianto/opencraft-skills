@@ -1,0 +1,38 @@
+id: ctx-fintech-audit
+version: 1
+title: Financial transactions must have an immutable audit trail
+description: >
+  Every financial transaction MUST produce an immutable audit record with a
+  server-side timestamp, transaction type and amount, customer id, initiator,
+  and result. Records MUST be write-once and retained for the required period
+  (minimum 5 years). Audit records MUST NOT be editable by application code.
+applies_to:
+  - "**/*.ts"
+category: compliance
+severity: critical
+source:
+  type: organization
+  uri: https://github.com/Lelianto/opencraft-skills
+authority:
+  source:
+    type: organization
+    id: opencraft-fintech
+    name: OpenCraft Fintech
+  level: 4
+lifecycle: active
+governance:
+  classification: hardened-mandate
+  approval_required: true
+effective_date: "2026-01-01T00:00:00Z"
+owner: opencraft-fintech
+enforcement:
+  mode: block
+  specification:
+    type: file-exists
+    config:
+      files: ["**/audit*.ts", "**/audit*.py"]
+      at_least_one: true
+    violation_message_template: >
+      Financial transactions must produce an immutable, retained audit trail.
+metadata:
+  pack: fintech-pack

@@ -1,0 +1,38 @@
+id: ctx-testing-gates
+version: 1
+title: CI must gate on tests, and failures must be real
+description: >
+  The CI pipeline MUST run the unit, integration, and end-to-end suites and
+  block merge on failures. Tests MUST assert real behavior — no skipped
+  assertions, no empty "example passes" tests, no weakening a failing test to
+  make it pass. Changing a test to fit broken behavior is forbidden.
+applies_to:
+  - "**/*.test.ts"
+  - "**/*.spec.ts"
+category: testing
+severity: high
+source:
+  type: organization
+  uri: https://github.com/Lelianto/opencraft-skills
+authority:
+  source:
+    type: organization
+    id: opencraft-quality
+    name: OpenCraft Quality
+  level: 3
+lifecycle: active
+governance:
+  classification: local-standard
+  approval_required: false
+effective_date: "2026-01-01T00:00:00Z"
+owner: opencraft-quality
+enforcement:
+  mode: block
+  specification:
+    type: ci-gate
+    config:
+      suites: ["unit", "integration", "e2e"]
+    violation_message_template: >
+      CI must run and gate on real test suites; do not weaken tests to pass.
+metadata:
+  pack: testing-pack

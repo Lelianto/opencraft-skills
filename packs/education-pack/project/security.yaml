@@ -1,0 +1,25 @@
+kind: security
+pack: education-pack
+version: 1
+description: Education-specific security rules.
+updated_at: 2026-01-01
+standards:
+  - name: OWASP ASVS
+    version: 5.0.0
+    level: "L2"
+rules:
+  - id: CTRL-EDU-001
+    description: "Learner data encrypted and access-minimized."
+    severity: critical
+  - id: CTRL-EDU-002
+    description: "Third-party sharing requires explicit consent; no data selling."
+    severity: critical
+  - id: CTRL-EDU-003
+    description: "Progress and assessment data is not exposed to unrelated learners."
+    severity: high
+sensitive_data:
+  - "Learner progress and assessment results"
+  - "Learner identifiers"
+trust_boundaries:
+  - "Learner device <-> service"
+  - "Service <-> third-party tools (consented, scoped)"

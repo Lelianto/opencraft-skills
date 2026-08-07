@@ -1,0 +1,46 @@
+schema: https://opencraft.dev/schema/context-pack/v1
+name: ecommerce-pack
+version: 1.0.0
+type: domain
+description: Living context for e-commerce applications — cart, payments, inventory, tax, abuse.
+license: MIT
+author:
+  type: organization
+  id: opencraft-ecommerce
+  name: OpenCraft E-commerce
+tags: [ecommerce, checkout, payments, inventory, abuse]
+extends:
+  - node-pack@^1
+  - security-pack@^1
+  - testing-pack@^1
+dependencies: []
+override:
+  - id: ctx-testing-gates
+    action: patch
+    patch:
+      enforcement:
+        mode: block
+      severity: critical
+    reason: "Checkout and inventory are high-risk money paths; test gates are release-blocking."
+provides:
+  contexts:
+    - ctx-ecommerce-checkout
+    - ctx-ecommerce-inventory
+    - ctx-ecommerce-abuse
+  knowledge:
+    - vision
+    - business-constraints
+    - security
+    - testing
+    - ai-rules
+    - review-checklist
+    - observability
+lifecycle: active
+governance:
+  classification: local-standard
+  approval_required: false
+owner:
+  type: organization
+  id: opencraft-ecommerce
+  name: OpenCraft E-commerce
+repository: https://github.com/Lelianto/opencraft-skills

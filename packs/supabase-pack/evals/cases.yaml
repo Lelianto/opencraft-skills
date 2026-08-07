@@ -1,0 +1,12 @@
+positive:
+  - "Add a new table with RLS policies for the tenant."
+  - "Write a migration to add an index; keep it non-destructive."
+  - "Subscribe to realtime changes and clean up on unmount."
+negative:
+  - "Design the landing page."
+  - "Write release notes."
+ambiguous:
+  - "Set up the Supabase backend for this feature."
+assertions:
+  - "response enables RLS with explicit policies"
+  - "response keeps the service role key server-side"

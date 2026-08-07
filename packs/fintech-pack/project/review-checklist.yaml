@@ -1,0 +1,24 @@
+kind: review-checklist
+pack: fintech-pack
+version: 1
+description: Fintech review checklist.
+updated_at: 2026-01-01
+categories:
+  - name: Compliance
+    items:
+      - id: chk-kyc
+        check: "KYC/AML verified before transactions; failures recorded."
+      - id: chk-disclosure
+        check: "Fees, rate, total cost, schedule disclosed before accept, from versioned terms."
+      - id: chk-residency
+        check: "Data stored in approved jurisdiction; no regional drift."
+  - name: Money movement
+    items:
+      - id: chk-idempotency
+        check: "Idempotency keys on payment intents; reconciliation end-to-end."
+      - id: chk-audit
+        check: "Immutable audit records for every transaction; retained 5+ years."
+  - name: Data protection
+    items:
+      - id: chk-logs
+        check: "No PII/card/transaction details in plaintext logs."

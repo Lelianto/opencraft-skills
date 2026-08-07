@@ -1,0 +1,12 @@
+positive:
+  - "Make this form keyboard-accessible with visible focus states."
+  - "This icon button has no label — fix it."
+  - "Add automated axe-core checks to CI."
+negative:
+  - "Write the database migration."
+  - "Design a logo."
+ambiguous:
+  - "Improve the accessibility of this page."
+assertions:
+  - "response proposes native semantics and accessible names"
+  - "response includes keyboard operability and focus handling"

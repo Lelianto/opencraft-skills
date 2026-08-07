@@ -1,0 +1,20 @@
+kind: conventions
+pack: firebase-pack
+version: 1
+description: Firebase coding conventions.
+updated_at: 2026-01-01
+naming:
+  - id: conv-firebase-collections
+    rule: "Collections are camelCase; documents keyed by uid or stable id; timestamps stored as server timestamps."
+formatting:
+  - id: conv-firebase-rules-format
+    rule: "Security rules are formatted, commented per rule, and reviewed."
+imports:
+  - id: conv-firebase-client
+    rule: "One typed client module per environment; no ad-hoc firestore() instances."
+state:
+  - id: conv-firebase-queries
+    rule: "Queries are composed in a data-access layer and constrained to indexed paths."
+structure:
+  - id: conv-firebase-functions
+    rule: "Functions are grouped by domain in the functions/ workspace."

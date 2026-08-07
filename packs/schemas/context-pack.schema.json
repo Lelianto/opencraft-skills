@@ -1,0 +1,146 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://opencraft.dev/schema/context-pack/v1",
+  "title": "OpenCraft Context Pack Manifest",
+  "description": "The pack.yaml manifest for an OpenCraft Context Pack.",
+  "type": "object",
+  "required": [
+    "schema",
+    "name",
+    "version",
+    "type",
+    "description",
+    "license",
+    "author",
+    "lifecycle",
+    "governance",
+    "owner"
+  ],
+  "properties": {
+    "schema": {
+      "type": "string",
+      "const": "https://opencraft.dev/schema/context-pack/v1"
+    },
+    "name": {
+      "type": "string",
+      "pattern": "^[a-z0-9]+(?:-[a-z0-9]+)*-pack$"
+    },
+    "version": {
+      "type": "string",
+      "pattern": "^[0-9]+\\.[0-9]+\\.[0-9]+$"
+    },
+    "type": {
+      "type": "string",
+      "enum": ["technology", "framework", "baas", "cross-cutting", "domain"]
+    },
+    "description": {
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 512
+    },
+    "license": {
+      "type": "string",
+      "minLength": 1
+    },
+    "author": {
+      "$ref": "#/$defs/entity"
+    },
+    "tags": {
+      "type": "array",
+      "items": { "type": "string" },
+      "uniqueItems": true
+    },
+    "extends": {
+      "type": "array",
+      "items": { "type": "string", "pattern": "^[a-z0-9]+(?:-[a-z0-9]+)*-pack(@.+)?$" },
+      "uniqueItems": true
+    },
+    "dependencies": {
+      "type": "array",
+      "items": { "type": "string", "pattern": "^[a-z0-9]+(?:-[a-z0-9]+)*-pack(@.+)?$" },
+      "uniqueItems": true
+    },
+    "provides": {
+      "type": "object",
+      "properties": {
+        "contexts": {
+          "type": "array",
+          "items": { "type": "string", "pattern": "^ctx-[a-z0-9-]+$" }
+        },
+        "knowledge": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "enum": [
+              "vision", "architecture", "conventions", "folder-structure",
+              "tech-stack", "security", "testing", "business-constraints",
+              "ai-rules", "review-checklist", "deployment", "observability",
+              "lifecycle", "ownership"
+            ]
+          }
+        }
+      }
+    },
+    "lifecycle": {
+      "type": "string",
+      "enum": ["draft", "candidate", "approved", "active", "deprecated", "archived"]
+    },
+    "governance": {
+      "type": "object",
+      "required": ["classification", "approval_required"],
+      "properties": {
+        "classification": {
+          "type": "string",
+          "enum": [
+            "hardened-mandate", "hardened-standard", "hardened-local",
+            "local-standard", "local-guideline", "local-experimental"
+          ]
+        },
+        "approval_required": { "type": "boolean" },
+        "approvers": { "type": "array", "items": { "type": "string" } },
+        "min_review_period_hours": { "type": "integer", "minimum": 0 }
+      }
+    },
+    "owner": { "$ref": "#/$defs/entity" },
+    "repository": { "type": "string", "format": "uri" },
+    "deprecated": {
+      "type": "object",
+      "properties": {
+        "superseded_by": { "type": "string" },
+        "reason": { "type": "string" }
+      }
+    },
+    "override": {
+      "type": "array",
+      "items": { "$ref": "#/$defs/override" }
+    }
+  },
+  "$defs": {
+    "entity": {
+      "type": "object",
+      "required": ["type", "id", "name"],
+      "properties": {
+        "type": {
+          "type": "string",
+          "enum": ["individual", "organization", "community", "standard-body", "ai-system"]
+        },
+        "id": { "type": "string" },
+        "name": { "type": "string" },
+        "uri": { "type": "string", "format": "uri" },
+        "email": { "type": "string", "format": "email" }
+      }
+    },
+    "override": {
+      "type": "object",
+      "required": ["id", "action"],
+      "properties": {
+        "id": { "type": "string" },
+        "action": { "type": "string", "enum": ["replace", "patch", "disable", "defer", "resolve"] },
+        "pack": { "type": "string" },
+        "path": { "type": "string" },
+        "patch": { "type": "object" },
+        "reason": { "type": "string" }
+      }
+    }
+  }
+}

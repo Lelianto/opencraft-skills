@@ -1,0 +1,38 @@
+id: ctx-supabase-migrations
+version: 1
+title: Schema changes must be versioned migrations, reviewed like code
+description: >
+  All schema changes MUST be additive, versioned migrations in
+  `supabase/migrations/` reviewed in pull requests. Destructive operations
+  (drops, truncates, data rewrites) MUST be split into a separate, explicitly
+  approved migration. Never alter the production database by hand.
+applies_to:
+  - "supabase/migrations/**/*.sql"
+category: data-integrity
+severity: high
+source:
+  type: organization
+  uri: https://supabase.com/docs/guides/database/migrations
+authority:
+  source:
+    type: organization
+    id: opencraft-backend
+    name: OpenCraft Backend
+  level: 3
+lifecycle: active
+governance:
+  classification: local-standard
+  approval_required: false
+effective_date: "2026-01-01T00:00:00Z"
+owner: opencraft-backend
+enforcement:
+  mode: block
+  specification:
+    type: file-exists
+    config:
+      files: ["supabase/migrations/**/*.sql"]
+      at_least_one: true
+    violation_message_template: >
+      Schema changes must be versioned migrations; no hand-edited production schema.
+metadata:
+  pack: supabase-pack

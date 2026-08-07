@@ -1,0 +1,23 @@
+kind: business-constraints
+pack: education-pack
+version: 1
+description: Business constraints for education products.
+updated_at: 2026-01-01
+constraints:
+  - id: biz-edu-privacy
+    description: "Learner data protected, minimized, and retention-policied."
+    type: regulatory
+  - id: biz-edu-integrity
+    description: "Content reviewed, versioned, and accurate."
+    type: quality
+compliance:
+  - name: FERPA
+    requirement: "Student education records protected where applicable."
+  - name: COPPA
+    requirement: "Children's data handling compliant where applicable."
+  - name: GDPR
+    requirement: "Learner rights and data minimization."
+kpis:
+  - "Course completion rate"
+  - "Learner-privacy incidents per quarter"
+risk_tolerance: "Low: privacy and accessibility gaps are release-blocking."

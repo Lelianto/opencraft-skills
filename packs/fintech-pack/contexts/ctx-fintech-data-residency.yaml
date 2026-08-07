@@ -1,0 +1,41 @@
+id: ctx-fintech-data-residency
+version: 1
+title: Customer financial data must stay within the required jurisdiction
+description: >
+  Customer PII and financial transaction data MUST be stored only in the
+  approved jurisdiction. Deployment configuration MUST pin the region for
+  primary data stores, and backups MUST be in-region. Any change to data
+  residency requires compliance approval.
+applies_to:
+  - "**/*.tf"
+  - "**/*.yaml"
+  - "**/*.yml"
+category: compliance
+severity: critical
+source:
+  type: organization
+  uri: https://github.com/Lelianto/opencraft-skills
+authority:
+  source:
+    type: organization
+    id: opencraft-fintech
+    name: OpenCraft Fintech
+  level: 4
+lifecycle: active
+governance:
+  classification: hardened-mandate
+  approval_required: true
+  approvers: ["opencraft-fintech", "compliance-officer"]
+effective_date: "2026-01-01T00:00:00Z"
+owner: opencraft-fintech
+enforcement:
+  mode: block
+  specification:
+    type: terraform-resource-constraint
+    config:
+      resource_types: ["aws_db_instance", "aws_rds_cluster", "aws_s3_bucket"]
+      required_region: "ap-southeast-3"
+    violation_message_template: >
+      Customer financial data must be stored in the approved jurisdiction.
+metadata:
+  pack: fintech-pack

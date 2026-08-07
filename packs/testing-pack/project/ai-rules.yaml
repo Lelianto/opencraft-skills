@@ -1,0 +1,22 @@
+kind: ai-rules
+pack: testing-pack
+version: 1
+description: AI coding rules for test-driven work.
+updated_at: 2026-01-01
+rules:
+  - id: ai-test-proportional
+    level: should
+    instruction: Write tests proportional to the risk of the change; cover high-risk paths with integration or E2E evidence.
+    rationale: Weak coverage is not verification.
+  - id: ai-test-no-weak
+    level: must-not
+    instruction: Never weaken a failing test, remove assertions, or skip tests to make a suite pass.
+    rationale: Drifting the test to match broken code is specification drift.
+  - id: ai-test-run
+    level: must
+    instruction: Run the focused test suite and report fresh output before claiming completion.
+    rationale: Completion claims require fresh command output.
+  - id: ai-test-regression
+    level: must
+    instruction: Add a regression test that fails on the old behavior before fixing a bug.
+    rationale: Regressions are only proven by a test that reproduces the failure.

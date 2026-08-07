@@ -1,0 +1,21 @@
+kind: vision
+pack: ecommerce-pack
+version: 1
+description: Vision template for e-commerce products.
+updated_at: 2026-01-01
+purpose: "Sell products reliably: correct pricing, available stock, safe payments, and honest merchandising."
+target_users:
+  - "Shoppers and merchants."
+primary_journey: "Browse → add to cart → server-priced checkout → settled payment → reconciled inventory."
+principles:
+  - id: vis-server-truth
+    statement: "Price, stock, and orders are decided on the server; the client renders, never decides."
+  - id: vis-honest
+    statement: "No fake metrics, no fabricated scarcity, no misleading availability."
+  - id: vis-reliable
+    statement: "Money and stock move atomically and reconcile."
+success_signals:
+  - "Zero overselling incidents in the last quarter."
+  - "Reconciliation gaps below threshold."
+non_goals:
+  - "Manipulative urgency or fake social proof."

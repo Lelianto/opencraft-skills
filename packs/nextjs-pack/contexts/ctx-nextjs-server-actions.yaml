@@ -1,0 +1,39 @@
+id: ctx-nextjs-server-actions
+version: 1
+title: Mutations must be Server Actions with server-side validation and authorization
+description: >
+  Mutations MUST run in Server Actions or route handlers. Every mutation MUST:
+  (1) revalidate the affected routes with `revalidatePath`/`revalidateTag`,
+  (2) validate input on the server, and (3) re-check authorization on the
+  server. Client-only state mutation that bypasses the server is forbidden for
+  durable data because it cannot be enforced or audited.
+applies_to:
+  - "app/**/actions.ts"
+  - "app/**/route.ts"
+category: security
+severity: critical
+source:
+  type: organization
+  uri: https://github.com/Lelianto/opencraft-skills
+authority:
+  source:
+    type: organization
+    id: opencraft
+    name: OpenCraft
+  level: 3
+lifecycle: active
+governance:
+  classification: hardened-standard
+  approval_required: true
+effective_date: "2026-01-01T00:00:00Z"
+owner: opencraft-web
+enforcement:
+  mode: block
+  specification:
+    type: custom-script
+    config:
+      command: "node scripts/verify-server-actions.mjs"
+    violation_message_template: >
+      Mutations must run server-side with validation, authorization, and cache revalidation.
+metadata:
+  pack: nextjs-pack

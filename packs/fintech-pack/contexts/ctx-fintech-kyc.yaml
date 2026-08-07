@@ -1,0 +1,39 @@
+id: ctx-fintech-kyc
+version: 1
+title: Customer identity must be verified before financial transactions
+description: >
+  Know Your Customer (KYC) and Anti-Money Laundering (AML) checks MUST be
+  completed before a customer can perform financial transactions. Verification
+  includes identity document validation, biometric or equivalent matching,
+  sanctions screening, and politically exposed person (PEP) screening. Failed
+  verification blocks the transaction and is recorded.
+applies_to:
+  - "**/*.ts"
+category: compliance
+severity: critical
+source:
+  type: organization
+  uri: https://github.com/Lelianto/opencraft-skills
+authority:
+  source:
+    type: organization
+    id: opencraft-fintech
+    name: OpenCraft Fintech
+  level: 4
+lifecycle: active
+governance:
+  classification: hardened-mandate
+  approval_required: true
+  approvers: ["opencraft-fintech", "cto"]
+effective_date: "2026-01-01T00:00:00Z"
+owner: opencraft-fintech
+enforcement:
+  mode: block
+  specification:
+    type: custom-script
+    config:
+      command: "node scripts/verify-kyc-flow.mjs"
+    violation_message_template: >
+      KYC/AML verification must complete before financial transactions; record failures.
+metadata:
+  pack: fintech-pack

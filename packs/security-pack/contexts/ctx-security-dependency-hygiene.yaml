@@ -1,0 +1,46 @@
+id: ctx-security-dependency-hygiene
+version: 1
+title: Dependencies must be pinned, locked, and scanned
+description: >
+  Applications MUST commit a lockfile, pin direct dependency ranges, and run
+  vulnerability scanning (OSV/Snyk/npm audit) in CI. Upgrades that fix a
+  known-vulnerability advisory are prioritized. Disallowed: unpinned transitive
+  drift, ignored high-severity advisories without a risk-acceptance owner.
+applies_to:
+  - "package.json"
+  - "package-lock.json"
+category: security
+severity: high
+source:
+  type: organization
+  uri: https://github.com/Lelianto/opencraft-skills
+authority:
+  source:
+    type: organization
+    id: opencraft-security
+    name: OpenCraft Security
+  level: 3
+lifecycle: active
+governance:
+  classification: hardened-standard
+  approval_required: true
+effective_date: "2026-01-01T00:00:00Z"
+owner: opencraft-security
+enforcement:
+  mode: block
+  specification:
+    type: composite
+    config:
+      operator: "and"
+      verifiers:
+        - type: "file-exists"
+          config:
+            files: ["package-lock.json"]
+            at_least_one: true
+        - type: "dependency-scan"
+          config:
+            fail_on: "high"
+    violation_message_template: >
+      Lock the dependency graph and scan for vulnerabilities in CI.
+metadata:
+  pack: security-pack

@@ -1,0 +1,37 @@
+id: ctx-a11y-keyboard
+version: 1
+title: All interactive behavior must be keyboard operable
+description: >
+  Every interactive element MUST be reachable and operable by keyboard alone:
+  logical tab order, visible focus, Enter/Space activation for buttons, arrow
+  keys for composite widgets, and Escape to dismiss overlays. Hover, drag, and
+  long-press MUST have keyboard equivalents.
+applies_to:
+  - "**/*.tsx"
+category: accessibility
+severity: high
+source:
+  type: standard-body
+  uri: https://www.w3.org/WAI/WCAG22/
+authority:
+  source:
+    type: standard-body
+    id: w3c
+    name: W3C Web Accessibility Initiative
+  level: 3
+lifecycle: active
+governance:
+  classification: local-standard
+  approval_required: false
+effective_date: "2026-01-01T00:00:00Z"
+owner: opencraft-accessibility
+enforcement:
+  mode: warn
+  specification:
+    type: manual-check
+    config:
+      requires: "keyboard walk-through"
+    violation_message_template: >
+      Interactive behavior must have a keyboard-operable equivalent.
+metadata:
+  pack: accessibility-pack

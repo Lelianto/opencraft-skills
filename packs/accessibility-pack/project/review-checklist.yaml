@@ -1,0 +1,24 @@
+kind: review-checklist
+pack: accessibility-pack
+version: 1
+description: Accessibility review checklist.
+updated_at: 2026-01-01
+categories:
+  - name: Semantics and names
+    items:
+      - id: chk-native
+        check: "Native elements used; roles/aria only to correct semantics."
+      - id: chk-names
+        check: "Every control has an accessible name and announced state."
+  - name: Keyboard
+    items:
+      - id: chk-focus
+        check: "Visible focus, logical tab order, Escape dismisses overlays."
+      - id: chk-equivalents
+        check: "Hover/drag gestures have keyboard equivalents."
+  - name: Visual
+    items:
+      - id: chk-contrast
+        check: "Contrast meets AA; no color-only meaning."
+      - id: chk-motion
+        check: "prefers-reduced-motion respected."

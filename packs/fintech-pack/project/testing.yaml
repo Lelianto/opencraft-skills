@@ -1,0 +1,21 @@
+kind: testing
+pack: fintech-pack
+version: 1
+description: Testing strategy for fintech.
+updated_at: 2026-01-01
+strategy: "Risk-based with a compliance gate: money movement, identity, and disclosure flows get end-to-end coverage."
+pyramid: "Unit tests for logic, integration tests for money movement and audit, E2E for KYC and checkout."
+tools:
+  - vitest
+  - Playwright
+  - "reconciliation-fixtures"
+gates:
+  - name: money-movement
+    requirement: "End-to-end tests for authorization, idempotency, and reconciliation."
+  - name: disclosure
+    requirement: "Assertions that fees, rate, total cost, and schedule appear before accept."
+  - name: audit
+    requirement: "Tests assert immutable audit records are written for every transaction."
+fixtures:
+  - "Reconciliation fixtures with balance and ledger expectations"
+  - "Sandboxed payment-provider stubs"

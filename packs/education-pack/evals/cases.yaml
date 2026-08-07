@@ -1,0 +1,13 @@
+positive:
+  - "Add progress tracking with privacy-safe analytics."
+  - "Set up versioned content review before publishing lessons."
+  - "Test the learner path under class-start load."
+negative:
+  - "Design the corporate landing page."
+  - "Write a developer tutorial."
+ambiguous:
+  - "Review the new learning module."
+assertions:
+  - "response protects learner data and minimizes exposure"
+  - "response requires versioned, reviewed content"
+  - "response handles peak load with graceful degradation"

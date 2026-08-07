@@ -1,0 +1,38 @@
+id: ctx-nextjs-data-fetching
+version: 1
+title: Data fetching must use Server Components and Next.js primitives
+description: >
+  Data needed for initial render MUST be fetched in Server Components or via
+  Next.js data primitives (`fetch` with caching semantics, `generateMetadata`,
+  and static/ISR params). Client-side fetching is allowed only for
+  user-initiated, dynamic, or post-interaction data. Every fetch MUST declare
+  its caching intent.
+applies_to:
+  - "app/**/*.tsx"
+category: architecture
+severity: high
+source:
+  type: organization
+  uri: https://github.com/Lelianto/opencraft-skills
+authority:
+  source:
+    type: organization
+    id: opencraft
+    name: OpenCraft
+  level: 3
+lifecycle: active
+governance:
+  classification: local-standard
+  approval_required: false
+effective_date: "2026-01-01T00:00:00Z"
+owner: opencraft-web
+enforcement:
+  mode: warn
+  specification:
+    type: lint-rule
+    config:
+      rule: "next/no-client-side-fetch-without-reason"
+    violation_message_template: >
+      Prefer Server Component data fetching; declare caching intent for every fetch.
+metadata:
+  pack: nextjs-pack

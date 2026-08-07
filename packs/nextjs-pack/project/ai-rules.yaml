@@ -1,0 +1,26 @@
+kind: ai-rules
+pack: nextjs-pack
+version: 1
+description: AI coding rules for Next.js work.
+updated_at: 2026-01-01
+rules:
+  - id: ai-next-router
+    level: must
+    instruction: Use the App Router for all new routes; never extend pages/.
+    rationale: One router keeps caching and data-fetching semantics consistent.
+  - id: ai-next-server-first
+    level: must
+    instruction: Fetch in Server Components by default; mark client components explicitly with 'use client'.
+    rationale: Server-first rendering is the Next.js performance and correctness model.
+  - id: ai-next-mutations
+    level: must
+    instruction: Route durable mutations through Server Actions or route handlers with server-side validation and authorization.
+    rationale: Client-only mutations bypass enforcement and audit.
+  - id: ai-next-revalidate
+    level: must
+    instruction: Revalidate affected routes after every mutation with revalidatePath or revalidateTag.
+    rationale: Stale caches after writes violate the living-context promise.
+  - id: ai-next-secrets
+    level: must-not
+    instruction: Do not expose secrets to the client; keep server-only code behind the server-only boundary.
+    rationale: Server components can leak to the client bundle if misused.

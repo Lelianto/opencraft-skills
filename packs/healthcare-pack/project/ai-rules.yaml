@@ -1,0 +1,26 @@
+kind: ai-rules
+pack: healthcare-pack
+version: 1
+description: AI coding rules for healthcare work.
+updated_at: 2026-01-01
+rules:
+  - id: ai-healthcare-phi
+    level: must
+    instruction: Treat PHI as critical: encrypt, minimize, and never log or expose unnecessarily.
+    rationale: PHI exposure is a legal and patient-safety failure.
+  - id: ai-healthcare-consent
+    level: must
+    instruction: Check consent at point of access and honor revocation immediately.
+    rationale: Consent is not a one-time enrollment.
+  - id: ai-healthcare-audit
+    level: must
+    instruction: Log every PHI access non-repudiably for compliance review.
+    rationale: Auditability is a hard requirement.
+  - id: ai-healthcare-accessible
+    level: must
+    instruction: Design for assistive technology, low vision, and stressed users from the start.
+    rationale: Accessibility is release-critical in healthcare.
+  - id: ai-healthcare-safety
+    level: must
+    instruction: Do not present unvalidated clinical claims; flag uncertainty and data boundaries.
+    rationale: Unsupported clinical assertions are harmful.

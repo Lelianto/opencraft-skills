@@ -1,0 +1,23 @@
+kind: ownership
+pack: fintech-pack
+version: 1
+description: Ownership metadata for fintech-pack.
+updated_at: 2026-01-01
+pack_owner: opencraft-fintech
+areas:
+  - name: compliance
+    owner: compliance-officer
+    review_cadence: monthly
+  - name: money-movement
+    owner: opencraft-fintech
+    review_cadence: monthly
+contexts:
+  - id: ctx-fintech-kyc
+    owner: opencraft-fintech
+  - id: ctx-fintech-audit
+    owner: opencraft-fintech
+  - id: ctx-fintech-data-residency
+    owner: compliance-officer
+  - id: ctx-fintech-disclosure
+    owner: compliance-officer
+escalation: "Compliance and data-residency escalations go to the compliance-officer."

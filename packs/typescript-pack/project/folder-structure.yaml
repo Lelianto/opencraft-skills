@@ -1,0 +1,23 @@
+kind: folder-structure
+pack: typescript-pack
+version: 1
+description: Canonical folder structure for TypeScript projects.
+updated_at: 2026-01-01
+root: project-root
+directories:
+  - path: src/
+    purpose: All application source code.
+    conventions: ["Aliased as @/", "No source outside src/ except config"]
+  - path: src/lib/
+    purpose: Framework-independent utilities and shared logic.
+  - path: src/components/
+    purpose: Reusable UI components (when a UI layer exists).
+  - path: tests/
+    purpose: Co-located unit and integration tests when not colocated with source.
+  - path: config/
+    purpose: Build, lint, and tooling configuration modules.
+files:
+  - path: tsconfig.json
+    purpose: TypeScript compiler configuration; strict mode enabled.
+  - path: eslint.config.js
+    purpose: ESLint flat config.

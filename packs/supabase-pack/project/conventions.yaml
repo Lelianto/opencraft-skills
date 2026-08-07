@@ -1,0 +1,20 @@
+kind: conventions
+pack: supabase-pack
+version: 1
+description: Supabase coding conventions.
+updated_at: 2026-01-01
+naming:
+  - id: conv-supabase-tables
+    rule: "Tables are plural snake_case; columns snake_case; primary key named id unless the domain says otherwise."
+formatting:
+  - id: conv-supabase-sql
+    rule: "SQL is formatted and reviewed; policies are grouped per table."
+imports:
+  - id: conv-supabase-client
+    rule: "One typed client module (createClient) per environment; no ad-hoc clients."
+state:
+  - id: conv-supabase-query
+    rule: "Queries go through typed helpers in a data-access layer, not inline in components."
+structure:
+  - id: conv-supabase-types
+    rule: "Generated database types (supabase gen types) are the single source of row types."

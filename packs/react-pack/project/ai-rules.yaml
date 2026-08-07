@@ -1,0 +1,26 @@
+kind: ai-rules
+pack: react-pack
+version: 1
+description: AI coding rules for React work.
+updated_at: 2026-01-01
+rules:
+  - id: ai-react-functional
+    level: must
+    instruction: Write new components as function components using hooks.
+    rationale: Matches the current supported React model.
+  - id: ai-react-hooks
+    level: must
+    instruction: Follow the Rules of Hooks: top-level calls, complete dependency arrays.
+    rationale: Violations cause stale closures that are hard to detect.
+  - id: ai-react-keys
+    level: should
+    instruction: Use stable identity keys for list items, never bare indexes for reorderable lists.
+    rationale: Index keys corrupt state reuse and accessibility.
+  - id: ai-react-a11y
+    level: must
+    instruction: Include accessible labels, focus handling, and keyboard operability in every interactive component.
+    rationale: Accessibility is a delivery input, not final polish.
+  - id: ai-react-no-generated-ui
+    level: must-not
+    instruction: Do not generate decorative, interchangeable layouts; ground visual decisions in product meaning.
+    rationale: OpenCraft rejects generic AI-generated design.

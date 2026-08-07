@@ -1,0 +1,21 @@
+kind: business-constraints
+pack: healthcare-pack
+version: 1
+description: Business constraints for healthcare products.
+updated_at: 2026-01-01
+constraints:
+  - id: biz-healthcare-phi
+    description: "PHI encrypted, access-minimized, and auditable."
+    type: regulatory
+  - id: biz-healthcare-consent
+    description: "PHI access follows recorded, current consent with immediate revocation."
+    type: regulatory
+compliance:
+  - name: HIPAA
+    requirement: "PHI protection, audit controls, and access management."
+  - name: GDPR
+    requirement: "Data minimization and subject rights where applicable."
+kpis:
+  - "Time from consent revocation to enforcement"
+  - "Unauthorized-access count per quarter"
+risk_tolerance: "Very low: patient-safety and privacy gaps are release-blocking."

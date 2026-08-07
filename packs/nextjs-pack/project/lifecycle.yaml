@@ -1,0 +1,16 @@
+kind: lifecycle
+pack: nextjs-pack
+version: 1
+description: Lifecycle metadata for the nextjs-pack.
+updated_at: 2026-01-01
+pack_info:
+  version: 1.0.0
+  lifecycle: active
+review_cadence: "Quarterly review of contexts against the current Next.js major."
+context_defaults:
+  governance_classification: local-standard
+  min_review_period_hours: 24
+transitions:
+  - to: active
+    date: 2026-01-01
+    reason: "Initial release of nextjs-pack."

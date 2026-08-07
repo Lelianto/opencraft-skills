@@ -1,0 +1,22 @@
+kind: deployment
+pack: nextjs-pack
+version: 1
+description: Deployment guidelines for Next.js applications.
+updated_at: 2026-01-01
+environments:
+  - name: preview
+    purpose: Per-PR preview with isolated data.
+  - name: staging
+    purpose: Full-stack validation before release.
+  - name: production
+    purpose: Customer-facing.
+rollout:
+  - "Build with a locked dependency graph and typed config."
+  - "Run migrations before deploying new server code."
+  - "Deploy behind a CDN with cache-busting for static assets."
+smoke_tests:
+  - "Landing page renders with expected status."
+  - "A representative authenticated route responds."
+rollback:
+  - "Revert by redeploying the previous release."
+  - "Keep database schema backward-compatible for one release."

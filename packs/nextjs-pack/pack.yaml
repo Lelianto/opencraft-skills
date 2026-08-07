@@ -1,0 +1,44 @@
+schema: https://opencraft.dev/schema/context-pack/v1
+name: nextjs-pack
+version: 1.0.0
+type: framework
+description: Living context for Next.js App Router applications — data fetching, server actions, structure.
+license: MIT
+author:
+  type: organization
+  id: opencraft
+  name: OpenCraft
+tags: [nextjs, react, app-router, ssr, web]
+extends:
+  - react-pack@^1
+  - typescript-pack@^1
+dependencies:
+  - node-pack@^1
+provides:
+  contexts:
+    - ctx-nextjs-app-router
+    - ctx-nextjs-data-fetching
+    - ctx-nextjs-server-actions
+  knowledge:
+    - vision
+    - architecture
+    - conventions
+    - folder-structure
+    - tech-stack
+    - security
+    - testing
+    - ai-rules
+    - review-checklist
+    - deployment
+    - observability
+    - lifecycle
+    - ownership
+lifecycle: active
+governance:
+  classification: local-standard
+  approval_required: false
+owner:
+  type: organization
+  id: opencraft-web
+  name: OpenCraft Web
+repository: https://github.com/Lelianto/opencraft-skills

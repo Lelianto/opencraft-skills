@@ -1,0 +1,26 @@
+kind: review-checklist
+pack: nextjs-pack
+version: 1
+description: Next.js review checklist.
+updated_at: 2026-01-01
+categories:
+  - name: Router and rendering
+    items:
+      - id: chk-router
+        check: "New routes use App Router; no pages/ additions."
+      - id: chk-server-first
+        check: "Server Components by default; 'use client' only where interactivity requires it."
+      - id: chk-fetch-cache
+        check: "Every fetch declares its caching intent; static content is not accidentally dynamic."
+  - name: Mutations
+    items:
+      - id: chk-mutation-server
+        check: "Mutations run in Server Actions/route handlers with server validation and authorization."
+      - id: chk-revalidate
+        check: "Affected routes are revalidated after writes."
+  - name: Security
+    items:
+      - id: chk-secrets
+        check: "No secrets or server-only logic in client bundles."
+      - id: chk-headers
+        check: "Security headers and CSP are present and reviewed."

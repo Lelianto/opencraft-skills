@@ -1,0 +1,21 @@
+kind: deployment
+pack: education-pack
+version: 1
+description: Deployment guidelines for education products.
+updated_at: 2026-01-01
+environments:
+  - name: development
+    purpose: Local iteration with synthetic data.
+  - name: staging
+    purpose: Content and load validation.
+  - name: production
+    purpose: Learner-facing.
+rollout:
+  - "Deploy content independently from code so fixes ship fast."
+  - "Scale for class-start peaks; use caching for static lessons."
+  - "Use feature flags for assessment and progress changes."
+smoke_tests:
+  - "A representative lesson renders and records progress."
+  - "Offline lesson delivery works."
+rollback:
+  - "Revert code without losing learner progress; content rolls back independently."

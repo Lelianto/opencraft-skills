@@ -1,0 +1,38 @@
+id: ctx-typescript-path-aliases
+version: 1
+title: Imports must use configured path aliases, not deep relative paths
+description: >
+  Imports MUST use the configured `paths` aliases (for example `@/` for the
+  source root) instead of deep relative paths. This keeps refactors safe and
+  moves predictable across directory renames. Relative imports are allowed only
+  within the same directory or for a single `./` or `../` hop.
+applies_to:
+  - "**/*.ts"
+  - "**/*.tsx"
+category: code-style
+severity: low
+source:
+  type: organization
+  uri: https://github.com/Lelianto/opencraft-skills
+authority:
+  source:
+    type: organization
+    id: opencraft
+    name: OpenCraft
+  level: 2
+lifecycle: active
+governance:
+  classification: local-guideline
+  approval_required: false
+effective_date: "2026-01-01T00:00:00Z"
+owner: opencraft-web
+enforcement:
+  mode: comment
+  specification:
+    type: lint-rule
+    config:
+      rule: "import/no-relative-parent-imports"
+    violation_message_template: >
+      Use a configured path alias instead of a deep relative import.
+metadata:
+  pack: typescript-pack

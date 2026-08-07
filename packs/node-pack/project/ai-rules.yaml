@@ -1,0 +1,22 @@
+kind: ai-rules
+pack: node-pack
+version: 1
+description: AI coding rules for Node.js work.
+updated_at: 2026-01-01
+rules:
+  - id: ai-node-lts
+    level: must
+    instruction: Assume the Node LTS version declared in engines; never rely on non-LTS-only APIs.
+    rationale: Runtime version drift between environments causes production surprises.
+  - id: ai-node-esm
+    level: should
+    instruction: Write new modules as ESM.
+    rationale: Predictable static analysis and bundling.
+  - id: ai-node-handle-errors
+    level: must
+    instruction: Handle rejected promises and stream errors; never leave unhandled rejections.
+    rationale: Unhandled rejections crash Node processes in modern runtimes.
+  - id: ai-node-no-secrets
+    level: must-not
+    instruction: Do not embed secrets, connection strings, or private operational details in code or config.
+    rationale: Secrets in source are a supply-chain and exposure risk.

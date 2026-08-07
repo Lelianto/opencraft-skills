@@ -1,0 +1,38 @@
+id: ctx-ecommerce-checkout
+version: 1
+title: Checkout must be idempotent, server-priced, and payment-safe
+description: >
+  Checkout MUST compute the order total and price on the server — never from
+  client-provided values. Payment intents MUST use idempotency keys, and the
+  order MUST NOT be confirmed until the payment is settled. Price, tax, and
+  shipping are derived from versioned catalog and rate data.
+applies_to:
+  - "**/*.ts"
+category: money-movement
+severity: critical
+source:
+  type: organization
+  uri: https://github.com/Lelianto/opencraft-skills
+authority:
+  source:
+    type: organization
+    id: opencraft-ecommerce
+    name: OpenCraft E-commerce
+  level: 4
+lifecycle: active
+governance:
+  classification: hardened-mandate
+  approval_required: true
+  approvers: ["opencraft-ecommerce", "cto"]
+effective_date: "2026-01-01T00:00:00Z"
+owner: opencraft-ecommerce
+enforcement:
+  mode: block
+  specification:
+    type: custom-script
+    config:
+      command: "node scripts/verify-checkout.mjs"
+    violation_message_template: >
+      Checkout must be server-priced, idempotent, and confirmed only after settlement.
+metadata:
+  pack: ecommerce-pack

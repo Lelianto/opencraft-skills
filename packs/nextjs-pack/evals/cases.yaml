@@ -1,0 +1,13 @@
+positive:
+  - "Add a new App Router page that fetches data on the server."
+  - "Implement a form that saves data via a Server Action and revalidates the list."
+  - "Explain why this page is slow; move the fetch to a Server Component."
+negative:
+  - "Design the database schema for a mobile app."
+  - "Write unit tests for a pure utility library."
+ambiguous:
+  - "Set up a new Next.js feature."
+assertions:
+  - "response uses Server Components / server-side data fetching for initial render"
+  - "response includes server-side validation and authorization for mutations"
+  - "response calls revalidatePath or revalidateTag after writes"

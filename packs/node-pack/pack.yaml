@@ -1,0 +1,32 @@
+schema: https://opencraft.dev/schema/context-pack/v1
+name: node-pack
+version: 1.0.0
+type: technology
+description: Living context for Node.js services — runtime versioning, module discipline, process hygiene.
+license: MIT
+author:
+  type: organization
+  id: opencraft
+  name: OpenCraft
+tags: [nodejs, node, runtime, backend]
+extends: []
+dependencies: []
+provides:
+  contexts:
+    - ctx-node-runtime-version
+    - ctx-node-esm
+  knowledge:
+    - tech-stack
+    - conventions
+    - ai-rules
+    - deployment
+    - observability
+lifecycle: active
+governance:
+  classification: local-standard
+  approval_required: false
+owner:
+  type: organization
+  id: opencraft-web
+  name: OpenCraft Web
+repository: https://github.com/Lelianto/opencraft-skills

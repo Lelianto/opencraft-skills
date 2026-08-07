@@ -1,0 +1,12 @@
+positive:
+  - "Set up the Node.js service runtime version for this backend."
+  - "Convert this module from CommonJS to ESM."
+  - "Add structured logging and health endpoints to the API."
+negative:
+  - "Style this React page's buttons."
+  - "Write the product one-pager."
+ambiguous:
+  - "Help me harden this Node service."
+assertions:
+  - "response references engines.node and LTS alignment when relevant"
+  - "response does not embed secrets or connection strings"

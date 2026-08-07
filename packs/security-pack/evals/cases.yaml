@@ -1,0 +1,12 @@
+positive:
+  - "Harden the API: validate inputs and enforce authorization."
+  - "Why did we commit a token? Remove it and rotate."
+  - "Add dependency scanning to CI and fix the advisories."
+negative:
+  - "Style the landing page hero section."
+  - "Write a marketing email."
+ambiguous:
+  - "Review this endpoint for security issues."
+assertions:
+  - "response emphasizes server-side validation and authorization"
+  - "response never proposes committing secrets"

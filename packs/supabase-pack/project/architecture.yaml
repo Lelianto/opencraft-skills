@@ -1,0 +1,25 @@
+kind: architecture
+pack: supabase-pack
+version: 1
+description: Supabase architecture conventions.
+updated_at: 2026-01-01
+patterns:
+  - id: arch-rls-source-of-truth
+    name: RLS is the authorization source of truth
+    statement: "Authorization is expressed in Postgres RLS policies; application code only narrows and renders."
+    applies_to: ["supabase/migrations/**/*.sql"]
+  - id: arch-storage-buckets
+    name: Storage buckets with access policies
+    statement: "Public/private buckets are configured with storage policies; private data never leaves the server."
+decisions:
+  - id: ARCH-SUPABASE-001
+    title: Service role stays server-side
+    status: accepted
+    context: "The service role key bypasses RLS."
+    decision: "Service role is used only in server/edge functions."
+    consequences: "Client SDK uses anon key + user session only."
+boundaries:
+  - "Client <-> PostgREST (RLS-enforced)"
+  - "Server <-> service role (trusted)"
+constraints:
+  - "No tables without RLS and at least one policy."

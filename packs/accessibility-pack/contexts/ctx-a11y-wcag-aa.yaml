@@ -1,0 +1,39 @@
+id: ctx-a11y-wcag-aa
+version: 1
+title: User-facing features must meet WCAG 2.2 AA
+description: >
+  Every user-facing feature MUST meet WCAG 2.2 Level AA: sufficient contrast,
+  visible focus, no color-only meaning, captions for media, and predictable
+  behavior. Automated checks run in CI; manual checks cover what automation
+  cannot (focus order, semantics, screen-reader flow).
+applies_to:
+  - "**/*.tsx"
+  - "**/*.html"
+category: accessibility
+severity: high
+source:
+  type: standard-body
+  uri: https://www.w3.org/WAI/WCAG22/
+authority:
+  source:
+    type: standard-body
+    id: w3c
+    name: W3C Web Accessibility Initiative
+  level: 3
+lifecycle: active
+governance:
+  classification: local-standard
+  approval_required: false
+effective_date: "2026-01-01T00:00:00Z"
+owner: opencraft-accessibility
+enforcement:
+  mode: warn
+  specification:
+    type: ci-scan
+    config:
+      scanner: "axe-core"
+      level: "aa"
+    violation_message_template: >
+      Feature must meet WCAG 2.2 AA; fix automated findings and verify focus/order manually.
+metadata:
+  pack: accessibility-pack

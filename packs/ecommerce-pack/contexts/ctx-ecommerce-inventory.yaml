@@ -1,0 +1,42 @@
+id: ctx-ecommerce-inventory
+version: 1
+title: Inventory changes must be atomic and consistent with orders
+description: >
+  Inventory reservations and decrements MUST be atomic with order state
+  transitions to prevent overselling. Stock is the source of truth on the
+  server; client displays are advisory. Reconciliation detects and flags
+  drift between orders, payments, and inventory.
+applies_to:
+  - "**/*.ts"
+category: data-integrity
+severity: high
+source:
+  type: organization
+  uri: https://github.com/Lelianto/opencraft-skills
+authority:
+  source:
+    type: organization
+    id: opencraft-ecommerce
+    name: OpenCraft E-commerce
+  level: 3
+lifecycle: active
+governance:
+  classification: hardened-standard
+  approval_required: true
+effective_date: "2026-01-01T00:00:00Z"
+owner: opencraft-ecommerce
+enforcement:
+  mode: block
+  specification:
+    type: composite
+    config:
+      operator: "and"
+      verifiers:
+        - type: "transactional-check"
+          config: { atomic_inventory: true }
+        - type: "reconciliation-check"
+          config: { enabled: true }
+    violation_message_template: >
+      Inventory changes must be atomic with order transitions and reconciled.
+metadata:
+  pack: ecommerce-pack

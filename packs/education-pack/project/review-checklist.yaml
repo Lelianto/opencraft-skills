@@ -1,0 +1,22 @@
+kind: review-checklist
+pack: education-pack
+version: 1
+description: Education review checklist.
+updated_at: 2026-01-01
+categories:
+  - name: Privacy
+    items:
+      - id: chk-learner-data
+        check: "Learner data encrypted, minimized, retention-policied."
+      - id: chk-tenancy
+        check: "No learner data exposed across tenants or roles."
+  - name: Content
+    items:
+      - id: chk-content
+        check: "Content versioned and reviewed; no fabricated facts or references."
+  - name: Accessibility and availability
+    items:
+      - id: chk-a11y
+        check: "Core paths axe-core clean and keyboard-operable."
+      - id: chk-load
+        check: "Core paths survive peak load with graceful degradation."

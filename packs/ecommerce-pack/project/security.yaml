@@ -1,0 +1,25 @@
+kind: security
+pack: ecommerce-pack
+version: 1
+description: E-commerce-specific security rules.
+updated_at: 2026-01-01
+standards:
+  - name: OWASP ASVS
+    version: 5.0.0
+    level: "L2"
+rules:
+  - id: CTRL-ECOMM-001
+    description: "Server-side pricing; client values never trusted for totals."
+    severity: critical
+  - id: CTRL-ECOMM-002
+    description: "Card data handled by compliant processors; never stored."
+    severity: critical
+  - id: CTRL-ECOMM-003
+    description: "Coupons, limits, and inventory holds validated server-side."
+    severity: high
+sensitive_data:
+  - "Payment instrument tokens (processor-scoped)"
+  - "Customer and order data"
+trust_boundaries:
+  - "Shopper <-> checkout service"
+  - "Checkout service <-> payment processor"

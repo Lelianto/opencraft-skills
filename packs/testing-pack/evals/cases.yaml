@@ -1,0 +1,12 @@
+positive:
+  - "Add tests for the new checkout flow including failure paths."
+  - "CI is green but I think coverage is fake — investigate."
+  - "Write a regression test for the login bug."
+negative:
+  - "Design a dark-mode color palette."
+  - "Write a blog post."
+ambiguous:
+  - "Make sure this feature is tested."
+assertions:
+  - "response recommends risk-proportional test coverage"
+  - "response does not suggest weakening or removing tests"

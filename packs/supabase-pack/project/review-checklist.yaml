@@ -1,0 +1,22 @@
+kind: review-checklist
+pack: supabase-pack
+version: 1
+description: Supabase review checklist.
+updated_at: 2026-01-01
+categories:
+  - name: Access control
+    items:
+      - id: chk-rls
+        check: "RLS enabled on every table; policies reviewed per role."
+      - id: chk-keys
+        check: "Service role never in client; anon key + session only."
+  - name: Schema
+    items:
+      - id: chk-migrations
+        check: "Changes are versioned migrations; no hand-edited schema."
+      - id: chk-types
+        check: "Row types come from generated types."
+  - name: Realtime
+    items:
+      - id: chk-realtime
+        check: "Subscriptions RLS-scoped, filtered, and cleaned up."

@@ -1,0 +1,45 @@
+schema: https://opencraft.dev/schema/context-pack/v1
+name: education-pack
+version: 1.0.0
+type: domain
+description: Living context for education products — learner privacy, content integrity, offline, scale.
+license: MIT
+author:
+  type: organization
+  id: opencraft-education
+  name: OpenCraft Education
+tags: [education, learning, privacy, content, scale]
+extends:
+  - node-pack@^1
+  - accessibility-pack@^1
+  - testing-pack@^1
+dependencies: []
+override:
+  - id: ctx-a11y-keyboard
+    action: patch
+    patch:
+      severity: critical
+    reason: "Learning products serve diverse learners; keyboard operability is release-critical."
+provides:
+  contexts:
+    - ctx-education-learner-privacy
+    - ctx-education-content-integrity
+    - ctx-education-availability
+  knowledge:
+    - vision
+    - business-constraints
+    - security
+    - testing
+    - ai-rules
+    - review-checklist
+    - deployment
+    - observability
+lifecycle: active
+governance:
+  classification: local-standard
+  approval_required: false
+owner:
+  type: organization
+  id: opencraft-education
+  name: OpenCraft Education
+repository: https://github.com/Lelianto/opencraft-skills

@@ -1,0 +1,41 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://opencraft.dev/schema/knowledge/ownership/v1",
+  "title": "PKD: ownership",
+  "description": "Ownership metadata: who owns what, and who to escalate to.",
+  "type": "object",
+  "allOf": [
+    { "$ref": "#/$defs/envelope" },
+    {
+      "type": "object",
+      "properties": {
+        "pack_owner": { "type": "string" },
+        "areas": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "required": ["name", "owner"],
+            "properties": {
+              "name": { "type": "string" },
+              "owner": { "type": "string" },
+              "review_cadence": { "type": "string" }
+            }
+          }
+        },
+        "contexts": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "required": ["id", "owner"],
+            "properties": {
+              "id": { "type": "string" },
+              "owner": { "type": "string" }
+            }
+          }
+        },
+        "escalation": { "type": "string" }
+      }
+    }
+  ],
+  "$defs": { "envelope": { "$ref": "https://opencraft.dev/schema/knowledge/envelope/v1" } }
+}

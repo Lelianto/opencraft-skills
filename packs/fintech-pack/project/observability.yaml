@@ -1,0 +1,31 @@
+kind: observability
+pack: fintech-pack
+version: 1
+description: Observability practices for fintech.
+updated_at: 2026-01-01
+metrics:
+  - name: transaction_success_rate
+    description: Share of transactions succeeding end-to-end.
+    type: gauge
+  - name: reconciliation_gap
+    description: Amount unaccounted between ledger and provider.
+    type: gauge
+  - name: kyc_failure_rate
+    description: Share of KYC attempts failing verification.
+    type: gauge
+logs:
+  - "Structured logs with trace id, transaction id, and outcome; no PII."
+  - "Audit events written to the immutable store, not application logs."
+traces:
+  - "End-to-end traces across identity, authorization, and payment providers."
+alerts:
+  - name: reconciliation_gap
+    condition: "gap exceeds threshold for 15 minutes"
+    severity: critical
+  - name: auth_failures
+    condition: "unusual spike in authorization failures"
+    severity: high
+slos:
+  - name: availability
+    target: "99.95%"
+    description: Payment-path availability.

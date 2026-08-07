@@ -1,0 +1,21 @@
+kind: deployment
+pack: fintech-pack
+version: 1
+description: Deployment guidelines for fintech services.
+updated_at: 2026-01-01
+environments:
+  - name: sandbox
+    purpose: Integration testing with provider sandboxes.
+  - name: staging
+    purpose: Full compliance and reconciliation validation.
+  - name: production
+    purpose: Customer-facing.
+rollout:
+  - "Feature flags gate new money-movement paths."
+  - "Run reconciliation dry-runs before enabling live traffic."
+  - "Deploy behind a health-checked target; drain on shutdown."
+smoke_tests:
+  - "Health endpoint responds."
+  - "A sandbox money-movement round-trip succeeds and audits."
+rollback:
+  - "Revert code without rolling back ledger state; reconcile after rollback."

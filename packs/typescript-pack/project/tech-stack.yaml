@@ -1,0 +1,24 @@
+kind: tech-stack
+pack: typescript-pack
+version: 1
+description: Baseline TypeScript toolchain.
+updated_at: 2026-01-01
+entries:
+  - name: TypeScript
+    role: language
+    version: "5.x"
+    alternatives: [JavaScript with JSDoc]
+    rationale: Static typing is the baseline for safe refactoring and AI-assisted development.
+  - name: eslint
+    role: linting
+    version: "9.x"
+    rationale: Rule-driven enforcement of typing and import hygiene.
+  - name: prettier
+    role: formatting
+    rationale: Deterministic formatting avoids style churn in diffs.
+  - name: vitest
+    role: unit-test-runner
+    rationale: Fast, TS-native test runner.
+pinned_versions:
+  typescript: ">=5.4"
+  node: ">=20"

@@ -1,0 +1,26 @@
+kind: ai-rules
+pack: accessibility-pack
+version: 1
+description: AI coding rules for accessible interfaces.
+updated_at: 2026-01-01
+rules:
+  - id: ai-a11y-native
+    level: must
+    instruction: Prefer native semantic elements; add roles and aria only when semantics need correction.
+    rationale: Native semantics are the most robust accessibility baseline.
+  - id: ai-a11y-keyboard
+    level: must
+    instruction: Ensure every interactive element is keyboard operable with visible focus and logical tab order.
+    rationale: Keyboard operability is a WCAG 2.1+ requirement, not optional polish.
+  - id: ai-a11y-names
+    level: must
+    instruction: Give every control an accessible name and announced state; label icon-only buttons.
+    rationale: Unnamed controls are invisible to assistive technology.
+  - id: ai-a11y-motion
+    level: should
+    instruction: Respect prefers-reduced-motion; never auto-play meaningful content without control.
+    rationale: Motion can cause vestibular harm; users must control it.
+  - id: ai-a11y-mobile
+    level: must
+    instruction: Recompose touch targets and flows for mobile instead of stacking desktop layouts.
+    rationale: Mobile is a distinct composition, not a shrunk desktop.

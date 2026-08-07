@@ -1,0 +1,37 @@
+id: ctx-firebase-functions
+version: 1
+title: Privileged operations must run in Cloud Functions with revalidation
+description: >
+  Operations that need the admin SDK (service-account privileges, scheduled
+  jobs, complex aggregations, webhooks) MUST run in Cloud Functions. Function
+  calls MUST be authorized (callable functions validate auth context) and MUST
+  never accept a user-controlled object as trusted input.
+applies_to:
+  - "functions/**/*.ts"
+category: security
+severity: high
+source:
+  type: organization
+  uri: https://firebase.google.com/docs/functions
+authority:
+  source:
+    type: organization
+    id: opencraft-backend
+    name: OpenCraft Backend
+  level: 3
+lifecycle: active
+governance:
+  classification: local-standard
+  approval_required: false
+effective_date: "2026-01-01T00:00:00Z"
+owner: opencraft-backend
+enforcement:
+  mode: warn
+  specification:
+    type: lint-rule
+    config:
+      rule: "no-admin-sdk-in-client"
+    violation_message_template: >
+      Privileged operations belong in Cloud Functions with authorization.
+metadata:
+  pack: firebase-pack

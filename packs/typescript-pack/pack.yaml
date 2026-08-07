@@ -1,0 +1,33 @@
+schema: https://opencraft.dev/schema/context-pack/v1
+name: typescript-pack
+version: 1.0.0
+type: technology
+description: Living context for TypeScript projects — typing discipline, tsconfig, lint, and AI coding rules.
+license: MIT
+author:
+  type: organization
+  id: opencraft
+  name: OpenCraft
+tags: [typescript, tsconfig, strict, typing]
+extends: []
+dependencies: []
+provides:
+  contexts:
+    - ctx-typescript-strict
+    - ctx-typescript-no-explicit-any
+    - ctx-typescript-path-aliases
+  knowledge:
+    - tech-stack
+    - conventions
+    - ai-rules
+    - review-checklist
+    - folder-structure
+lifecycle: active
+governance:
+  classification: local-standard
+  approval_required: false
+owner:
+  type: organization
+  id: opencraft-web
+  name: OpenCraft Web
+repository: https://github.com/Lelianto/opencraft-skills

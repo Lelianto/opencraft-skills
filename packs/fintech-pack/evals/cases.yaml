@@ -1,0 +1,13 @@
+positive:
+  - "Implement the KYC verification gate before the payment flow."
+  - "Add immutable audit logging to the money-movement service."
+  - "Why is a transaction failing disclosure? Fix the terms wiring."
+negative:
+  - "Design a dashboard theme."
+  - "Write a team bio page."
+ambiguous:
+  - "Review the new payment feature."
+assertions:
+  - "response gates transactions on KYC/AML and records failures"
+  - "response ensures idempotency and reconciliation"
+  - "response never logs PII or card data"

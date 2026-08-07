@@ -1,0 +1,40 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://opencraft.dev/schema/knowledge/business-constraints/v1",
+  "title": "PKD: business-constraints",
+  "type": "object",
+  "allOf": [
+    { "$ref": "#/$defs/envelope" },
+    {
+      "type": "object",
+      "properties": {
+        "constraints": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "required": ["id", "description"],
+            "properties": {
+              "id": { "type": "string" },
+              "description": { "type": "string" },
+              "type": { "type": "string" }
+            }
+          }
+        },
+        "compliance": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "required": ["name", "requirement"],
+            "properties": {
+              "name": { "type": "string" },
+              "requirement": { "type": "string" }
+            }
+          }
+        },
+        "kpis": { "type": "array", "items": { "type": "string" } },
+        "risk_tolerance": { "type": "string" }
+      }
+    }
+  ],
+  "$defs": { "envelope": { "$ref": "https://opencraft.dev/schema/knowledge/envelope/v1" } }
+}

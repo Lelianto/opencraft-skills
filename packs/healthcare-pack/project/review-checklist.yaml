@@ -1,0 +1,24 @@
+kind: review-checklist
+pack: healthcare-pack
+version: 1
+description: Healthcare review checklist.
+updated_at: 2026-01-01
+categories:
+  - name: PHI protection
+    items:
+      - id: chk-encrypt
+        check: "PHI encrypted at rest and in transit; least privilege."
+      - id: chk-no-log
+        check: "No PHI in logs, analytics, or client bundles."
+  - name: Consent and audit
+    items:
+      - id: chk-consent
+        check: "Consent checked at point of use; revocation immediate."
+      - id: chk-audit
+        check: "Every PHI access logged non-repudiably."
+  - name: Accessibility and safety
+    items:
+      - id: chk-a11y
+        check: "WCAG 2.2 AA for all clinical and patient flows."
+      - id: chk-claims
+        check: "No unvalidated clinical claims or invented data."

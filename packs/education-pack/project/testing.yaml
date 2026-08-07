@@ -1,0 +1,21 @@
+kind: testing
+pack: education-pack
+version: 1
+description: Testing strategy for education products.
+updated_at: 2026-01-01
+strategy: "Coverage for learning-path integrity, accessibility, and availability under load."
+pyramid: "Unit for content/assessments, integration for progress flows, E2E for learner journeys."
+tools:
+  - vitest
+  - Playwright
+  - "axe-core"
+gates:
+  - name: accessibility
+    requirement: "axe-core clean on core learner paths; keyboard walk-through passes."
+  - name: load
+    requirement: "Core paths survive 2x class-start load without data loss."
+  - name: privacy
+    requirement: "Tests assert learner data is not exposed across tenants."
+fixtures:
+  - "Synthetic learner cohorts"
+  - "Load-test scenarios for class-start peaks"

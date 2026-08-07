@@ -1,0 +1,21 @@
+kind: testing
+pack: ecommerce-pack
+version: 1
+description: Testing strategy for e-commerce.
+updated_at: 2026-01-01
+strategy: "End-to-end coverage for checkout, payment settlement, and inventory transitions; unit tests for pricing and discount logic."
+pyramid: "Unit for pricing/discounts, integration for orders+inventory, E2E for the purchase journey."
+tools:
+  - vitest
+  - Playwright
+  - "reconciliation-fixtures"
+gates:
+  - name: checkout-e2e
+    requirement: "Full purchase journey tested with representative roles and failure paths."
+  - name: inventory-atomicity
+    requirement: "Concurrency tests prove no overselling."
+  - name: pricing
+    requirement: "Server-pricing tests with tax and shipping cases."
+fixtures:
+  - "Payment-processor sandbox stubs"
+  - "Inventory concurrency fixtures"

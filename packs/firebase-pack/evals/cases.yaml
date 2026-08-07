@@ -1,0 +1,12 @@
+positive:
+  - "Write security rules for the user documents collection."
+  - "Add a callable function for the aggregation job."
+  - "Restructure this collection so rules can enforce tenant isolation."
+negative:
+  - "Style the login page."
+  - "Write the project README."
+ambiguous:
+  - "Set up the Firebase backend."
+assertions:
+  - "response puts authorization in security rules"
+  - "response keeps admin SDK out of the client"

@@ -1,0 +1,25 @@
+kind: security
+pack: firebase-pack
+version: 1
+description: Firebase-specific security rules.
+updated_at: 2026-01-01
+standards:
+  - name: Firebase Security
+    version: latest
+    level: recommended
+rules:
+  - id: CTRL-FIREBASE-001
+    description: "Firestore and Storage fully covered by deny-by-default security rules."
+    severity: critical
+    applies_to: ["firestore.rules", "storage.rules"]
+  - id: CTRL-FIREBASE-002
+    description: "Admin SDK only in Cloud Functions; functions authorize callers."
+    severity: critical
+  - id: CTRL-FIREBASE-003
+    description: "Service account keys and API keys never committed; config comes from environment."
+    severity: critical
+sensitive_data:
+  - "User PII and per-user documents"
+trust_boundaries:
+  - "Client <-> Firestore (rules)"
+  - "Client <-> callable functions"

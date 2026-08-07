@@ -1,0 +1,22 @@
+kind: conventions
+pack: react-pack
+version: 1
+description: React coding conventions.
+updated_at: 2026-01-01
+naming:
+  - id: conv-react-components
+    rule: "Component files are PascalCase; component names match their file names."
+formatting:
+  - id: conv-react-self-closing
+    rule: "Use self-closing tags for components without children."
+imports:
+  - id: conv-react-import-order
+    rule: "Import React/ReactDOM, external libs, then internal modules, then styles."
+state:
+  - id: conv-react-derived
+    rule: "Derive values during render instead of mirroring them in state."
+  - id: conv-react-lift
+    rule: "Lift shared state to the closest common ancestor only when needed."
+structure:
+  - id: conv-react-compose
+    rule: "Compose small components; a component that renders more than one screen is a sign to split."

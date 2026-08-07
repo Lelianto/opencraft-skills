@@ -1,0 +1,22 @@
+kind: conventions
+pack: nextjs-pack
+version: 1
+description: Next.js coding conventions.
+updated_at: 2026-01-01
+naming:
+  - id: conv-next-files
+    rule: "Colocate route, layout, loading, and error files in route segments; use their reserved file names."
+formatting:
+  - id: conv-next-format
+    rule: "Prettier with default Next.js settings; imports sorted."
+imports:
+  - id: conv-next-import
+    rule: "Import server-only modules with the `server-only` package where they must not reach the client."
+state:
+  - id: conv-next-state
+    rule: "UI state lives in components; durable state lives on the server; nothing durable is client-only."
+structure:
+  - id: conv-next-colocate
+    rule: "Keep segment-specific code inside its route segment folder."
+  - id: conv-next-shared
+    rule: "Shared UI and logic live in src/components and src/lib, never in route segments."

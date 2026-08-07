@@ -1,0 +1,26 @@
+kind: ai-rules
+pack: education-pack
+version: 1
+description: AI coding rules for education work.
+updated_at: 2026-01-01
+rules:
+  - id: ai-edu-privacy
+    level: must
+    instruction: Protect learner data; never log, sell, or expose progress or assessment data.
+    rationale: Learner trust and legal compliance depend on it.
+  - id: ai-edu-content
+    level: must
+    instruction: Never fabricate facts, references, or statistics in learning content.
+    rationale: Content integrity is the core product promise.
+  - id: ai-edu-accessible
+    level: must
+    instruction: Build every learner path for assistive technology and diverse abilities.
+    rationale: Equitable access is a product requirement.
+  - id: ai-edu-offline
+    level: should
+    instruction: Design lesson delivery to degrade gracefully (offline reading, queued saves).
+    rationale: Availability under load and poor connectivity is core reliability.
+  - id: ai-edu-no-deception
+    level: must-not
+    instruction: Do not use manipulative patterns or misrepresent learner progress.
+    rationale: Deceptive gamification erodes trust.

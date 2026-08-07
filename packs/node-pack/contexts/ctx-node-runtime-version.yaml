@@ -1,0 +1,39 @@
+id: ctx-node-runtime-version
+version: 1
+title: Node runtime version must match the declared engines range
+description: >
+  The repository MUST declare `engines.node` in package.json and the runtime
+  used locally, in CI, and in production MUST be an LTS version within that
+  range. Using mismatched or end-of-life Node versions produces subtle
+  behavior drift between environments.
+applies_to:
+  - "package.json"
+category: code-style
+severity: high
+source:
+  type: organization
+  uri: https://github.com/Lelianto/opencraft-skills
+authority:
+  source:
+    type: organization
+    id: opencraft
+    name: OpenCraft
+  level: 3
+lifecycle: active
+governance:
+  classification: hardened-standard
+  approval_required: true
+effective_date: "2026-01-01T00:00:00Z"
+owner: opencraft-web
+enforcement:
+  mode: block
+  specification:
+    type: config-constraint
+    config:
+      json_path: "engines.node"
+      expected: ">=20"
+    violation_message_template: >
+      package.json must declare engines.node and the runtime must be an LTS
+      version within that range.
+metadata:
+  pack: node-pack

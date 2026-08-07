@@ -1,0 +1,25 @@
+kind: folder-structure
+pack: nextjs-pack
+version: 1
+description: Canonical Next.js App Router folder structure.
+updated_at: 2026-01-01
+root: project-root
+directories:
+  - path: app/
+    purpose: App Router route segments; colocated layouts, pages, loading, error, and actions.
+    conventions: ["One segment per folder", "Reserved file names: page.tsx, layout.tsx, loading.tsx, error.tsx, not-found.tsx"]
+  - path: app/api/
+    purpose: Route handlers for non-UI endpoints.
+  - path: src/components/
+    purpose: Reusable UI components shared across segments.
+  - path: src/lib/
+    purpose: Framework-agnostic logic, data access, and utilities.
+  - path: src/server/
+    purpose: Server-only logic: auth, validation, and mutation orchestration.
+  - path: public/
+    purpose: Static assets served as-is.
+files:
+  - path: next.config.ts
+    purpose: Next.js configuration; typed and reviewed.
+  - path: middleware.ts
+    purpose: Edge middleware for auth and routing guards.

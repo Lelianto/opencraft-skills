@@ -1,0 +1,21 @@
+kind: vision
+pack: healthcare-pack
+version: 1
+description: Vision template for healthcare products.
+updated_at: 2026-01-01
+purpose: "Deliver healthcare software that is safe, accessible, and trustworthy for patients and clinicians."
+target_users:
+  - "Patients, clinicians, and care teams."
+primary_journey: "Consent recorded → PHI accessed under least privilege → every access auditable."
+principles:
+  - id: vis-patient-first
+    statement: "Patient safety and trust are non-negotiable constraints on every decision."
+  - id: vis-consent
+    statement: "Data flows only with current, recorded consent."
+  - id: vis-accessible
+    statement: "Interfaces are usable by everyone, including under stress and with assistive technology."
+success_signals:
+  - "Zero unauthorized PHI access in audits."
+  - "Consent revocation reflected immediately."
+non_goals:
+  - "Collecting PHI that a feature does not need."

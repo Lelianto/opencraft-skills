@@ -1,0 +1,26 @@
+kind: security
+pack: supabase-pack
+version: 1
+description: Supabase-specific security rules.
+updated_at: 2026-01-01
+standards:
+  - name: Supabase Security
+    version: latest
+    level: recommended
+rules:
+  - id: CTRL-SUPABASE-001
+    description: "RLS enabled on every table with explicit policies; no table-owner bypass."
+    severity: critical
+    applies_to: ["supabase/migrations/**/*.sql"]
+  - id: CTRL-SUPABASE-002
+    description: "Service role key is server-side only; anon key is the client identity."
+    severity: critical
+  - id: CTRL-SUPABASE-003
+    description: "Secrets and connections strings come from environment, never committed."
+    severity: critical
+sensitive_data:
+  - "User identity and session data"
+  - "Any row marked sensitive by the product"
+trust_boundaries:
+  - "Client <-> PostgREST (RLS)"
+  - "Edge functions <-> service role"

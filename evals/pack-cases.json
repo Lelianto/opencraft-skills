@@ -1,0 +1,227 @@
+{
+  "accessibility-pack": {
+    "ambiguous": "Improve the accessibility of this page.",
+    "assertions": [
+      "response proposes native semantics and accessible names",
+      "response includes keyboard operability and focus handling"
+    ],
+    "scenario": "Make this form keyboard-accessible with visible focus states.",
+    "should_not_trigger": [
+      "Write the database migration.",
+      "Design a logo."
+    ],
+    "should_trigger": [
+      "Make this form keyboard-accessible with visible focus states.",
+      "This icon button has no label \u2014 fix it.",
+      "Add automated axe-core checks to CI."
+    ]
+  },
+  "ecommerce-pack": {
+    "ambiguous": "Review the new purchase flow.",
+    "assertions": [
+      "response prices and settles checkout on the server",
+      "response keeps inventory atomic with orders",
+      "response avoids fake scarcity or invented social proof"
+    ],
+    "scenario": "Implement the checkout with server-side pricing and idempotency.",
+    "should_not_trigger": [
+      "Write the blog announcement.",
+      "Style the footer."
+    ],
+    "should_trigger": [
+      "Implement the checkout with server-side pricing and idempotency.",
+      "Why can we oversell this product? Fix inventory atomicity.",
+      "Add abuse controls to the coupon redemption flow."
+    ]
+  },
+  "education-pack": {
+    "ambiguous": "Review the new learning module.",
+    "assertions": [
+      "response protects learner data and minimizes exposure",
+      "response requires versioned, reviewed content",
+      "response handles peak load with graceful degradation"
+    ],
+    "scenario": "Add progress tracking with privacy-safe analytics.",
+    "should_not_trigger": [
+      "Design the corporate landing page.",
+      "Write a developer tutorial."
+    ],
+    "should_trigger": [
+      "Add progress tracking with privacy-safe analytics.",
+      "Set up versioned content review before publishing lessons.",
+      "Test the learner path under class-start load."
+    ]
+  },
+  "fintech-pack": {
+    "ambiguous": "Review the new payment feature.",
+    "assertions": [
+      "response gates transactions on KYC/AML and records failures",
+      "response ensures idempotency and reconciliation",
+      "response never logs PII or card data"
+    ],
+    "scenario": "Implement the KYC verification gate before the payment flow.",
+    "should_not_trigger": [
+      "Design a dashboard theme.",
+      "Write a team bio page."
+    ],
+    "should_trigger": [
+      "Implement the KYC verification gate before the payment flow.",
+      "Add immutable audit logging to the money-movement service.",
+      "Why is a transaction failing disclosure? Fix the terms wiring."
+    ]
+  },
+  "firebase-pack": {
+    "ambiguous": "Set up the Firebase backend.",
+    "assertions": [
+      "response puts authorization in security rules",
+      "response keeps admin SDK out of the client"
+    ],
+    "scenario": "Write security rules for the user documents collection.",
+    "should_not_trigger": [
+      "Style the login page.",
+      "Write the project README."
+    ],
+    "should_trigger": [
+      "Write security rules for the user documents collection.",
+      "Add a callable function for the aggregation job.",
+      "Restructure this collection so rules can enforce tenant isolation."
+    ]
+  },
+  "healthcare-pack": {
+    "ambiguous": "Review the new patient portal.",
+    "assertions": [
+      "response enforces consent at point of access",
+      "response keeps PHI out of logs and client bundles"
+    ],
+    "scenario": "Add consent-gated access to patient records.",
+    "should_not_trigger": [
+      "Style the marketing site.",
+      "Write the pricing page."
+    ],
+    "should_trigger": [
+      "Add consent-gated access to patient records.",
+      "Make sure no PHI leaks into the audit logs or analytics.",
+      "Harden the clinical portal for assistive technology."
+    ]
+  },
+  "nextjs-pack": {
+    "ambiguous": "Set up a new Next.js feature.",
+    "assertions": [
+      "response uses Server Components / server-side data fetching for initial render",
+      "response includes server-side validation and authorization for mutations",
+      "response calls revalidatePath or revalidateTag after writes"
+    ],
+    "scenario": "Add a new App Router page that fetches data on the server.",
+    "should_not_trigger": [
+      "Design the database schema for a mobile app.",
+      "Write unit tests for a pure utility library."
+    ],
+    "should_trigger": [
+      "Add a new App Router page that fetches data on the server.",
+      "Implement a form that saves data via a Server Action and revalidates the list.",
+      "Explain why this page is slow; move the fetch to a Server Component."
+    ]
+  },
+  "node-pack": {
+    "ambiguous": "Help me harden this Node service.",
+    "assertions": [
+      "response references engines.node and LTS alignment when relevant",
+      "response does not embed secrets or connection strings"
+    ],
+    "scenario": "Set up the Node.js service runtime version for this backend.",
+    "should_not_trigger": [
+      "Style this React page's buttons.",
+      "Write the product one-pager."
+    ],
+    "should_trigger": [
+      "Set up the Node.js service runtime version for this backend.",
+      "Convert this module from CommonJS to ESM.",
+      "Add structured logging and health endpoints to the API."
+    ]
+  },
+  "react-pack": {
+    "ambiguous": "Refactor this React screen.",
+    "assertions": [
+      "response uses function components and hooks",
+      "response includes accessible labels and keyboard handling"
+    ],
+    "scenario": "Build a settings component with form state.",
+    "should_not_trigger": [
+      "Write a Node.js database migration.",
+      "Compose a marketing email."
+    ],
+    "should_trigger": [
+      "Build a settings component with form state.",
+      "Why is this component re-rendering with stale props?",
+      "Add a sortable list with stable keys to this view."
+    ]
+  },
+  "security-pack": {
+    "ambiguous": "Review this endpoint for security issues.",
+    "assertions": [
+      "response emphasizes server-side validation and authorization",
+      "response never proposes committing secrets"
+    ],
+    "scenario": "Harden the API: validate inputs and enforce authorization.",
+    "should_not_trigger": [
+      "Style the landing page hero section.",
+      "Write a marketing email."
+    ],
+    "should_trigger": [
+      "Harden the API: validate inputs and enforce authorization.",
+      "Why did we commit a token? Remove it and rotate.",
+      "Add dependency scanning to CI and fix the advisories."
+    ]
+  },
+  "supabase-pack": {
+    "ambiguous": "Set up the Supabase backend for this feature.",
+    "assertions": [
+      "response enables RLS with explicit policies",
+      "response keeps the service role key server-side"
+    ],
+    "scenario": "Add a new table with RLS policies for the tenant.",
+    "should_not_trigger": [
+      "Design the landing page.",
+      "Write release notes."
+    ],
+    "should_trigger": [
+      "Add a new table with RLS policies for the tenant.",
+      "Write a migration to add an index; keep it non-destructive.",
+      "Subscribe to realtime changes and clean up on unmount."
+    ]
+  },
+  "testing-pack": {
+    "ambiguous": "Make sure this feature is tested.",
+    "assertions": [
+      "response recommends risk-proportional test coverage",
+      "response does not suggest weakening or removing tests"
+    ],
+    "scenario": "Add tests for the new checkout flow including failure paths.",
+    "should_not_trigger": [
+      "Design a dark-mode color palette.",
+      "Write a blog post."
+    ],
+    "should_trigger": [
+      "Add tests for the new checkout flow including failure paths.",
+      "CI is green but I think coverage is fake \u2014 investigate.",
+      "Write a regression test for the login bug."
+    ]
+  },
+  "typescript-pack": {
+    "ambiguous": "Review this TypeScript change.",
+    "assertions": [
+      "response mentions tsconfig strict mode when discussing configuration",
+      "response does not introduce `any` where a concrete type is possible"
+    ],
+    "scenario": "Set up TypeScript with strict mode for this new module.",
+    "should_not_trigger": [
+      "Deploy the database migration to staging.",
+      "Write a marketing email draft."
+    ],
+    "should_trigger": [
+      "Set up TypeScript with strict mode for this new module.",
+      "Why does this code use `any`? Fix it properly.",
+      "Add path aliases to the tsconfig and update imports."
+    ]
+  }
+}

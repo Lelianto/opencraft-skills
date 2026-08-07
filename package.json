@@ -4,16 +4,20 @@
   "description": "Portable end-to-end Agent Skills for meaningful, secure, production-ready product development",
   "type": "module",
   "bin": {
-    "opencraft-skills": "scripts/install.mjs"
+    "opencraft-skills": "scripts/install.mjs",
+    "opencraft-packs": "scripts/packtool.mjs"
   },
   "files": [
     "skills/",
+    "packs/",
     "templates/",
     "evals/",
     "scripts/*.py",
     "scripts/*.mjs",
+    "scripts/packlib/*.py",
     "collection.json",
     "skills.lock.json",
+    "packs.lock.json",
     "STANDARD.md",
     "SECURITY.md",
     "README.md",
@@ -21,9 +25,15 @@
   ],
   "scripts": {
     "validate": "python3 scripts/validate.py && python3 scripts/evaluate.py && node scripts/validate-hitl.mjs && python3 scripts/generate_lock.py --check && node scripts/check-release.mjs",
+    "validate:packs": "python3 scripts/packtool.py packs validate --all && python3 scripts/pack-evaluate.py",
+    "lock:packs": "python3 scripts/generate_pack_lock.py",
+    "lock:packs:check": "python3 scripts/generate_pack_lock.py --check",
+    "test:packs": "python3 scripts/packlib_test.py",
+    "test:packs:security": "python3 scripts/security_test.py",
+    "bench:packs": "python3 scripts/pack-bench.py",
     "test:node-installer": "node scripts/install.mjs --help",
     "test:hitl": "node scripts/test-decision-cli.mjs",
-    "prepack": "npm run validate && npm run test:node-installer && npm run test:hitl"
+    "prepack": "npm run validate && npm run validate:packs && npm run lock:packs:check && npm run test:packs && npm run test:packs:security && npm run bench:packs && npm run test:node-installer && npm run test:hitl"
   },
   "engines": {
     "node": ">=18"
@@ -33,6 +43,9 @@
   },
   "keywords": [
     "agent-skills",
+    "context-packs",
+    "living-context",
+    "lcdd",
     "ai-assisted-development",
     "claude-code",
     "codex",

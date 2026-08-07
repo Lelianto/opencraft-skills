@@ -1,0 +1,22 @@
+kind: ai-rules
+pack: supabase-pack
+version: 1
+description: AI coding rules for Supabase work.
+updated_at: 2026-01-01
+rules:
+  - id: ai-supabase-rls
+    level: must
+    instruction: Enable RLS and write explicit policies for every new table; never rely on client filtering.
+    rationale: Client filters are not authorization.
+  - id: ai-supabase-service-role
+    level: must-not
+    instruction: Never put the service role key or its use in the client bundle.
+    rationale: Service role bypasses RLS.
+  - id: ai-supabase-migrations
+    level: must
+    instruction: Make schema changes as versioned migrations; separate destructive changes into approved steps.
+    rationale: Migrations keep schema evolution auditable.
+  - id: ai-supabase-types
+    level: should
+    instruction: Use generated database types instead of hand-written row types.
+    rationale: Single source of truth for row shapes.

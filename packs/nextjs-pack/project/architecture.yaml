@@ -1,0 +1,31 @@
+kind: architecture
+pack: nextjs-pack
+version: 1
+description: Next.js architecture decisions and patterns.
+updated_at: 2026-01-01
+patterns:
+  - id: arch-server-components
+    name: Server Components by default
+    statement: "Route segments are Server Components; only interactive leaves opt into 'use client'."
+    applies_to: ["app/**/*.tsx"]
+  - id: arch-route-groups
+    name: Route groups and layouts
+    statement: "Use route groups to share layouts without leaking URL structure."
+decisions:
+  - id: ARCH-NEXT-001
+    title: App Router is the only router
+    status: accepted
+    context: "Pages Router is legacy; maintaining two routers doubles caching and data-fetching complexity."
+    decision: "All new routes use the App Router."
+    consequences: "pages/ directory is frozen; migration is incremental."
+  - id: ARCH-NEXT-002
+    title: Server Actions for mutations
+    status: accepted
+    context: "Client-side state mutation cannot be enforced or audited."
+    decision: "Durable mutations run in Server Actions or route handlers."
+    consequences: "Mutations carry validation, authorization, and cache revalidation."
+boundaries:
+  - "Server and client component boundaries are explicit; a component is either one or the other."
+constraints:
+  - "No new Pages Router routes."
+  - "Every mutation revalidates its affected routes."

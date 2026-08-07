@@ -27,6 +27,31 @@ jobs:
         run: python3 scripts/evaluate.py
       - name: Validate HITL contracts
         run: node scripts/validate-hitl.mjs
+      - name: Compile pack engine
+        run: python3 -m py_compile scripts/packlib/*.py scripts/packtool.py scripts/generate_pack_lock.py scripts/pack-evaluate.py
+      - name: Validate Context Packs
+        run: |
+          python3 scripts/packtool.py packs validate --all
+          python3 scripts/pack-evaluate.py
+      - name: Run pack engine tests
+        run: python3 scripts/packlib_test.py
+      - name: Run pack security tests
+        run: python3 scripts/security_test.py
+      - name: Run pack performance benchmark
+        run: python3 scripts/pack-bench.py
+      - name: Verify pack integrity lock
+        run: python3 scripts/generate_pack_lock.py --check
+      - name: Smoke-test pack install (Python + Node parity)
+        run: |
+          project="$(mktemp -d)"
+          printf 'schema: https://opencraft.dev/schema/project-packs/v1\nextends:\n  - nextjs-pack@^1\n  - security-pack@^1\n  - fintech-pack@^1\nconflict_policy: fail\n' > "$project/packs.yaml"
+          python3 scripts/packtool.py packs install --project "$project"
+          python_out="$project/.lcdd"
+          cp -r "$python_out" "$project/py-out"
+          node scripts/packtool.mjs packs install --project "$project"
+          diff -r "$project/py-out" "$project/.lcdd" --exclude packs.lock.json --exclude report.json
+          test -f "$project/.lcdd/CONTEXT.md"
+          test -f "$project/.lcdd/packs.lock.json"
       - name: Verify integrity lock
         run: python3 scripts/generate_lock.py --check
       - name: Smoke-test installer

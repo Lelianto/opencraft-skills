@@ -1,0 +1,18 @@
+kind: tech-stack
+pack: firebase-pack
+version: 1
+description: Firebase technology stack.
+updated_at: 2026-01-01
+language: TypeScript
+runtime: Node.js LTS
+entries:
+  - name: Firebase
+    role: backend-as-a-service
+    version: "latest"
+    alternatives: [Supabase, AWS Amplify]
+    rationale: Firestore, Auth, Storage, Functions, and Hosting in one platform.
+  - name: Firebase Emulator Suite
+    role: local-development
+    rationale: Local parity and rules testing.
+pinned_versions:
+  firebase: "latest"

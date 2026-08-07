@@ -1,0 +1,26 @@
+kind: review-checklist
+pack: ecommerce-pack
+version: 1
+description: E-commerce review checklist.
+updated_at: 2026-01-01
+categories:
+  - name: Money path
+    items:
+      - id: chk-pricing
+        check: "Totals computed server-side; client values never trusted."
+      - id: chk-idempotency
+        check: "Payment intents and order transitions idempotent."
+      - id: chk-settlement
+        check: "Order confirmed only after settlement."
+  - name: Inventory
+    items:
+      - id: chk-atomic
+        check: "Inventory atomic with order state; no overselling."
+      - id: chk-reconcile
+        check: "Reconciliation flags order/payment/inventory drift."
+  - name: Abuse and honesty
+    items:
+      - id: chk-abuse
+        check: "Rate limits and abuse controls on high-value flows."
+      - id: chk-honest
+        check: "No fake scarcity, fabricated reviews, or invented social proof."

@@ -1,0 +1,28 @@
+kind: review-checklist
+pack: security-pack
+version: 1
+description: Security review checklist.
+updated_at: 2026-01-01
+categories:
+  - name: Authentication and authorization
+    items:
+      - id: chk-authz-server
+        check: "Authorization re-checked server-side; deny-by-default; 401/403 correct."
+      - id: chk-session
+        check: "Sessions/tokens are secure, scoped, and revocable."
+  - name: Input and injection
+    items:
+      - id: chk-input
+        check: "Untrusted input validated at boundaries; fail closed."
+      - id: chk-encoding
+        check: "Output encoded for HTML/URL/JSON; no injection sinks."
+  - name: Secrets and data
+    items:
+      - id: chk-secrets
+        check: "No secrets in repo, logs, fixtures, or client bundles."
+      - id: chk-data
+        check: "Sensitive data encrypted at rest and in transit; least privilege."
+  - name: Supply chain
+    items:
+      - id: chk-lockfile
+        check: "Lockfile committed; dependency scan clean or risk-accepted."

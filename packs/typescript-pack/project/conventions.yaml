@@ -1,0 +1,25 @@
+kind: conventions
+pack: typescript-pack
+version: 1
+description: TypeScript coding conventions.
+updated_at: 2026-01-01
+naming:
+  - id: conv-naming-files
+    rule: "Files use kebab-case for modules and PascalCase for components and classes."
+    applies_to: ["**/*.ts", "**/*.tsx"]
+  - id: conv-naming-types
+    rule: "Type aliases and interfaces use PascalCase; avoid the I-prefix convention."
+formatting:
+  - id: conv-format-prettier
+    rule: "All source is formatted with prettier; no manual line wrapping decisions."
+imports:
+  - id: conv-import-type
+    rule: "Use `import type` for type-only imports so the bundler can drop them."
+  - id: conv-import-order
+    rule: "Group external, then internal, then relative imports, separated by blank lines."
+state:
+  - id: conv-state-exhaustive
+    rule: "Exhaustive switches use the `never` return type to catch unhandled unions."
+structure:
+  - id: conv-structure-exports
+    rule: "Barrel files re-export public API only; never re-export types via `export *` from typed internals."

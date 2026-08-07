@@ -1,0 +1,36 @@
+schema: https://opencraft.dev/schema/context-pack/v1
+name: firebase-pack
+version: 1.0.0
+type: baas
+description: Living context for Firebase backends — security rules, Firestore modeling, functions, auth.
+license: MIT
+author:
+  type: organization
+  id: opencraft
+  name: OpenCraft
+tags: [firebase, firestore, security-rules, functions, auth]
+extends:
+  - typescript-pack@^1
+  - security-pack@^1
+dependencies: []
+provides:
+  contexts:
+    - ctx-firebase-rules
+    - ctx-firebase-functions
+    - ctx-firebase-modeling
+  knowledge:
+    - architecture
+    - conventions
+    - security
+    - ai-rules
+    - review-checklist
+    - tech-stack
+lifecycle: active
+governance:
+  classification: local-standard
+  approval_required: false
+owner:
+  type: organization
+  id: opencraft-backend
+  name: OpenCraft Backend
+repository: https://github.com/Lelianto/opencraft-skills

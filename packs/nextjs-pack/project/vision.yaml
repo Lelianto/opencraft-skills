@@ -1,0 +1,22 @@
+kind: vision
+pack: nextjs-pack
+version: 1
+description: Vision template for Next.js App Router applications.
+updated_at: 2026-01-01
+purpose: "Build fast, server-rendered web applications with clear separation between server and client concerns."
+target_users:
+  - "Product teams shipping content-heavy and interactive web apps."
+primary_journey: "Route renders on the server; interactive islands hydrate on the client; mutations round-trip through the server."
+principles:
+  - id: vis-server-first
+    statement: "Render and fetch on the server by default; move to the client only when interactivity requires it."
+  - id: vis-typed-end-to-end
+    statement: "Types flow from the data layer to the UI without hand-written duplication."
+  - id: vis-observable
+    statement: "Every route, fetch, and mutation is observable and versioned."
+success_signals:
+  - "Fast initial paint via server rendering and static optimization."
+  - "Predictable cache invalidation after every mutation."
+non_goals:
+  - "Client-only single-page application architecture."
+  - "Inline data fetching inside arbitrary client components."

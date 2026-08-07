@@ -1,0 +1,43 @@
+id: ctx-healthcare-phi
+version: 1
+title: Protected health information must be encrypted and access-minimized
+description: >
+  Protected health information (PHI) MUST be encrypted at rest and in transit,
+  accessed under least privilege, and never exposed in logs, analytics, or
+  client-side storage beyond what the feature requires. Data minimization is
+  the default: collect and retain only what the feature needs.
+applies_to:
+  - "**/*.ts"
+category: compliance
+severity: critical
+source:
+  type: organization
+  uri: https://github.com/Lelianto/opencraft-skills
+authority:
+  source:
+    type: organization
+    id: opencraft-healthcare
+    name: OpenCraft Healthcare
+  level: 4
+lifecycle: active
+governance:
+  classification: hardened-mandate
+  approval_required: true
+  approvers: ["opencraft-healthcare", "compliance-officer"]
+effective_date: "2026-01-01T00:00:00Z"
+owner: opencraft-healthcare
+enforcement:
+  mode: block
+  specification:
+    type: composite
+    config:
+      operator: "and"
+      verifiers:
+        - type: "encryption-check"
+          config: { at_rest: "AES-256", in_transit: "TLS1.2+" }
+        - type: "log-scan"
+          config: { forbidden: ["PHI fields"] }
+    violation_message_template: >
+      PHI must be encrypted and access-minimized; never logged or exposed to the client unnecessarily.
+metadata:
+  pack: healthcare-pack

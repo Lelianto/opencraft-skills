@@ -1,0 +1,26 @@
+kind: ai-rules
+pack: ecommerce-pack
+version: 1
+description: AI coding rules for e-commerce work.
+updated_at: 2026-01-01
+rules:
+  - id: ai-ecom-server-pricing
+    level: must
+    instruction: Compute totals, taxes, and shipping on the server; never trust client values.
+    rationale: Client-priced checkout is trivially exploitable.
+  - id: ai-ecom-idempotent
+    level: must
+    instruction: Use idempotency keys for payment intents and order transitions.
+    rationale: Retries and webhooks must not double-charge.
+  - id: ai-ecom-atomic
+    level: must
+    instruction: Make inventory changes atomic with order transitions; reconcile drift.
+    rationale: Overselling is a customer-trust failure.
+  - id: ai-ecom-honest
+    level: must-not
+    instruction: Never generate fake scarcity, fabricated reviews, or invented social proof.
+    rationale: Honest merchandising is a product-quality requirement.
+  - id: ai-ecom-abuse
+    level: should
+    instruction: Add rate limits and abuse controls to high-value public flows.
+    rationale: Abuse controls protect legitimate customers too.

@@ -1,0 +1,24 @@
+kind: review-checklist
+pack: typescript-pack
+version: 1
+description: TypeScript review checklist.
+updated_at: 2026-01-01
+categories:
+  - name: Typing
+    items:
+      - id: chk-strict
+        check: "tsconfig has strict: true and no per-file // @ts-ignore additions."
+      - id: chk-any
+        check: "No new explicit `any`; boundaries use unknown with narrowing."
+      - id: chk-null
+        check: "Nullable values are narrowed before access; no silent non-null assertions."
+  - name: Imports
+    items:
+      - id: chk-alias
+        check: "Imports use configured aliases; no deep relative paths."
+      - id: chk-type-only
+        check: "Type-only imports use `import type`."
+  - name: Hygiene
+    items:
+      - id: chk-format
+        check: "Formatting matches prettier; type-check and lint pass."

@@ -1,0 +1,30 @@
+schema: https://opencraft.dev/schema/context-pack/v1
+name: testing-pack
+version: 1.0.0
+type: cross-cutting
+description: Living context for testing strategy — pyramid, risk-based selection, gates, fixtures.
+license: MIT
+author:
+  type: organization
+  id: opencraft
+  name: OpenCraft
+tags: [testing, quality, coverage, ci]
+extends: []
+dependencies: []
+provides:
+  contexts:
+    - ctx-testing-risk-proportional
+    - ctx-testing-gates
+  knowledge:
+    - testing
+    - ai-rules
+    - review-checklist
+lifecycle: active
+governance:
+  classification: local-standard
+  approval_required: false
+owner:
+  type: organization
+  id: opencraft-quality
+  name: OpenCraft Quality
+repository: https://github.com/Lelianto/opencraft-skills

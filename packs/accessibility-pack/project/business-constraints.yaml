@@ -1,0 +1,13 @@
+kind: business-constraints
+pack: accessibility-pack
+version: 1
+description: Business constraints from accessibility commitments.
+updated_at: 2026-01-01
+constraints:
+  - id: biz-a11y-regression
+    description: "Accessibility regressions block release."
+    type: quality
+compliance:
+  - name: WCAG
+    requirement: "2.2 Level AA for all user-facing features."
+risk_tolerance: "No known AA violations in critical journeys at release."

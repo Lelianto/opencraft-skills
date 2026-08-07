@@ -1,0 +1,24 @@
+kind: business-constraints
+pack: fintech-pack
+version: 1
+description: Business constraints for fintech products.
+updated_at: 2026-01-01
+constraints:
+  - id: biz-fintech-moneymovement
+    description: "Every money movement requires identity verification, authorization, and audit."
+    type: regulatory
+  - id: biz-fintech-disclosure
+    description: "No charge without prior disclosure of fees, rate, total cost, and schedule."
+    type: regulatory
+  - id: biz-fintech-retention
+    description: "Audit records retained for at least 5 years, write-once."
+    type: regulatory
+compliance:
+  - name: AML/KYC
+    requirement: "Identity and sanctions verification before financial transactions."
+  - name: Data residency
+    requirement: "Customer financial data stored in the approved jurisdiction."
+kpis:
+  - "Time to complete KYC onboarding"
+  - "Failed-audit count per quarter"
+risk_tolerance: "Very low: compliance gaps are release-blocking."

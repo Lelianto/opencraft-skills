@@ -1,0 +1,12 @@
+positive:
+  - "Add consent-gated access to patient records."
+  - "Make sure no PHI leaks into the audit logs or analytics."
+  - "Harden the clinical portal for assistive technology."
+negative:
+  - "Style the marketing site."
+  - "Write the pricing page."
+ambiguous:
+  - "Review the new patient portal."
+assertions:
+  - "response enforces consent at point of access"
+  - "response keeps PHI out of logs and client bundles"

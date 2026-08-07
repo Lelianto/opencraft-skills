@@ -1,0 +1,28 @@
+kind: security
+pack: healthcare-pack
+version: 1
+description: Healthcare-specific security rules.
+updated_at: 2026-01-01
+standards:
+  - name: HIPAA Security Rule
+    version: latest
+    level: required
+rules:
+  - id: CTRL-HEALTH-001
+    description: "PHI encrypted at rest and in transit; least-privilege access."
+    severity: critical
+  - id: CTRL-HEALTH-002
+    description: "Consent checked at point of access; revocation immediate."
+    severity: critical
+  - id: CTRL-HEALTH-003
+    description: "Every PHI access logged non-repudiably for compliance."
+    severity: critical
+  - id: CTRL-HEALTH-004
+    description: "No PHI in logs, analytics, or client bundles."
+    severity: critical
+sensitive_data:
+  - "Protected health information"
+  - "Identifiers linkable to patients"
+trust_boundaries:
+  - "Patient device <-> service (consented)"
+  - "Service <-> clinical systems (scoped)"

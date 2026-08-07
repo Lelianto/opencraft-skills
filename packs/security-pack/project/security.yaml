@@ -1,0 +1,38 @@
+kind: security
+pack: security-pack
+version: 1
+description: Security baseline for all applications.
+updated_at: 2026-01-01
+standards:
+  - name: OWASP ASVS
+    version: 5.0.0
+    level: "L1 (L2 for sensitive data)"
+  - name: OWASP AISVS
+    version: 1.0.0
+    level: "when AI features are present"
+rules:
+  - id: CTRL-SEC-001
+    description: "Validate input at every trust boundary; fail closed."
+    severity: critical
+    applies_to: ["api/**", "app/**/route.ts"]
+  - id: CTRL-SEC-002
+    description: "Authorize every operation server-side with deny-by-default."
+    severity: critical
+  - id: CTRL-SEC-003
+    description: "Encrypt data at rest and in transit (TLS 1.2+)."
+    severity: critical
+  - id: CTRL-SEC-004
+    description: "Log security-relevant events; never log secrets or PII."
+    severity: high
+  - id: CTRL-SEC-005
+    description: "Pin and scan dependencies; track advisories to resolution."
+    severity: high
+sensitive_data:
+  - "Credentials and session tokens"
+  - "PII, financial data, and health data when present"
+trust_boundaries:
+  - "Client <-> server"
+  - "Server <-> external services"
+references:
+  - "https://owasp.org/www-project-application-security-verification-standard/"
+  - "https://owasp.org/www-project-ai-security-and-privacy-guide/"

@@ -1,0 +1,19 @@
+kind: business-constraints
+pack: ecommerce-pack
+version: 1
+description: Business constraints for e-commerce.
+updated_at: 2026-01-01
+constraints:
+  - id: biz-ecom-pricing
+    description: "Prices, taxes, and totals are always computed server-side."
+    type: correctness
+  - id: biz-ecom-oversell
+    description: "No overselling; inventory is atomic with orders."
+    type: reliability
+compliance:
+  - name: PCI DSS
+    requirement: "Payment data handled via compliant processors; no card data on servers."
+kpis:
+  - "Checkout conversion rate"
+  - "Oversell incidents per quarter"
+risk_tolerance: "Low: money-path inconsistencies are release-blocking."

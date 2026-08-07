@@ -1,0 +1,20 @@
+kind: conventions
+pack: node-pack
+version: 1
+description: Node.js coding conventions.
+updated_at: 2026-01-01
+naming:
+  - id: conv-node-file-case
+    rule: "Module files use kebab-case; entrypoints match their package name."
+formatting:
+  - id: conv-node-format
+    rule: "Source is formatted with prettier; line width 100."
+imports:
+  - id: conv-node-import-type
+    rule: "Use `import type` for type-only imports in TypeScript modules."
+state:
+  - id: conv-node-async
+    rule: "Top-level code is async-aware; avoid fire-and-forget promises unless errors are handled."
+structure:
+  - id: conv-node-separation
+    rule: "Business logic is separated from HTTP transport handlers."

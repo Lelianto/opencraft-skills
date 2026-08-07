@@ -1,0 +1,38 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://opencraft.dev/schema/packs.lock/v1",
+  "title": "OpenCraft Packs Lockfile",
+  "description": "Resolved pack graph with integrity hashes for reproducible installs.",
+  "type": "object",
+  "required": ["schema", "algorithm", "generated_at", "resolved"],
+  "properties": {
+    "schema": {
+      "type": "string",
+      "const": "https://opencraft.dev/schema/packs.lock/v1"
+    },
+    "algorithm": {
+      "type": "string",
+      "const": "sha256"
+    },
+    "generated_at": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "resolved": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["name", "version", "integrity"],
+        "properties": {
+          "name": { "type": "string", "pattern": "^[a-z0-9]+(?:-[a-z0-9]+)*-pack$" },
+          "version": { "type": "string", "pattern": "^[0-9]+\\.[0-9]+\\.[0-9]+$" },
+          "integrity": { "type": "string", "pattern": "^sha256-[a-f0-9]{64}$" },
+          "precedence": { "type": "integer" },
+          "extends": { "type": "array", "items": { "type": "string" } },
+          "dependencies": { "type": "array", "items": { "type": "string" } },
+          "deprecated": { "type": "boolean" }
+        }
+      }
+    }
+  }
+}

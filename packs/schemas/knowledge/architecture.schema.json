@@ -1,0 +1,45 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://opencraft.dev/schema/knowledge/architecture/v1",
+  "title": "PKD: architecture",
+  "type": "object",
+  "allOf": [
+    { "$ref": "#/$defs/envelope" },
+    {
+      "type": "object",
+      "properties": {
+        "patterns": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "required": ["id", "name", "statement"],
+            "properties": {
+              "id": { "type": "string" },
+              "name": { "type": "string" },
+              "statement": { "type": "string" },
+              "applies_to": { "type": "array", "items": { "type": "string" } }
+            }
+          }
+        },
+        "decisions": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "required": ["id", "title", "status", "decision"],
+            "properties": {
+              "id": { "type": "string", "pattern": "^ARCH-.*$" },
+              "title": { "type": "string" },
+              "status": { "type": "string", "enum": ["proposed", "accepted", "superseded", "deprecated"] },
+              "context": { "type": "string" },
+              "decision": { "type": "string" },
+              "consequences": { "type": "string" }
+            }
+          }
+        },
+        "boundaries": { "type": "array", "items": { "type": "string" } },
+        "constraints": { "type": "array", "items": { "type": "string" } }
+      }
+    }
+  ],
+  "$defs": { "envelope": { "$ref": "https://opencraft.dev/schema/knowledge/envelope/v1" } }
+}

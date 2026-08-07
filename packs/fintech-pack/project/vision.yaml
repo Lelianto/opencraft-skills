@@ -1,0 +1,21 @@
+kind: vision
+pack: fintech-pack
+version: 1
+description: Vision template for fintech products.
+updated_at: 2026-01-01
+purpose: "Build financial products that are trustworthy, auditable, and compliant while remaining fast to iterate."
+target_users:
+  - "Fintech teams shipping payments, lending, or investment features."
+primary_journey: "Identity verified → transaction authorized → disclosed and auditable."
+principles:
+  - id: vis-trust-first
+    statement: "Regulatory and audit requirements are product requirements, not overhead."
+  - id: vis-auditable
+    statement: "Every money movement is traceable from request to reconciliation."
+  - id: vis-transparent
+    statement: "Customers always see true cost before they commit."
+success_signals:
+  - "Zero failed audits in the last review cycle."
+  - "All high-risk transactions recoverable from the audit trail."
+non_goals:
+  - "Circumventing or hiding regulatory constraints for speed."

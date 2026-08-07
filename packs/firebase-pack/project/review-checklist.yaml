@@ -1,0 +1,18 @@
+kind: review-checklist
+pack: firebase-pack
+version: 1
+description: Firebase review checklist.
+updated_at: 2026-01-01
+categories:
+  - name: Access control
+    items:
+      - id: chk-rules
+        check: "Firestore/Storage fully covered by rules; deny-by-default; emulator-tested."
+      - id: chk-admin
+        check: "Admin SDK only in functions; functions authorize callers."
+  - name: Data model
+    items:
+      - id: chk-model
+        check: "Documents model access boundaries; per-user data scoped by uid."
+      - id: chk-secrets
+        check: "No secrets or API keys in committed code."

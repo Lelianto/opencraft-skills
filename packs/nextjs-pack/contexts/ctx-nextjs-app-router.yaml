@@ -1,0 +1,38 @@
+id: ctx-nextjs-app-router
+version: 1
+title: New routes must use the App Router
+description: >
+  All new routes MUST use the App Router (`app/` directory) with React Server
+  Components where appropriate. The Pages Router (`pages/`) is legacy and must
+  not be extended. Using one router keeps conventions, caching, and server
+  actions consistent across the application.
+applies_to:
+  - "app/**/*.tsx"
+  - "pages/**/*.tsx"
+category: architecture
+severity: high
+source:
+  type: organization
+  uri: https://github.com/Lelianto/opencraft-skills
+authority:
+  source:
+    type: organization
+    id: opencraft
+    name: OpenCraft
+  level: 3
+lifecycle: active
+governance:
+  classification: local-standard
+  approval_required: false
+effective_date: "2026-01-01T00:00:00Z"
+owner: opencraft-web
+enforcement:
+  mode: block
+  specification:
+    type: directory-constraint
+    config:
+      disallowed: ["pages/"]
+    violation_message_template: >
+      New routes must live in the app/ directory (App Router), not pages/.
+metadata:
+  pack: nextjs-pack

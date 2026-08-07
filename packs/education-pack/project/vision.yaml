@@ -1,0 +1,21 @@
+kind: vision
+pack: education-pack
+version: 1
+description: Vision template for education products.
+updated_at: 2026-01-01
+purpose: "Deliver trustworthy learning experiences that are accessible to every learner, at scale."
+target_users:
+  - "Learners, educators, and institutions."
+primary_journey: "Enroll → learn with accessible content → assessed fairly → progress recorded safely."
+principles:
+  - id: vis-learners-first
+    statement: "Every learner can access and complete the path, including with assistive technology."
+  - id: vis-honest-content
+    statement: "Content is accurate, versioned, and free of fabricated references."
+  - id: vis-safe-data
+    statement: "Learner data is minimized, protected, and never exploited."
+success_signals:
+  - "High completion with equitable access across abilities."
+  - "Zero learner-privacy incidents."
+non_goals:
+  - "Manipulative gamification that misrepresents progress."

@@ -1,0 +1,37 @@
+id: ctx-react-hooks-rules
+version: 1
+title: Hooks must follow the Rules of Hooks
+description: >
+  Hooks MUST be called at the top level of a function component or custom hook
+  and never inside conditions, loops, or callbacks. Dependencies arrays MUST be
+  complete and stable. Violating the rules of hooks produces stale closures and
+  inconsistent render behavior that is hard to detect.
+applies_to:
+  - "**/*.tsx"
+category: code-style
+severity: high
+source:
+  type: organization
+  uri: https://github.com/Lelianto/opencraft-skills
+authority:
+  source:
+    type: organization
+    id: opencraft
+    name: OpenCraft
+  level: 3
+lifecycle: active
+governance:
+  classification: local-standard
+  approval_required: false
+effective_date: "2026-01-01T00:00:00Z"
+owner: opencraft-web
+enforcement:
+  mode: block
+  specification:
+    type: lint-rule
+    config:
+      rule: "react-hooks/rules-of-hooks"
+    violation_message_template: >
+      Hooks must be called unconditionally at the top level.
+metadata:
+  pack: react-pack

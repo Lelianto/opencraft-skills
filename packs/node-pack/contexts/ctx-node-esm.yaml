@@ -1,0 +1,40 @@
+id: ctx-node-esm
+version: 1
+title: New Node modules must use ECMAScript modules
+description: >
+  New packages and modules MUST use ESM (`"type": "module"` and `import`
+  syntax). CommonJS is permitted only for legacy packages that cannot be
+  converted. ESM keeps static analysis, tree-shaking, and module interop
+  predictable for AI tooling and bundlers.
+applies_to:
+  - "**/*.mjs"
+  - "package.json"
+category: code-style
+severity: medium
+source:
+  type: organization
+  uri: https://github.com/Lelianto/opencraft-skills
+authority:
+  source:
+    type: organization
+    id: opencraft
+    name: OpenCraft
+  level: 2
+lifecycle: active
+governance:
+  classification: local-standard
+  approval_required: false
+effective_date: "2026-01-01T00:00:00Z"
+owner: opencraft-web
+enforcement:
+  mode: warn
+  specification:
+    type: file-content-constraint
+    config:
+      pattern: "require\\("
+      file_patterns: ["**/*.mjs", "**/*.js"]
+      should_not_match: true
+    violation_message_template: >
+      Prefer ESM imports over require() in new modules.
+metadata:
+  pack: node-pack

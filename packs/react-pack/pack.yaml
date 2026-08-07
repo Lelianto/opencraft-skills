@@ -1,0 +1,33 @@
+schema: https://opencraft.dev/schema/context-pack/v1
+name: react-pack
+version: 1.0.0
+type: framework
+description: Living context for React applications — component conventions, hooks, state, and accessibility basics.
+license: MIT
+author:
+  type: organization
+  id: opencraft
+  name: OpenCraft
+tags: [react, components, hooks, ui]
+extends:
+  - typescript-pack@^1
+dependencies: []
+provides:
+  contexts:
+    - ctx-react-functional-components
+    - ctx-react-hooks-rules
+    - ctx-react-keys
+  knowledge:
+    - architecture
+    - conventions
+    - ai-rules
+    - review-checklist
+lifecycle: active
+governance:
+  classification: local-standard
+  approval_required: false
+owner:
+  type: organization
+  id: opencraft-web
+  name: OpenCraft Web
+repository: https://github.com/Lelianto/opencraft-skills

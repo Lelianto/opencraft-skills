@@ -1,0 +1,18 @@
+kind: tech-stack
+pack: node-pack
+version: 1
+description: Baseline Node.js runtime stack.
+updated_at: 2026-01-01
+language: TypeScript
+runtime: Node.js LTS
+entries:
+  - name: Node.js
+    role: runtime
+    version: ">=20 LTS"
+    alternatives: [Bun, Deno]
+    rationale: LTS alignment, ecosystem maturity, and container image availability.
+  - name: npm
+    role: package-manager
+    rationale: Workspaces and lockfile support.
+pinned_versions:
+  node: ">=20"

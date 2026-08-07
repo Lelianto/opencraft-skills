@@ -1,0 +1,44 @@
+schema: https://opencraft.dev/schema/context-pack/v1
+name: healthcare-pack
+version: 1.0.0
+type: domain
+description: Living context for healthcare applications — PHI handling, audit, consent, availability.
+license: MIT
+author:
+  type: organization
+  id: opencraft-healthcare
+  name: OpenCraft Healthcare
+tags: [healthcare, phi, hipaa, consent, audit]
+extends:
+  - node-pack@^1
+  - security-pack@^1
+  - accessibility-pack@^1
+dependencies: []
+override:
+  - id: ctx-a11y-wcag-aa
+    action: patch
+    patch:
+      severity: critical
+    reason: "Healthcare interfaces serve vulnerable users; accessibility is release-critical."
+provides:
+  contexts:
+    - ctx-healthcare-phi
+    - ctx-healthcare-consent
+    - ctx-healthcare-audit
+  knowledge:
+    - vision
+    - business-constraints
+    - security
+    - ai-rules
+    - review-checklist
+    - deployment
+    - observability
+lifecycle: active
+governance:
+  classification: local-standard
+  approval_required: false
+owner:
+  type: organization
+  id: opencraft-healthcare
+  name: OpenCraft Healthcare
+repository: https://github.com/Lelianto/opencraft-skills

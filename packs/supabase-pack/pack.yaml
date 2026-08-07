@@ -1,0 +1,36 @@
+schema: https://opencraft.dev/schema/context-pack/v1
+name: supabase-pack
+version: 1.0.0
+type: baas
+description: Living context for Supabase backends — Row Level Security, migrations, realtime, auth.
+license: MIT
+author:
+  type: organization
+  id: opencraft
+  name: OpenCraft
+tags: [supabase, postgres, rls, realtime, auth]
+extends:
+  - typescript-pack@^1
+  - security-pack@^1
+dependencies: []
+provides:
+  contexts:
+    - ctx-supabase-rls
+    - ctx-supabase-migrations
+    - ctx-supabase-realtime
+  knowledge:
+    - architecture
+    - conventions
+    - security
+    - ai-rules
+    - review-checklist
+    - tech-stack
+lifecycle: active
+governance:
+  classification: local-standard
+  approval_required: false
+owner:
+  type: organization
+  id: opencraft-backend
+  name: OpenCraft Backend
+repository: https://github.com/Lelianto/opencraft-skills

@@ -1,0 +1,31 @@
+schema: https://opencraft.dev/schema/context-pack/v1
+name: accessibility-pack
+version: 1.0.0
+type: cross-cutting
+description: Living context for accessibility — WCAG 2.2 AA, keyboard, semantics, contrast, motion.
+license: MIT
+author:
+  type: organization
+  id: opencraft
+  name: OpenCraft
+tags: [accessibility, wcag, a11y, keyboard]
+extends: []
+dependencies: []
+provides:
+  contexts:
+    - ctx-a11y-wcag-aa
+    - ctx-a11y-keyboard
+    - ctx-a11y-labels
+  knowledge:
+    - ai-rules
+    - review-checklist
+    - business-constraints
+lifecycle: active
+governance:
+  classification: local-standard
+  approval_required: false
+owner:
+  type: organization
+  id: opencraft-accessibility
+  name: OpenCraft Accessibility
+repository: https://github.com/Lelianto/opencraft-skills
