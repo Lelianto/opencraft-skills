@@ -354,6 +354,14 @@ Contributions of all kinds are welcome:
 - **Engine** — extend `scripts/packlib/` (Python) and keep `scripts/packtool.mjs` behaviorally equivalent.
 - **Docs** — clarity fixes and examples.
 
+## Acknowledgements
+
+Context Packs are the **building-block implementation** of **Living Context Driven Development (LCDD)**, the governing methodology defined at:
+
+> **[github.com/Lelianto/living-context-driven-development](https://github.com/Lelianto/living-context-driven-development)**
+
+LCDD establishes the Context Schema, Context Registry, lifecycle, governance-by-rate-of-change, and the composability principle this module makes installable. Acknowledgements also to the Agent Skills specification ([agentskills.io](https://agentskills.io/specification)), OWASP (ASVS/AISVS), and the wider constraint-driven-development literature that informs the governance model.
+
 ## License
 
 The Context Pack Specification is Apache-2.0 (matching LCDD); individual packs carry their own licenses; this module's code and examples are MIT.
