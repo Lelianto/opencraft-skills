@@ -2,7 +2,7 @@
 
 ### *Install living project context instead of rewriting it.*
 
-**Context decays.** Your README says PostgreSQL 14; you run 16. Your architecture decisions live in a Slack thread from March. Your compliance requirements changed in June. AI agents keep coding against stale assumptions. Context Packs fix this: they package production-ready **Living Context** — conventions, security rules, testing strategy, AI coding rules, and more — that installs into any project, stays versioned and enforced, and is consumed directly by your AI agents.
+**Context is mostly unwritten.** The conventions a team follows, the decisions that shape an architecture, the rules a compliant product must obey — most of it exists in memory and chat threads, not in a form anyone can install. Context Packs change that: they package production-ready **Living Context** — conventions, security rules, testing strategy, AI coding rules, and more — that installs into any project, stays versioned and enforced, and is consumed directly by your AI agents.
 
 Context Packs are the **composability layer** of **Living Context Driven Development (LCDD)**. The methodology is defined in the reference repository:
 
@@ -36,13 +36,13 @@ LCDD treats context as a first-class artifact — versioned, governed, enforced,
 
 ## The Problem
 
-**Documentation dies. Specifications drift. Knowledge changes. Yet AI keeps coding as if nothing happened.**
+**Context is implicit. Implicit context goes stale. Stale context is worse than none.**
 
 Every README, every architecture decision, every compliance document, every coding standard — all of it becomes outdated the moment it is written. The consequences:
 
 ### 1. Context Debt
 
-Your codebase has Technical Debt. Your knowledge base has Context Debt. The Postgres version you document is not the one you run. The regulation you cite was amended last month. **Nobody measures this debt. Nobody pays it down.** Every decision made against stale context becomes a liability.
+Your codebase has Technical Debt. Your knowledge base has **Context Debt** — the accumulated gap between what is true and what everyone believes. The documented version, the enforced pattern, and the cited regulation each fall behind reality at their own pace, and no one tracks the gap. Every decision made against that stale knowledge becomes a liability.
 
 ### 2. Specification Drift
 

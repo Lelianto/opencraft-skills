@@ -3,7 +3,7 @@
 </h1>
 
 <p align="center">
-  Portable Agent Skills + reusable Living Context for AI-assisted product development — the building-block implementation of <strong>Living Context Driven Development (LCDD)</strong>.
+  Portable skills and living context for AI-assisted product development — installed once, governed forever.
 </p>
 
 <p align="center">
@@ -14,12 +14,12 @@
   <a href="packs"><img src="https://img.shields.io/badge/context%20packs-14-10b981" alt="Context Packs" /></a>
 </p>
 
-**Code evolves. Knowledge decays. AI never notices. Until now.**
+Every project accumulates unwritten knowledge: how things are named, why this architecture, what security actually requires, which tests matter. That knowledge lives in team memory — and, worst of all, in whatever your AI agent happens to assume. OpenCraft captures it in two reusable forms and installs them into any project:
 
-Documentation dies. Specifications drift. Conventions are rewritten in every project. Yet AI agents keep coding as if nothing happened. OpenCraft fixes both sides of the problem:
+- **Portable Agent Skills** teach compatible AI agents (Claude Code, OpenAI Codex, Cursor, GitHub Copilot, and more) a shared, production-minded way to work — from product analysis to authorized deployment.
+- **Context Packs** install the project's Living Context — conventions, security rules, testing strategy, AI coding rules — once, instead of re-authoring it in every repository.
 
-- **Portable Agent Skills** give compatible AI agents (Claude Code, OpenAI Codex, Cursor, GitHub Copilot, and more) a shared, production-minded delivery system — from product analysis to authorized deployment.
-- **Context Packs** install production-ready Living Context — conventions, security rules, testing strategy, AI coding rules — instead of rewriting project knowledge repeatedly.
+Install them once; humans and agents stay on the same, current page.
 
 Context Packs are the **building-block implementation** of the methodology defined at:
 
@@ -57,15 +57,16 @@ The goal is not to generate more documents. The goal is to keep product intent, 
 
 ## The Problem
 
-Your codebase has Technical Debt. Your knowledge base has **Context Debt**. The Postgres version you document is not the one you run. The regulation you cite was amended last month. The architectural pattern you enforce is the one you decided to replace two sprints ago. Nobody measures this debt. Nobody pays it down.
+Most teams carry their real rules around in memory. The README is two major versions behind. The decision that matters is buried in a closed review thread. The compliance requirement nobody wrote down changes every quarter. Nobody owns the gap — it just widens.
 
-And AI agents make it worse. They optimize for "all tests pass." When context is absent or outdated, they fill the gap — rewriting tests, relaxing schemas, removing validation. The specification silently drifts to match the code, not the other way around.
+Meanwhile your AI agent, given only vague instructions, quietly fills the gaps its own way: rewriting tests to match whatever it produced, dropping validation it never knew about, inventing conventions nobody agreed to. The cost is invisible — every build runs on context nobody verified.
 
-LCDD names this precisely and treats **context as a first-class artifact** — versioned, governed, enforced, and evolved. OpenCraft is the building block that makes that context *reusable and installable*:
+OpenCraft treats the fix as a first-class artifact, following LCDD: **context is versioned, governed, enforced, and evolved** — then made *reusable and installable*:
 
 - Every **rule and convention** is structured, machine-readable, and enforceable.
 - Every **rule** carries provenance, authority, ownership, and a lifecycle.
 - Project knowledge is **shared as packs** instead of rewritten per project.
+- What the agent assumes and what the team decided become the same thing.
 
 ## The OpenCraft Way
 
