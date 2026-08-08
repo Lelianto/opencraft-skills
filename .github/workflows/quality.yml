@@ -72,3 +72,19 @@ jobs:
           expected="$(( $(find skills -mindepth 1 -maxdepth 1 -type d | wc -l) * 5 ))"
           test "$(find "$project" -name SKILL.md | wc -l)" -eq "$expected"
           node scripts/test-decision-cli.mjs
+      - name: Verify LCDD interoperability (@lcdd/cli + @lcdd/mcp)
+        run: |
+          lcdd_dir="$(mktemp -d)"
+          npm install --prefix "$lcdd_dir" --no-audit --no-fund @lcdd/cli@^0.5.0 @lcdd/mcp@^0.5.0
+          node scripts/check-lcdd-interop.mjs \
+            --lcdd-bin "$lcdd_dir/node_modules/.bin/lcd" \
+            --mcp-bin "$lcdd_dir/node_modules/.bin/lcdd-mcp"
+      - name: Smoke-test packs MCP server
+        run: node scripts/test-pack-mcp.mjs
+      - name: Smoke-test real-agent eval harness (dry run)
+        run: |
+          runs_dir="$(mktemp -d)"
+          node scripts/run-evals.mjs --dry-run --out "$runs_dir" --skills analyze-product,write-product-prd
+          test -f "$runs_dir/with-skill/analyze-product.md"
+          test -f "$runs_dir/without-skill/analyze-product.md"
+          python3 scripts/evaluate.py --runs "$runs_dir" --skills analyze-product,write-product-prd

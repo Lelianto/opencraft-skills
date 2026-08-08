@@ -1,11 +1,12 @@
 {
   "name": "opencraft-skills",
-  "version": "1.3.0",
+  "version": "1.4.0",
   "description": "Portable end-to-end Agent Skills for meaningful, secure, production-ready product development",
   "type": "module",
   "bin": {
     "opencraft-skills": "scripts/install.mjs",
-    "opencraft-packs": "scripts/packtool.mjs"
+    "opencraft-packs": "scripts/packtool.mjs",
+    "opencraft-packs-mcp": "scripts/pack-mcp.mjs"
   },
   "files": [
     "skills/",
@@ -25,15 +26,22 @@
   ],
   "scripts": {
     "validate": "python3 scripts/validate.py && python3 scripts/evaluate.py && node scripts/validate-hitl.mjs && python3 scripts/generate_lock.py --check && node scripts/check-release.mjs",
-    "validate:packs": "python3 scripts/packtool.py packs validate --all && python3 scripts/pack-evaluate.py",
+    "validate:packs": "python3 scripts/packtool.py packs validate --all && python3 scripts/pack-evaluate.py && python3 scripts/generate_pack_catalog.py --check",
     "lock:packs": "python3 scripts/generate_pack_lock.py",
     "lock:packs:check": "python3 scripts/generate_pack_lock.py --check",
+    "catalog:packs": "python3 scripts/generate_pack_catalog.py",
+    "catalog:packs:check": "python3 scripts/generate_pack_catalog.py --check",
     "test:packs": "python3 scripts/packlib_test.py",
     "test:packs:security": "python3 scripts/security_test.py",
     "bench:packs": "python3 scripts/pack-bench.py",
     "test:node-installer": "node scripts/install.mjs --help",
     "test:hitl": "node scripts/test-decision-cli.mjs",
-    "prepack": "npm run validate && npm run validate:packs && npm run lock:packs:check && npm run test:packs && npm run test:packs:security && npm run bench:packs && npm run test:node-installer && npm run test:hitl"
+    "test:lcdd-interop": "node scripts/check-lcdd-interop.mjs",
+    "test:packs-mcp": "node scripts/test-pack-mcp.mjs",
+    "eval:dry-run": "node scripts/run-evals.mjs --dry-run --out runs",
+    "eval:run": "node scripts/run-evals.mjs --out runs",
+    "eval:grade": "python3 scripts/evaluate.py --runs runs --benchmark runs/benchmark.json",
+    "prepack": "npm run validate && npm run validate:packs && npm run lock:packs:check && npm run test:packs && npm run test:packs:security && npm run bench:packs && npm run test:node-installer && npm run test:hitl && npm run test:packs-mcp"
   },
   "engines": {
     "node": ">=18"

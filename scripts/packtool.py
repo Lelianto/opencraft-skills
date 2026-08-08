@@ -76,7 +76,13 @@ def write_declaration(project: Path, declaration):
 
 def build_registry():
     cache = Path.home() / ".opencraft" / "packs"
-    return Registry(PACKS_ROOT, cache_dir=cache)
+    remote = "--remote" in sys.argv
+    catalog = {}
+    if remote:
+        catalog_path = REPO_ROOT / "packs" / "registry" / "index.json"
+        if catalog_path.is_file():
+            catalog = json.loads(catalog_path.read_text(encoding="utf-8"))
+    return Registry(PACKS_ROOT, cache_dir=cache, catalog=catalog, remote=remote)
 
 
 def run_pipeline(project_dir, force=False):
@@ -293,6 +299,7 @@ def cmd_doctor(project, argv, json_out):
         else:
             print("ERROR no .lcdd installed")
         return 1
+    from packlib import doctor as doctor_engine
     from packlib import yamlmini
 
     contexts = {}
@@ -304,32 +311,18 @@ def cmd_doctor(project, argv, json_out):
     if (lcdd / "report.json").is_file():
         report = json.loads((lcdd / "report.json").read_text(encoding="utf-8"))
 
-    missing_owners = [cid for cid, ctx in contexts.items() if not ctx.get("owner")]
-    no_metadata = [cid for cid, ctx in contexts.items() if not ctx.get("updated_at")]
-    deprecation_backlog = [cid for cid, ctx in contexts.items() if ctx.get("lifecycle") == "deprecated"]
-    unresolved = [c["id"] for c in report.get("conflicts", []) if c.get("status") == "blocking-unresolved"]
+    health = doctor_engine.compute_health(contexts, report=report, lcdd_dir=lcdd)
+    health["ok"] = health["grade"] not in ("D", "F") and not health["unresolved_conflicts"]
 
-    score = 100
-    score -= 10 * min(10, len(missing_owners))
-    score -= 10 * min(10, len(unresolved))
-    health = {
-        "ok": score >= 70 and not unresolved,
-        "score": max(0, score),
-        "contexts": len(contexts),
-        "missing_owners": missing_owners,
-        "untracked_updated_at": no_metadata,
-        "deprecation_backlog": deprecation_backlog,
-        "unresolved_conflicts": unresolved,
-    }
     if json_out:
         out_json(health)
     else:
-        print(f"Context Health: {health['score']}/100")
-        print(f"contexts: {health['contexts']}")
-        for cid in missing_owners:
-            print(f"  missing owner: {cid}")
-        for cid in unresolved:
-            print(f"  unresolved conflict: {cid}")
+        print(f"Context Health: {health['overall_score']}/{health['max_score']}  Grade: {health['grade']}")
+        print(f"contexts: {health['total_contexts']}")
+        for metric in health["metrics"]:
+            print(f"  {metric['name']}: {metric['score']}/{metric['max_score']} [{metric['status']}]")
+        for recommendation in health["recommendations"]:
+            print(f"  - {recommendation}")
     return 0 if health["ok"] else 1
 
 
@@ -640,6 +633,8 @@ def main(argv):
             skip_next = True
             continue
         if token == "--json":
+            continue
+        if token == "--remote":
             continue
         command_argv.append(token)
     try:

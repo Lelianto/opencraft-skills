@@ -10,6 +10,7 @@ applies_to:
   - "**/*.tsx"
 category: accessibility
 severity: medium
+tags: [accessibility, labels, wcag]
 source:
   type: standard-body
   uri: https://www.w3.org/WAI/WCAG22/
@@ -24,6 +25,8 @@ governance:
   classification: local-standard
   approval_required: false
 effective_date: "2026-01-01T00:00:00Z"
+created_at: "2026-08-07T00:00:00Z"
+updated_at: "2026-08-08T00:00:00Z"
 owner: opencraft-accessibility
 enforcement:
   mode: warn

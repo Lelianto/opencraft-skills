@@ -8,7 +8,7 @@ The resolver (`scripts/packlib/registry.py` and `scripts/packtool.mjs`) consults
 
 1. **Local cache** `~/.opencraft/packs/<name>/<version>/` — offline, immutable, integrity-verified.
 2. **Built-in tree** `packs/` — the 14 reference packs ship with the repository.
-3. **Remote transport** — scoped npm packages `@opencraft/<name>` via the catalog + npm tarball, with sha256 verification. (Reference implementation currently resolves sources 1–2; the transport interface is defined below so a remote implementation can be layered in.)
+3. **Remote transport** — scoped npm packages `@opencraft/<name>` via the catalog + npm tarball, with sha256 verification. Enabled with `--remote`; the tarball is fetched, unpacked, and the unpacked content is verified against the catalog's `pack_integrity` before the cache entry is accepted.
 
 ## Version selection
 
@@ -67,7 +67,11 @@ A remote registry MUST expose:
 | Tarball | `GET /packs/:name/-/:version.tgz` | Pack content, integrity-verified. |
 | Deprecation | field on version metadata | `deprecated` + `superseded_by`. |
 
-The reference implementation keeps the same interface behind `Registry` so a remote source can replace the built-in tree without changing the resolver.
+The npm registry satisfies this contract: `@opencraft/<name>` package metadata
+(`GET /@opencraft/<name>`) serves search/list/metadata, and the tarball URL
+`GET /@opencraft/<name>/-/<name>-<version>.tgz` serves the content. The
+reference implementation keeps the same interface behind `Registry` so a
+remote source can replace the built-in tree without changing the resolver.
 
 ## Deprecation
 

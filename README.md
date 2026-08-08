@@ -397,8 +397,10 @@ See [DEVELOPMENT_ROADMAP.md](DEVELOPMENT_ROADMAP.md) for the full plan. Current 
 | Human-in-the-loop decisions | ✅ | `D0`–`D3` decision records with explicit authority. |
 | Context Packs specification + engine | ✅ | 14 RFCs, schemas, zero-dependency Python + Node CLIs, 14 reference packs. |
 | Pack evaluation + benchmark | ✅ | Unit/security tests, CI parity smoke-test, performance bounds. |
-| Registry + publishing | 🟡 | Catalog + npm transport; automated publish via Trusted Publishing. |
-| MCP server for packs | 🔴 | Structured querying for MCP-capable agents. |
+| `packs doctor` LCDD parity | ✅ | 8-metric Context Health format identical to LCDD 0.5.0 (`lcd doctor`). |
+| MCP server for packs | ✅ | Zero-dependency stdio MCP server (`opencraft-packs-mcp`) exposing list/resolve/validate/doctor/query. |
+| Registry + publishing | 🟡 | `@opencraft/*` npm transport with sha256 verification (`--remote`); `publish-packs.yml` for Trusted Publishing. |
+| Real-agent eval harness | 🟡 | `scripts/run-evals.mjs` with-skill vs no-skill baselines against Claude Code/Codex; requires agent auth to run. |
 | Community ecosystem | 🔴 | Contribution SDK, maturity levels, compatibility matrix. |
 
 ## Contributing

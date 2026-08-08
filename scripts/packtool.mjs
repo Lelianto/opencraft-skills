@@ -3,6 +3,7 @@
 // to scripts/packtool.py). Usage: node scripts/packtool.mjs packs <command>
 
 import { createHash } from "node:crypto";
+import { spawnSync } from "node:child_process";
 import {
   existsSync,
   mkdirSync,
@@ -13,6 +14,7 @@ import {
 } from "node:fs";
 import { dirname, join, resolve } from "node:path";
 import { fileURLToPath } from "node:url";
+import https from "node:https";
 
 const REPO_ROOT = resolve(dirname(fileURLToPath(import.meta.url)), "..");
 const PACKS_ROOT = join(REPO_ROOT, "packs");
@@ -734,6 +736,9 @@ function packIntegrity(dir) {
   const files = walk(dir).sort();
   for (const path of files) {
     const rel = path.slice(dir.length + 1);
+    // npm injects package.json/package-lock.json into published tarballs;
+    // excluding them keeps integrity stable across publish and re-fetch.
+    if (rel === "package.json" || rel === "package-lock.json") continue;
     digest.update(rel);
     digest.update("\0");
     digest.update(sha256File(path));
@@ -791,10 +796,81 @@ function scanPack(packDir) {
   };
 }
 
+const NPM_REGISTRY = "https://registry.npmjs.org";
+
+function catalogVersions(catalog, name) {
+  for (const entry of catalog.packs || []) {
+    if (entry.name === name) return entry.versions || {};
+  }
+  return {};
+}
+
+function httpGetBuffer(url) {
+  return new Promise((resolvePromise, rejectPromise) => {
+    https
+      .get(url, (res) => {
+        if (res.statusCode !== 200) {
+          rejectPromise(new Error(`GET ${url} -> ${res.statusCode}`));
+          res.resume();
+          return;
+        }
+        const chunks = [];
+        res.on("data", (chunk) => chunks.push(chunk));
+        res.on("end", () => resolvePromise(Buffer.concat(chunks)));
+      })
+      .on("error", rejectPromise);
+  });
+}
+
+function fetchRemotePack(catalog, name, version, cacheDir) {
+  const meta = catalogVersions(catalog, name)[version];
+  if (!meta) throw new Error(`pack ${name}@${version} is not in the remote catalog`);
+  const npmPkg = meta.npm;
+  const expected = meta.integrity || "";
+  if (!expected.startsWith("sha256-")) throw new Error(`pack ${name}@${version}: catalog integrity is missing or not sha256`);
+  const tarballUrl = `${NPM_REGISTRY}/${npmPkg}/-/${name}-${version}.tgz`;
+  return httpGetBuffer(tarballUrl).then((payload) => {
+    const target = join(cacheDir, name, version);
+    mkdirSync(target, { recursive: true });
+    return unpackTarball(payload, target).then(() => {
+      const actual = packIntegrity(target);
+      if (actual !== expected) {
+        rmSync(target, { recursive: true, force: true });
+        throw new Error(`integrity mismatch for ${name}@${version}: unpacked content ${actual} != catalog ${expected}`);
+      }
+      return target;
+    });
+  });
+}
+
+function unpackTarball(payload, target) {
+  // Zero-dependency: pipe the tarball through the system tar (POSIX, available
+  // on macOS and GitHub Actions runners). Strip the npm `package/` prefix.
+  const result = spawnSync("tar", ["-xzf", "-", "-C", target, "--strip-components=1"], {
+    input: payload,
+    encoding: "utf8",
+  });
+  if (result.status !== 0) {
+    throw new Error(`unpack failed: ${result.stderr || "tar error"}`);
+  }
+  if (!existsSync(join(target, "pack.yaml"))) {
+    throw new Error(`fetched ${target} has no pack.yaml (not a Context Pack)`);
+  }
+  return target;
+}
+
 class Registry {
-  constructor(builtinDir, cacheDir) {
+  constructor(builtinDir, cacheDir, catalog, remote) {
     this.builtin = builtinDir;
     this.cache = cacheDir;
+    this.catalog = catalog && typeof catalog === "object" ? catalog : {};
+    this.remote = !!remote;
+  }
+  _catalogVersions(name) {
+    for (const entry of this.catalog.packs || []) {
+      if (entry.name === name) return entry.versions || {};
+    }
+    return {};
   }
   versions(name) {
     const found = {};
@@ -811,6 +887,11 @@ class Registry {
       const m = loadYamlFile(join(builtin, "pack.yaml"));
       found[m.version] = m;
     }
+    if (this.remote) {
+      for (const version of Object.keys(this._catalogVersions(name))) {
+        if (!(version in found)) found[version] = { version };
+      }
+    }
     return found;
   }
   _locate(name, version) {
@@ -822,6 +903,9 @@ class Registry {
     if (existsSync(join(builtin, "pack.yaml"))) {
       const m = loadYamlFile(join(builtin, "pack.yaml"));
       if (m.version === version) return builtin;
+    }
+    if (this.remote && this.cache) {
+      return fetchRemotePack(this.catalog, name, version, this.cache);
     }
     throw new Error(`pack ${name}@${version} is not available in the local registry`);
   }
@@ -1371,7 +1455,13 @@ function materialize(projectDir, merged, ordered, project, lockIntegrity) {
 
 function buildRegistry() {
   const cache = join(process.env.HOME || process.env.USERPROFILE, ".opencraft", "packs");
-  return new Registry(PACKS_ROOT, cache);
+  const remote = process.argv.includes("--remote");
+  let catalog = {};
+  if (remote) {
+    const catalogPath = join(PACKS_ROOT, "registry", "index.json");
+    if (existsSync(catalogPath)) catalog = JSON.parse(readFileSync(catalogPath, "utf8"));
+  }
+  return new Registry(PACKS_ROOT, cache, catalog, remote);
 }
 
 function runPipeline(projectDir) {
@@ -1423,6 +1513,204 @@ function runPipeline(projectDir) {
   return { ok: validationErrors.length === 0, ordered, merged, project, errors: validationErrors, blocking, lockIntegrity };
 }
 
+// ---------------------------------------------------------------------------
+// Context Health — parity with LCDD 0.5.0 `lcd doctor`
+// ---------------------------------------------------------------------------
+
+const HEALTH_STALE_DAYS = 90;
+const HEALTH_DEPRECATION_DAYS = 180;
+const HEALTH_DRAFT_DAYS = 30;
+
+function healthDaysSince(dateStr) {
+  if (!dateStr) return Infinity;
+  const ms = new Date(dateStr).getTime();
+  if (Number.isNaN(ms)) return Infinity;
+  return (Date.now() - ms) / 86400000;
+}
+
+function healthPatternsOverlap(a, b) {
+  if (a === "**/*" || b === "**/*") return true;
+  const strip = (p) => p.replace(/\/?\*\*?\/?\*?$/, "");
+  const aDir = strip(a);
+  const bDir = strip(b);
+  return aDir.startsWith(bDir) || bDir.startsWith(aDir);
+}
+
+function readJsonlFile(path) {
+  if (!existsSync(path)) return [];
+  return readFileSync(path, "utf8")
+    .split("\n")
+    .map((line) => line.trim())
+    .filter(Boolean)
+    .map((line) => {
+      try {
+        return JSON.parse(line);
+      } catch {
+        return null;
+      }
+    })
+    .filter(Boolean);
+}
+
+function healthTriggers(contexts, enforcements, dismissals) {
+  const dormant = [];
+  if (dismissals.length === 0) {
+    dormant.push({
+      trigger: "HIGH_FALSE_POSITIVE",
+      reason:
+        "No dismissal events recorded. False positive rate requires dismissals/violations; violation rate is reported separately as HIGH_VIOLATION_RATE.",
+    });
+  }
+  return { triggers: [], dormant };
+}
+
+function computeHealth(contexts, report, lcdd) {
+  const ctxList = Object.values(contexts);
+  const events = readJsonlFile(join(lcdd, "contexts", ".events.log")).filter((e) => e.actor_role !== "improve-engine");
+  const enforcements = readJsonlFile(join(lcdd, "contexts", ".enforcements.log"));
+  const dismissals = readJsonlFile(join(lcdd, "contexts", ".dismissals.log"));
+  const metrics = [];
+  const recommendations = [];
+
+  const staleIds = [];
+  for (const ctx of ctxList) {
+    if (ctx.lifecycle === "archived" || ctx.lifecycle === "draft") continue;
+    const ctxEvents = events.filter((e) => e.context_id === ctx.id).sort((a, b) => new Date(b.timestamp) - new Date(a.timestamp));
+    const last = ctxEvents.length ? ctxEvents[0].timestamp : ctx.updated_at || ctx.created_at;
+    if (healthDaysSince(last) > HEALTH_STALE_DAYS) staleIds.push(ctx.id);
+  }
+  metrics.push({
+    name: "Stale Contexts",
+    score: staleIds.length === 0 ? 15 : staleIds.length <= 2 ? 10 : staleIds.length <= 5 ? 5 : 0,
+    max_score: 15,
+    status: staleIds.length === 0 ? "ok" : staleIds.length <= 3 ? "warning" : "critical",
+    details: staleIds.length === 0 ? ["All active contexts have recent activity."] : [`${staleIds.length} context(s) with no activity in ${HEALTH_STALE_DAYS}+ days: ${staleIds.join(", ")}`],
+  });
+
+  const missingOwners = ctxList.filter((c) => !c.owner && c.lifecycle !== "archived").map((c) => c.id);
+  metrics.push({
+    name: "Missing Owners",
+    score: missingOwners.length === 0 ? 15 : missingOwners.length <= 2 ? 10 : missingOwners.length <= 5 ? 5 : 0,
+    max_score: 15,
+    status: missingOwners.length === 0 ? "ok" : missingOwners.length <= 3 ? "warning" : "critical",
+    details: missingOwners.length === 0 ? ["All non-archived contexts have assigned owners."] : [`${missingOwners.length} context(s) without owner: ${missingOwners.join(", ")}`],
+  });
+
+  const enforceable = ctxList.filter((c) => c.lifecycle === "active" || c.lifecycle === "approved" || c.lifecycle === "deprecated");
+  const conflicts = [];
+  for (let i = 0; i < enforceable.length; i++) {
+    for (let j = i + 1; j < enforceable.length; j++) {
+      const a = enforceable[i];
+      const b = enforceable[j];
+      const aPatterns = a.applies_to || ["**/*"];
+      const bPatterns = b.applies_to || ["**/*"];
+      const overlap = aPatterns.some((ap) => bPatterns.some((bp) => healthPatternsOverlap(ap, bp)));
+      if (overlap && a.enforcement?.mode === "block" && b.enforcement?.mode === "block") {
+        conflicts.push([a.id, b.id].sort().join(" ↔ "));
+      }
+    }
+  }
+  conflicts.sort();
+  metrics.push({
+    name: "Enforcement Conflicts",
+    score: conflicts.length === 0 ? 10 : conflicts.length <= 2 ? 5 : 0,
+    max_score: 10,
+    status: conflicts.length === 0 ? "ok" : "warning",
+    details: conflicts.length === 0 ? ["No overlapping enforcement conflicts detected."] : [`${conflicts.length} potential enforcement overlap(s): ${conflicts.join(", ")}`],
+  });
+
+  const deprecated = ctxList.filter((c) => c.lifecycle === "deprecated");
+  const oldDeprecated = deprecated.filter((c) => healthDaysSince(c.deprecated_date) > HEALTH_DEPRECATION_DAYS);
+  metrics.push({
+    name: "Deprecation Backlog",
+    score: deprecated.length === 0 ? 10 : oldDeprecated.length === 0 ? 5 : 0,
+    max_score: 10,
+    status: deprecated.length === 0 ? "ok" : oldDeprecated.length > 0 ? "critical" : "warning",
+    details: deprecated.length === 0
+      ? ["No deprecated contexts — backlog clean."]
+      : oldDeprecated.length > 0
+        ? [`${deprecated.length} deprecated context(s), ${oldDeprecated.length} stale >${HEALTH_DEPRECATION_DAYS} days: ${oldDeprecated.map((c) => c.id).join(", ")}`]
+        : [`${deprecated.length} deprecated context(s) pending archive: ${deprecated.map((c) => c.id).join(", ")}`],
+  });
+
+  const drafts = ctxList.filter((c) => c.lifecycle === "draft");
+  const stalled = drafts.filter((c) => {
+    const last = events.filter((e) => e.context_id === c.id).sort((a, b) => new Date(b.timestamp) - new Date(a.timestamp))[0];
+    const base = last ? last.timestamp : c.updated_at || c.created_at;
+    return healthDaysSince(base) > HEALTH_DRAFT_DAYS;
+  });
+  metrics.push({
+    name: "Draft Stagnation",
+    score: drafts.length === 0 ? 10 : stalled.length === 0 ? 7 : stalled.length <= 3 ? 3 : 0,
+    max_score: 10,
+    status: stalled.length === 0 ? "ok" : stalled.length <= 3 ? "warning" : "critical",
+    details: drafts.length === 0
+      ? ["No draft contexts."]
+      : stalled.length === 0
+        ? [`${drafts.length} draft context(s) — all within ${HEALTH_DRAFT_DAYS} day threshold.`]
+        : [`${stalled.length} draft context(s) stalled >${HEALTH_DRAFT_DAYS} days: ${stalled.map((c) => c.id).join(", ")}`],
+  });
+
+  const weak = ctxList.filter((c) => c.authority?.level === 0 && c.lifecycle !== "archived" && c.lifecycle !== "draft");
+  const moderate = ctxList.filter((c) => c.authority?.level === 1 && c.lifecycle !== "archived" && c.lifecycle !== "draft");
+  metrics.push({
+    name: "Authority Gaps",
+    score: weak.length + moderate.length === 0 ? 10 : weak.length === 0 ? 7 : weak.length <= 2 ? 4 : 0,
+    max_score: 10,
+    status: weak.length === 0 ? (moderate.length <= 2 ? "ok" : "warning") : "critical",
+    details: weak.length + moderate.length === 0
+      ? ["All non-archived contexts have sufficient authority levels."]
+      : weak.length > 0
+        ? [`${weak.length} context(s) with authority level 0 (weakest): ${weak.map((c) => c.id).join(", ")}`]
+        : [`${moderate.length} context(s) with authority level 1: ${moderate.map((c) => c.id).join(", ")}`],
+  });
+
+  const untagged = ctxList.filter((c) => (!c.tags || c.tags.length === 0) && c.lifecycle !== "archived").map((c) => c.id);
+  metrics.push({
+    name: "Tag Hygiene",
+    score: untagged.length === 0 ? 10 : untagged.length <= 3 ? 6 : untagged.length <= 8 ? 3 : 0,
+    max_score: 10,
+    status: untagged.length === 0 ? "ok" : untagged.length <= 5 ? "warning" : "critical",
+    details: untagged.length === 0 ? ["All non-archived contexts are tagged."] : [`${untagged.length} context(s) without tags: ${untagged.join(", ")}`],
+  });
+
+  const pending = ctxList.filter((c) => c.review_status === "pending" || c.review_status === "in-review" || c.review_status === "needs-revision").map((c) => c.id);
+  metrics.push({
+    name: "Review Backlog",
+    score: pending.length === 0 ? 20 : pending.length <= 3 ? 12 : pending.length <= 7 ? 6 : 0,
+    max_score: 20,
+    status: pending.length === 0 ? "ok" : pending.length <= 4 ? "warning" : "critical",
+    details: pending.length === 0 ? ["No contexts pending review."] : [`${pending.length} context(s) awaiting review: ${pending.join(", ")}`],
+  });
+
+  const unresolved = (report.conflicts || []).filter((c) => c.status === "blocking-unresolved").map((c) => c.id);
+  for (const m of metrics) {
+    if (m.status === "warning" || m.status === "critical") recommendations.push(...m.details);
+  }
+  if (unresolved.length) recommendations.push(`${unresolved.length} unresolved hardened conflict(s): ${unresolved.join(", ")}`);
+
+  const triggers = healthTriggers(ctxList, enforcements, dismissals);
+  for (const t of triggers.triggers) recommendations.push(`[${t.trigger}] ${t.recommendation}`);
+
+  const totalScore = metrics.reduce((sum, m) => sum + m.score, 0);
+  const maxScore = metrics.reduce((sum, m) => sum + m.max_score, 0);
+  const ratio = maxScore > 0 ? totalScore / maxScore : 1;
+  const grade = ratio >= 0.9 ? "A" : ratio >= 0.75 ? "B" : ratio >= 0.6 ? "C" : ratio >= 0.4 ? "D" : "F";
+
+  return {
+    overall_score: totalScore,
+    max_score: maxScore,
+    grade,
+    timestamp: new Date().toISOString(),
+    total_contexts: ctxList.length,
+    metrics,
+    recommendations: [...new Set(recommendations)],
+    triggers: triggers.triggers,
+    dormant_triggers: triggers.dormant,
+    unresolved_conflicts: unresolved,
+  };
+}
+
 function usage() {
   console.log(`OpenCraft Context Packs CLI
 
@@ -1448,13 +1736,14 @@ Commands:
 Options: --project <dir>  --json  --force  --dry-run`);
 }
 
-function cmdValidate(argv) {
+function cmdValidate(argv, jsonOut) {
   const store = loadSchemaStore();
   const reg = buildRegistry();
+  const emitJson = (obj) => console.log(JSON.stringify(obj, null, 2));
   const target = argv.find((a) => !a.startsWith("--"));
   const allPacks = argv.includes("--all");
   if (allPacks || !target) {
-    let failures = 0;
+    const failures = [];
     for (const name of readdirSync(PACKS_ROOT).sort()) {
       const dir = join(PACKS_ROOT, name);
       if (!existsSync(join(dir, "pack.yaml"))) continue;
@@ -1464,25 +1753,34 @@ function cmdValidate(argv) {
         const [depName] = parseRef(ref);
         if (Object.keys(reg.versions(depName)).length === 0) errors.push(`extends/dependency references unknown pack ${depName}`);
       }
-      for (const w of warnings) console.log(`WARN ${pack.name}: ${w}`);
+      for (const w of warnings) {
+        if (!jsonOut) console.log(`WARN ${pack.name}: ${w}`);
+      }
       if (errors.length) {
-        failures += 1;
-        console.log(`FAIL ${pack.name}`);
-        for (const e of errors) console.log(`  - ${e}`);
-      } else console.log(`PASS ${pack.name}`);
+        failures.push({ pack: pack.name, errors });
+        if (!jsonOut) {
+          console.log(`FAIL ${pack.name}`);
+          for (const e of errors) console.log(`  - ${e}`);
+        }
+      } else if (!jsonOut) {
+        console.log(`PASS ${pack.name}`);
+      }
     }
-    return failures ? 1 : 0;
+    if (jsonOut) emitJson({ ok: failures.length === 0, failures });
+    return failures.length ? 1 : 0;
   }
   const pack = scanPack(join(PACKS_ROOT, target));
   const [errors, warnings] = validatePack(pack, store);
-  for (const w of warnings) console.log(`WARN ${target}: ${w}`);
-  if (errors.length) {
+  if (!jsonOut) {
+    for (const w of warnings) console.log(`WARN ${target}: ${w}`);
+  }
+  if (jsonOut) emitJson({ ok: errors.length === 0, errors });
+  else if (errors.length) {
     console.log(`FAIL ${target}`);
     for (const e of errors) console.log(`  - ${e}`);
     return 1;
-  }
-  console.log(`PASS ${target}`);
-  return 0;
+  } else console.log(`PASS ${target}`);
+  return errors.length ? 1 : 0;
 }
 
 function main() {
@@ -1512,6 +1810,7 @@ function main() {
       continue;
     }
     if (argv[i] === "--json") continue;
+    if (argv[i] === "--remote") continue;
     rest.push(argv[i]);
   }
   const emit = (obj) => console.log(JSON.stringify(obj, null, 2));
@@ -1522,7 +1821,7 @@ function main() {
       return;
     }
     if (command === "validate") {
-      process.exitCode = cmdValidate(rest);
+      process.exitCode = cmdValidate(rest, jsonOut);
       return;
     }
     if (command === "install" || command === "update" || command === "bootstrap") {
@@ -1602,14 +1901,17 @@ function main() {
         if (data?.id) contexts[data.id] = data;
       }
       const report = existsSync(join(lcdd, "report.json")) ? JSON.parse(readFileSync(join(lcdd, "report.json"), "utf8")) : {};
-      const missingOwners = Object.entries(contexts).filter(([, c]) => !c.owner).map(([id]) => id);
-      const unresolved = (report.conflicts || []).filter((c) => c.status === "blocking-unresolved").map((c) => c.id);
-      const score = 100 - 10 * Math.min(10, missingOwners.length) - 10 * Math.min(10, unresolved.length);
-      if (jsonOut) emit({ ok: score >= 70 && unresolved.length === 0, score, contexts: Object.keys(contexts).length, missing_owners: missingOwners, unresolved_conflicts: unresolved });
-      else {
-        console.log(`Context Health: ${score}/100`);
-        for (const id of missingOwners) console.log(`  missing owner: ${id}`);
-        for (const id of unresolved) console.log(`  unresolved conflict: ${id}`);
+      const health = computeHealth(contexts, report, lcdd);
+      health.ok = health.grade !== "D" && health.grade !== "F" && health.unresolved_conflicts.length === 0;
+      if (jsonOut) {
+        emit(health);
+      } else {
+        console.log(`Context Health: ${health.overall_score}/${health.max_score}  Grade: ${health.grade}`);
+        console.log(`contexts: ${health.total_contexts}`);
+        for (const metric of health.metrics) {
+          console.log(`  ${metric.name}: ${metric.score}/${metric.max_score} [${metric.status}]`);
+        }
+        for (const recommendation of health.recommendations) console.log(`  - ${recommendation}`);
       }
       return;
     }

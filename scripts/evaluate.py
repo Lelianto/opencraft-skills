@@ -47,13 +47,15 @@ def score_output(case: dict[str, object], output: str) -> tuple[int, list[dict[s
     return passed, results
 
 
-def benchmark_runs(cases: dict[str, dict[str, object]], run_root: Path) -> tuple[list[str], dict[str, object]]:
+def benchmark_runs(cases: dict[str, dict[str, object]], run_root: Path, only: set[str] | None = None) -> tuple[list[str], dict[str, object]]:
     errors: list[str] = []
     records: dict[str, object] = {}
     total_with = 0
     total_without = 0
     total_assertions = 0
     for name, case in cases.items():
+        if only is not None and name not in only:
+            continue
         variants: dict[str, object] = {}
         for variant in ("with-skill", "without-skill"):
             output_path = run_root / variant / f"{name}.md"
@@ -69,7 +71,7 @@ def benchmark_runs(cases: dict[str, dict[str, object]], run_root: Path) -> tuple
         total_assertions += len(case["assertions"])
         records[name] = variants
     summary = {
-        "skills": len(cases),
+        "skills": len(records),
         "assertions_per_variant": total_assertions,
         "with_skill_passed": total_with,
         "without_skill_passed": total_without,
@@ -82,6 +84,7 @@ def main() -> int:
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--runs", type=Path, help="Directory containing with-skill/ and without-skill/ outputs")
     parser.add_argument("--benchmark", type=Path, help="Write benchmark JSON; requires --runs")
+    parser.add_argument("--skills", type=str, help="Comma-separated skill names to grade (default: all)")
     args = parser.parse_args()
     repository = Path(__file__).resolve().parent.parent
     cases = load_cases(repository / "evals/cases.json")
@@ -95,7 +98,12 @@ def main() -> int:
     if args.benchmark and not args.runs:
         errors.append("--benchmark requires --runs")
     if args.runs:
-        run_errors, benchmark = benchmark_runs(cases, args.runs)
+        only = set(args.skills.split(",")) if args.skills else None
+        if only:
+            missing = only - set(cases)
+            if missing:
+                errors.append(f"unknown skills in --skills: {sorted(missing)}")
+        run_errors, benchmark = benchmark_runs(cases, args.runs, only=only)
         errors.extend(run_errors)
     if errors:
         for error in errors:

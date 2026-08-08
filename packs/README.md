@@ -343,10 +343,11 @@ Context Packs are the **composability layer** of Living Context Driven Developme
 | Milestone | Status | Focus |
 |---|---|---|
 | Specification + schemas | ✅ | 14 RFCs, JSON Schemas, pack contract. |
-| Reference engine | ✅ | Zero-dependency Python + Node CLIs, 23 unit tests. |
+| Reference engine | ✅ | Zero-dependency Python + Node CLIs, 28 unit tests. |
 | Reference packs | ✅ | 14 installable packs exercising inheritance/overrides. |
-| Registry + publishing | 🟡 | Catalog + npm transport; automated publish via CI Trusted Publishing. |
-| MCP server | 🔴 | Structured querying for MCP-capable agents. |
+| `packs doctor` LCDD parity | ✅ | 8-metric Context Health format identical to LCDD 0.5.0. |
+| MCP server | ✅ | Zero-dependency stdio MCP server exposing list/resolve/validate/doctor/query. |
+| Registry + publishing | 🟡 | `@opencraft/*` npm transport with sha256 verification (`--remote`); `publish-packs.yml` for Trusted Publishing. |
 | Community ecosystem | 🔴 | Contribution SDK, maturity levels, compatibility matrix. |
 
 ## Contributing

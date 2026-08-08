@@ -11,6 +11,7 @@ applies_to:
   - "**/*.tsx"
 category: code-style
 severity: medium
+tags: [typescript, code-style, type-safety]
 source:
   type: organization
   uri: https://github.com/Lelianto/opencraft-skills
@@ -25,6 +26,8 @@ governance:
   classification: local-standard
   approval_required: false
 effective_date: "2026-01-01T00:00:00Z"
+created_at: "2026-08-07T00:00:00Z"
+updated_at: "2026-08-08T00:00:00Z"
 owner: opencraft-web
 enforcement:
   mode: warn

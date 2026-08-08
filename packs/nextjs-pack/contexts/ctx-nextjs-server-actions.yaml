@@ -12,6 +12,7 @@ applies_to:
   - "app/**/route.ts"
 category: security
 severity: critical
+tags: [nextjs, security, server-actions]
 source:
   type: organization
   uri: https://github.com/Lelianto/opencraft-skills
@@ -26,6 +27,8 @@ governance:
   classification: hardened-standard
   approval_required: true
 effective_date: "2026-01-01T00:00:00Z"
+created_at: "2026-08-07T00:00:00Z"
+updated_at: "2026-08-08T00:00:00Z"
 owner: opencraft-web
 enforcement:
   mode: block

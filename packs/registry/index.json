@@ -1,364 +1,364 @@
 {
+  "schema": "https://opencraft.dev/schema/registry/v1",
   "packs": [
     {
-      "author": "OpenCraft",
-      "description": "Living context for accessibility \u2014 WCAG 2.2 AA, keyboard, semantics, contrast, motion.",
-      "latest": "1.0.0",
-      "license": "MIT",
-      "lifecycle": "active",
       "name": "accessibility-pack",
-      "tags": [
-        "accessibility",
-        "wcag",
-        "a11y",
-        "keyboard"
-      ],
       "type": "cross-cutting",
+      "description": "Living context for accessibility \u2014 WCAG 2.2 AA, keyboard, semantics, contrast, motion.",
+      "license": "MIT",
+      "author": "OpenCraft",
+      "tags": [
+        "a11y",
+        "accessibility",
+        "keyboard",
+        "wcag"
+      ],
+      "latest": "1.0.0",
+      "lifecycle": "active",
       "versions": {
         "1.0.0": {
-          "dependencies": [],
+          "npm": "@opencraft/accessibility-pack",
+          "integrity": "sha256-2dfe1574b058b71f2a3f5d131773bebb53dd05c44f1c16c39e594bfdc9e7e3f6",
           "extends": [],
-          "integrity": "sha256-bb85a478e05e5f8f8039d2b0fa8d6a7bb2a837718ca350d67c928de71bf01e4a",
-          "npm": "@opencraft/accessibility-pack"
+          "dependencies": []
         }
       }
     },
     {
-      "author": "OpenCraft",
-      "description": "Baseline living context for any project \u2014 evidence standard, secrets, production authority, honest claims.",
-      "latest": "1.0.0",
-      "license": "MIT",
-      "lifecycle": "active",
       "name": "core-pack",
+      "type": "cross-cutting",
+      "description": "Baseline living context for any project \u2014 evidence standard, secrets, production authority, honest claims.",
+      "license": "MIT",
+      "author": "OpenCraft",
       "tags": [
         "baseline",
         "evidence",
-        "security",
-        "human-in-the-loop"
+        "human-in-the-loop",
+        "security"
       ],
-      "type": "cross-cutting",
+      "latest": "1.0.0",
+      "lifecycle": "active",
       "versions": {
         "1.0.0": {
-          "dependencies": [],
+          "npm": "@opencraft/core-pack",
+          "integrity": "sha256-fbc47a8c2b56985796c22d4d558d396d9e0effa18fb58d6c778102f2862ef6a2",
           "extends": [],
-          "integrity": "sha256-3759424c187114f163bdc3f016e53b7e4ab7a528e9fe84439b2d0c0190bc7b61",
-          "npm": "@opencraft/core-pack"
+          "dependencies": []
         }
       }
     },
     {
-      "author": "OpenCraft E-commerce",
-      "description": "Living context for e-commerce applications \u2014 cart, payments, inventory, tax, abuse.",
-      "latest": "1.0.0",
-      "license": "MIT",
-      "lifecycle": "active",
       "name": "ecommerce-pack",
-      "tags": [
-        "ecommerce",
-        "checkout",
-        "payments",
-        "inventory",
-        "abuse"
-      ],
       "type": "domain",
+      "description": "Living context for e-commerce applications \u2014 cart, payments, inventory, tax, abuse.",
+      "license": "MIT",
+      "author": "OpenCraft E-commerce",
+      "tags": [
+        "abuse",
+        "checkout",
+        "ecommerce",
+        "inventory",
+        "payments"
+      ],
+      "latest": "1.0.0",
+      "lifecycle": "active",
       "versions": {
         "1.0.0": {
-          "dependencies": [],
+          "npm": "@opencraft/ecommerce-pack",
+          "integrity": "sha256-b65210ee74dc19b46cfa1e8586960e06e109c2caee5eedeab338a8934e7e37db",
           "extends": [
             "node-pack@^1",
             "security-pack@^1",
             "testing-pack@^1"
           ],
-          "integrity": "sha256-9354fb8ad869ec51f6c13d8ec7398dacf765f6daac07390784b478ffc8409faa",
-          "npm": "@opencraft/ecommerce-pack"
+          "dependencies": []
         }
       }
     },
     {
-      "author": "OpenCraft Education",
-      "description": "Living context for education products \u2014 learner privacy, content integrity, offline, scale.",
-      "latest": "1.0.0",
-      "license": "MIT",
-      "lifecycle": "active",
       "name": "education-pack",
+      "type": "domain",
+      "description": "Living context for education products \u2014 learner privacy, content integrity, offline, scale.",
+      "license": "MIT",
+      "author": "OpenCraft Education",
       "tags": [
+        "content",
         "education",
         "learning",
         "privacy",
-        "content",
         "scale"
       ],
-      "type": "domain",
+      "latest": "1.0.0",
+      "lifecycle": "active",
       "versions": {
         "1.0.0": {
-          "dependencies": [],
+          "npm": "@opencraft/education-pack",
+          "integrity": "sha256-fa3e5ff7098fdd577f2c15b914b4d12ecece3bb190f53e0a8b5adfc1c792b8a2",
           "extends": [
             "node-pack@^1",
             "accessibility-pack@^1",
             "testing-pack@^1"
           ],
-          "integrity": "sha256-b945aa22c8cc44f991614739c50acb0821bc52594259e4d294e44f7694fbc56f",
-          "npm": "@opencraft/education-pack"
+          "dependencies": []
         }
       }
     },
     {
-      "author": "OpenCraft Fintech",
-      "description": "Living context for fintech applications \u2014 regulatory framing, audit, transparency, data residency.",
-      "latest": "1.0.0",
-      "license": "MIT",
-      "lifecycle": "active",
       "name": "fintech-pack",
+      "type": "domain",
+      "description": "Living context for fintech applications \u2014 regulatory framing, audit, transparency, data residency.",
+      "license": "MIT",
+      "author": "OpenCraft Fintech",
       "tags": [
-        "fintech",
-        "compliance",
         "audit",
+        "compliance",
+        "fintech",
         "kyc",
         "payments"
       ],
-      "type": "domain",
+      "latest": "1.0.0",
+      "lifecycle": "active",
       "versions": {
         "1.0.0": {
-          "dependencies": [],
+          "npm": "@opencraft/fintech-pack",
+          "integrity": "sha256-700bf8bdd28e6599cd4c3b37709183bb57f7356a41eec6d41060e3efd881f930",
           "extends": [
             "node-pack@^1",
             "security-pack@^1",
             "testing-pack@^1"
           ],
-          "integrity": "sha256-e86735dc362773e0548df6940b30e73db062d980667bef4aac86ceeba7235ac7",
-          "npm": "@opencraft/fintech-pack"
+          "dependencies": []
         }
       }
     },
     {
-      "author": "OpenCraft",
-      "description": "Living context for Firebase backends \u2014 security rules, Firestore modeling, functions, auth.",
-      "latest": "1.0.0",
-      "license": "MIT",
-      "lifecycle": "active",
       "name": "firebase-pack",
+      "type": "baas",
+      "description": "Living context for Firebase backends \u2014 security rules, Firestore modeling, functions, auth.",
+      "license": "MIT",
+      "author": "OpenCraft",
       "tags": [
+        "auth",
         "firebase",
         "firestore",
-        "security-rules",
         "functions",
-        "auth"
+        "security-rules"
       ],
-      "type": "baas",
+      "latest": "1.0.0",
+      "lifecycle": "active",
       "versions": {
         "1.0.0": {
-          "dependencies": [],
+          "npm": "@opencraft/firebase-pack",
+          "integrity": "sha256-cc43772910a9b7a2ffb5730a97c778cffd91c65b1089493851dd546f82482413",
           "extends": [
             "typescript-pack@^1",
             "security-pack@^1"
           ],
-          "integrity": "sha256-de0aaebc79d101e5ad28288d29bbd429fd9b0b14be327eb5dab89bbe83ba0b3e",
-          "npm": "@opencraft/firebase-pack"
+          "dependencies": []
         }
       }
     },
     {
-      "author": "OpenCraft Healthcare",
-      "description": "Living context for healthcare applications \u2014 PHI handling, audit, consent, availability.",
-      "latest": "1.0.0",
-      "license": "MIT",
-      "lifecycle": "active",
       "name": "healthcare-pack",
-      "tags": [
-        "healthcare",
-        "phi",
-        "hipaa",
-        "consent",
-        "audit"
-      ],
       "type": "domain",
+      "description": "Living context for healthcare applications \u2014 PHI handling, audit, consent, availability.",
+      "license": "MIT",
+      "author": "OpenCraft Healthcare",
+      "tags": [
+        "audit",
+        "consent",
+        "healthcare",
+        "hipaa",
+        "phi"
+      ],
+      "latest": "1.0.0",
+      "lifecycle": "active",
       "versions": {
         "1.0.0": {
-          "dependencies": [],
+          "npm": "@opencraft/healthcare-pack",
+          "integrity": "sha256-0a3c22d6b07f6d6cae0a810db1fd8547f7dfef5e17875c85a211043d5a5967af",
           "extends": [
             "node-pack@^1",
             "security-pack@^1",
             "accessibility-pack@^1"
           ],
-          "integrity": "sha256-fe3e02e7cd812a1549b36ac1df643520491897b880f3df78031c5141b659a06b",
-          "npm": "@opencraft/healthcare-pack"
+          "dependencies": []
         }
       }
     },
     {
-      "author": "OpenCraft",
-      "description": "Living context for Next.js App Router applications \u2014 data fetching, server actions, structure.",
-      "latest": "1.0.0",
-      "license": "MIT",
-      "lifecycle": "active",
       "name": "nextjs-pack",
+      "type": "framework",
+      "description": "Living context for Next.js App Router applications \u2014 data fetching, server actions, structure.",
+      "license": "MIT",
+      "author": "OpenCraft",
       "tags": [
+        "app-router",
         "nextjs",
         "react",
-        "app-router",
         "ssr",
         "web"
       ],
-      "type": "framework",
+      "latest": "1.0.0",
+      "lifecycle": "active",
       "versions": {
         "1.0.0": {
-          "dependencies": [
-            "node-pack@^1"
-          ],
+          "npm": "@opencraft/nextjs-pack",
+          "integrity": "sha256-cec87b3dd97fb918a9c6cfb0d2a7b9a27a8cffa0e5ffa30b0cc89d76ec1d533a",
           "extends": [
             "react-pack@^1",
             "typescript-pack@^1"
           ],
-          "integrity": "sha256-ca85f5ff95e5d1336ef5a10e37d85efbcaddaf8d0b9e35d0f727f313eb0e2368",
-          "npm": "@opencraft/nextjs-pack"
+          "dependencies": [
+            "node-pack@^1"
+          ]
         }
       }
     },
     {
-      "author": "OpenCraft",
-      "description": "Living context for Node.js services \u2014 runtime versioning, module discipline, process hygiene.",
-      "latest": "1.0.0",
-      "license": "MIT",
-      "lifecycle": "active",
       "name": "node-pack",
-      "tags": [
-        "nodejs",
-        "node",
-        "runtime",
-        "backend"
-      ],
       "type": "technology",
+      "description": "Living context for Node.js services \u2014 runtime versioning, module discipline, process hygiene.",
+      "license": "MIT",
+      "author": "OpenCraft",
+      "tags": [
+        "backend",
+        "node",
+        "nodejs",
+        "runtime"
+      ],
+      "latest": "1.0.0",
+      "lifecycle": "active",
       "versions": {
         "1.0.0": {
-          "dependencies": [],
+          "npm": "@opencraft/node-pack",
+          "integrity": "sha256-1532f9e65542c18ab2b279e2a1883228d3a1fe150886f3c3fca5773fe01df5d3",
           "extends": [],
-          "integrity": "sha256-5eeb87798f9bdea39f434a15d1128002661cb16ca21e822008bf838e4e199bb2",
-          "npm": "@opencraft/node-pack"
+          "dependencies": []
         }
       }
     },
     {
-      "author": "OpenCraft",
-      "description": "Living context for React applications \u2014 component conventions, hooks, state, and accessibility basics.",
-      "latest": "1.0.0",
-      "license": "MIT",
-      "lifecycle": "active",
       "name": "react-pack",
+      "type": "framework",
+      "description": "Living context for React applications \u2014 component conventions, hooks, state, and accessibility basics.",
+      "license": "MIT",
+      "author": "OpenCraft",
       "tags": [
-        "react",
         "components",
         "hooks",
+        "react",
         "ui"
       ],
-      "type": "framework",
+      "latest": "1.0.0",
+      "lifecycle": "active",
       "versions": {
         "1.0.0": {
-          "dependencies": [],
+          "npm": "@opencraft/react-pack",
+          "integrity": "sha256-244035f34c00ad341dcce99183d0ae35f7ed90fe713e246210183363c4c2cd6d",
           "extends": [
             "typescript-pack@^1"
           ],
-          "integrity": "sha256-3449c839fb61b7fa9dccdb8e427c93bec32ae931c52f8ba7e85d0127562825cc",
-          "npm": "@opencraft/react-pack"
+          "dependencies": []
         }
       }
     },
     {
-      "author": "OpenCraft",
-      "description": "Living context for application security \u2014 input validation, authorization, secrets, dependency hygiene.",
-      "latest": "1.0.0",
-      "license": "MIT",
-      "lifecycle": "active",
       "name": "security-pack",
+      "type": "cross-cutting",
+      "description": "Living context for application security \u2014 input validation, authorization, secrets, dependency hygiene.",
+      "license": "MIT",
+      "author": "OpenCraft",
       "tags": [
-        "security",
-        "owasp",
         "authz",
+        "owasp",
         "secrets",
+        "security",
         "supply-chain"
       ],
-      "type": "cross-cutting",
+      "latest": "1.0.0",
+      "lifecycle": "active",
       "versions": {
         "1.0.0": {
-          "dependencies": [],
+          "npm": "@opencraft/security-pack",
+          "integrity": "sha256-8fef5412505a80228c0cccfdb5af74bfc8d282a17f1a5544f016f6a01e98e22c",
           "extends": [],
-          "integrity": "sha256-0d7c4bbcc4ba034d1bc751d8fbe98bdcdf1824f908fbc093cf4c34b234fb8565",
-          "npm": "@opencraft/security-pack"
+          "dependencies": []
         }
       }
     },
     {
-      "author": "OpenCraft",
-      "description": "Living context for Supabase backends \u2014 Row Level Security, migrations, realtime, auth.",
-      "latest": "1.0.0",
-      "license": "MIT",
-      "lifecycle": "active",
       "name": "supabase-pack",
-      "tags": [
-        "supabase",
-        "postgres",
-        "rls",
-        "realtime",
-        "auth"
-      ],
       "type": "baas",
+      "description": "Living context for Supabase backends \u2014 Row Level Security, migrations, realtime, auth.",
+      "license": "MIT",
+      "author": "OpenCraft",
+      "tags": [
+        "auth",
+        "postgres",
+        "realtime",
+        "rls",
+        "supabase"
+      ],
+      "latest": "1.0.0",
+      "lifecycle": "active",
       "versions": {
         "1.0.0": {
-          "dependencies": [],
+          "npm": "@opencraft/supabase-pack",
+          "integrity": "sha256-98f099e7a6abb9b815562cd00bf467811f667173a4537b33a8564dbc9ea13b1d",
           "extends": [
             "typescript-pack@^1",
             "security-pack@^1"
           ],
-          "integrity": "sha256-4460d9e95b65b4c964998f9cecf61fe3a07059fadcadbb8fd223b342adec9026",
-          "npm": "@opencraft/supabase-pack"
+          "dependencies": []
         }
       }
     },
     {
-      "author": "OpenCraft",
-      "description": "Living context for testing strategy \u2014 pyramid, risk-based selection, gates, fixtures.",
-      "latest": "1.0.0",
-      "license": "MIT",
-      "lifecycle": "active",
       "name": "testing-pack",
-      "tags": [
-        "testing",
-        "quality",
-        "coverage",
-        "ci"
-      ],
       "type": "cross-cutting",
+      "description": "Living context for testing strategy \u2014 pyramid, risk-based selection, gates, fixtures.",
+      "license": "MIT",
+      "author": "OpenCraft",
+      "tags": [
+        "ci",
+        "coverage",
+        "quality",
+        "testing"
+      ],
+      "latest": "1.0.0",
+      "lifecycle": "active",
       "versions": {
         "1.0.0": {
-          "dependencies": [],
+          "npm": "@opencraft/testing-pack",
+          "integrity": "sha256-4a3859aa1ee74fb9c1df2f94c8728cf5a9b1fc7d76e750246aee37391fc01fb0",
           "extends": [],
-          "integrity": "sha256-ef4571599d1bc42180f5f1c96a46177d1b556139b46a8a66d6aac8476277b5c3",
-          "npm": "@opencraft/testing-pack"
+          "dependencies": []
         }
       }
     },
     {
-      "author": "OpenCraft",
-      "description": "Living context for TypeScript projects \u2014 typing discipline, tsconfig, lint, and AI coding rules.",
-      "latest": "1.0.0",
-      "license": "MIT",
-      "lifecycle": "active",
       "name": "typescript-pack",
+      "type": "technology",
+      "description": "Living context for TypeScript projects \u2014 typing discipline, tsconfig, lint, and AI coding rules.",
+      "license": "MIT",
+      "author": "OpenCraft",
       "tags": [
-        "typescript",
-        "tsconfig",
         "strict",
+        "tsconfig",
+        "typescript",
         "typing"
       ],
-      "type": "technology",
+      "latest": "1.0.0",
+      "lifecycle": "active",
       "versions": {
         "1.0.0": {
-          "dependencies": [],
+          "npm": "@opencraft/typescript-pack",
+          "integrity": "sha256-b036d02a7ca9f30655cf5771b17258bd65b622a3ec1bb7a40e28d7bf5c36ba35",
           "extends": [],
-          "integrity": "sha256-505674846c3c7dbaf8f0cf283cafb9efe1ac136f7752bacff67960c30cae4e87",
-          "npm": "@opencraft/typescript-pack"
+          "dependencies": []
         }
       }
     }
-  ],
-  "schema": "https://opencraft.dev/schema/registry/v1"
+  ]
 }

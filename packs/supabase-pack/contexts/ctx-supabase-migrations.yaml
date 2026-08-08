@@ -10,6 +10,7 @@ applies_to:
   - "supabase/migrations/**/*.sql"
 category: data-integrity
 severity: high
+tags: [supabase, migrations, data-integrity]
 source:
   type: organization
   uri: https://supabase.com/docs/guides/database/migrations
@@ -24,6 +25,8 @@ governance:
   classification: local-standard
   approval_required: false
 effective_date: "2026-01-01T00:00:00Z"
+created_at: "2026-08-07T00:00:00Z"
+updated_at: "2026-08-08T00:00:00Z"
 owner: opencraft-backend
 enforcement:
   mode: block

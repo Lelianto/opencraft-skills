@@ -13,6 +13,7 @@ applies_to:
   - "app/**/actions.ts"
 category: security
 severity: critical
+tags: [security, authorization]
 source:
   type: standard-body
   uri: https://owasp.org/www-project-application-security-verification-standard/
@@ -29,6 +30,8 @@ governance:
   approval_required: true
   approvers: ["opencraft-security", "cto"]
 effective_date: "2026-01-01T00:00:00Z"
+created_at: "2026-08-07T00:00:00Z"
+updated_at: "2026-08-08T00:00:00Z"
 owner: opencraft-security
 enforcement:
   mode: block

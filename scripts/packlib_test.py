@@ -12,6 +12,7 @@ from pathlib import Path
 sys.path.insert(0, str(Path(__file__).resolve().parent))
 
 from packlib import jsonschema_mini, manifest, merger, resolver, validator, yamlmini  # noqa: E402
+from packlib import doctor as doctor_engine  # noqa: E402
 from packlib.materialize import materialize, render_context_md  # noqa: E402
 from packlib.registry import Registry, pack_integrity  # noqa: E402
 
@@ -425,6 +426,91 @@ class MaterializeTests(unittest.TestCase):
         md = render_context_md(merged)
         self.assertIn("Living Context", md)
         self.assertIn("ctx-ts", md)
+
+
+class DoctorTests(unittest.TestCase):
+    def test_health_8_metrics_parity(self):
+        tmp = Path(tempfile.mkdtemp())
+        packs_root = tmp / "packs"
+        make_pack(
+            packs_root,
+            "typescript-pack",
+            "1.0.0",
+            contexts={
+                "ctx-ts": (
+                    "category: code-style\n"
+                    "severity: high\n"
+                    "created_at: 2026-08-07T00:00:00Z\n"
+                    "updated_at: 2026-08-07T00:00:00Z\n"
+                    "tags: [typescript, code-style]\n"
+                )
+            },
+        )
+        reg = Registry(packs_root)
+        proj = tmp / "proj"
+        make_project(proj, ["typescript-pack@^1"])
+        project = manifest.load_project_declaration(proj)
+        ordered = resolver.resolve(project, reg)
+        merged = merger.merge(ordered, project)
+        lcdd = materialize(proj, merged, ordered, project)
+        contexts = {}
+        for path in (lcdd / "contexts").glob("*.yaml"):
+            data = yamlmini.load_file(path)
+            if isinstance(data, dict) and data.get("id"):
+                contexts[data["id"]] = data
+        report = json.loads((lcdd / "report.json").read_text(encoding="utf-8"))
+        health = doctor_engine.compute_health(contexts, report=report, lcdd_dir=lcdd)
+        self.assertEqual(health["total_contexts"], 1)
+        self.assertEqual(health["max_score"], 100)
+        names = [m["name"] for m in health["metrics"]]
+        self.assertEqual(
+            names,
+            [
+                "Stale Contexts",
+                "Missing Owners",
+                "Enforcement Conflicts",
+                "Deprecation Backlog",
+                "Draft Stagnation",
+                "Authority Gaps",
+                "Tag Hygiene",
+                "Review Backlog",
+            ],
+        )
+        self.assertEqual(health["grade"], "A")
+        self.assertGreaterEqual(health["overall_score"], 90)
+
+    def test_health_flags_missing_tags_and_owners(self):
+        tmp = Path(tempfile.mkdtemp())
+        packs_root = tmp / "packs"
+        make_pack(
+            packs_root,
+            "typescript-pack",
+            "1.0.0",
+            contexts={"ctx-untagged": "category: code-style\n"},
+        )
+        reg = Registry(packs_root)
+        proj = tmp / "proj"
+        make_project(proj, ["typescript-pack@^1"])
+        project = manifest.load_project_declaration(proj)
+        ordered = resolver.resolve(project, reg)
+        merged = merger.merge(ordered, project)
+        lcdd = materialize(proj, merged, ordered, project)
+        contexts = {}
+        for path in (lcdd / "contexts").glob("*.yaml"):
+            data = yamlmini.load_file(path)
+            if isinstance(data, dict) and data.get("id"):
+                contexts[data["id"]] = data
+        health = doctor_engine.compute_health(contexts, report={}, lcdd_dir=lcdd)
+        tag_metric = next(m for m in health["metrics"] if m["name"] == "Tag Hygiene")
+        self.assertEqual(tag_metric["status"], "warning")
+        self.assertIn("ctx-untagged", tag_metric["details"][0])
+
+    def test_patterns_overlap(self):
+        self.assertTrue(doctor_engine.patterns_overlap("**/*", "app/**/*.ts"))
+        self.assertTrue(doctor_engine.patterns_overlap("**/*.ts", "**/*.tsx"))
+        self.assertFalse(doctor_engine.patterns_overlap("app/**/*.ts", "app/**/route.ts"))
+        self.assertFalse(doctor_engine.patterns_overlap("app/**/*.ts", "lib/**/*.ts"))
+        self.assertTrue(doctor_engine.patterns_overlap("app/**", "app/**/*.ts"))
 
 
 class PackValidationTests(unittest.TestCase):
